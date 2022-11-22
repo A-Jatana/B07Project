@@ -27,12 +27,12 @@ Any impediments or stumbling blocks?
  Name: Amitoz Jatana
 
 What have you done since yesterday?
-	- <What you have done>
+	- Completed the student login screen layout
+	- Completed the student sign-up screen layout
 
 What are you planning on doing today?
-	- <What you plan on doing 1...>
-    - <What you plan on doing 2...>
-    - <What you plan on doing 3...>
+	- Push the student and sign-up screen layouts to Git
+	- Begin working on implementing the GUI components of the student login/sign-uo screens
 
 Any impediments or stumbling blocks?
 	- None
