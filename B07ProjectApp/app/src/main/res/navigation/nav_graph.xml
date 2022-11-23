@@ -26,22 +26,4 @@
         android:name="com.example.b07projectapp.StudentLogin"
         android:label="fragment_student_login"
         tools:layout="@layout/fragment_student_login" />
-    <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.example.b07projectapp.FirstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
-        <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.b07projectapp.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
-        <action
-            android:id="@+id/action_secondFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
-    </fragment>
 </navigation>
