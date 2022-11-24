@@ -10,11 +10,11 @@
         android:label="fragment_entry_screen"
         tools:layout="@layout/fragment_entry_screen" >
         <action
+            android:id="@+id/action_entryScreen_to_studentDecision"
+            app:destination="@id/studentDecision" />
+        <action
             android:id="@+id/action_entryScreen_to_adminLogin"
             app:destination="@id/adminLogin" />
-        <action
-            android:id="@+id/action_entryScreen_to_studentLogin"
-            app:destination="@id/studentLogin" />
     </fragment>
     <fragment
         android:id="@+id/adminLogin"
@@ -26,4 +26,13 @@
         android:name="com.example.b07projectapp.StudentLogin"
         android:label="fragment_student_login"
         tools:layout="@layout/fragment_student_login" />
+    <fragment
+        android:id="@+id/studentDecision"
+        android:name="com.example.b07projectapp.StudentDecision"
+        android:label="fragment_student_desicion"
+        tools:layout="@layout/fragment_student_desicion" >
+        <action
+            android:id="@+id/action_studentDecision_to_studentLogin"
+            app:destination="@id/studentLogin" />
+    </fragment>
 </navigation>
