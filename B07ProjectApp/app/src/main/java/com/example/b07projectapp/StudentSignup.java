@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.example.b07projectapp.databinding.FragmentStudentLoginBinding;
 import com.example.b07projectapp.databinding.FragmentStudentSignupBinding;
 
 /**
@@ -27,9 +29,11 @@ public class StudentSignup extends Fragment {
     private static final String ARG_PARAM3 = "param3";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private String mParam3;
+    private String username;
+    private String password;
+    private String confirmPassword;
+    private String email;
+    private String fullName;
 
     public StudentSignup() {
         // Required empty public constructor
@@ -61,7 +65,24 @@ public class StudentSignup extends Fragment {
         view.findViewById(R.id.signUpButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseManager.search("username", "password", "student");
+                EditText textUser = binding.inputUsername;
+                username = textUser.getText().toString();
+                EditText textPassword = binding.inputPassword;
+                password = textPassword.getText().toString();
+                EditText textConfirm = binding.inputConfirmPassword;
+                confirmPassword = textConfirm.getText().toString();
+                EditText textEmail= binding.inputEmail;
+                email = textEmail.getText().toString();
+                EditText textFullName = binding.inputFullName;
+                fullName = textFullName.getText().toString();
+                /* TODO implement if statement
+                * If (Database already has that username) {
+                * pop up message saying username is already taken
+                * }*/
+                if (password.equals(confirmPassword)){
+                    //Pop up message saying passwords don't match
+                }
+                DatabaseManager.add(username, password);
             }
         });
     }
@@ -70,16 +91,16 @@ public class StudentSignup extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-            mParam3 = getArguments().getString(ARG_PARAM3);
+            //mParam1 = getArguments().getString(ARG_PARAM1);
+            //mParam2 = getArguments().getString(ARG_PARAM2);
+            //mParam3 = getArguments().getString(ARG_PARAM3);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_signup, container, false);
+        binding = FragmentStudentSignupBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 }

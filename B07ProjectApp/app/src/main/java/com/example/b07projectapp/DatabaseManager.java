@@ -22,9 +22,9 @@ public class DatabaseManager {
      * WANT TO ADD:
      * Let search() return 1 or 0 depending whether it found the user
      *
-     * @param username
-     * @param password
-     * @param type
+     * @param username user username
+     * @param password user password
+     * @param type type of user
      */
     protected static void search(String username, String password, String type) {
         database = FirebaseDatabase.getInstance();
@@ -40,8 +40,9 @@ public class DatabaseManager {
                 for(DataSnapshot ds : snapshot.getChildren()) {
 
                     // Get the value of username & password
-                    if (ds.child("password").getValue().toString().equals(password) ||
+                    if (ds.child("password").getValue().toString().equals(password) &&
                         ds.child("username").getValue().toString().equals(username)) {
+                    } else { //Incorrect username or password
 
                     }
                 }
@@ -58,8 +59,8 @@ public class DatabaseManager {
      * WANT TO ADD:
      * Use search() to verify if user already exists
      *
-     * @param username
-     * @param password
+     * @param username user username
+     * @param password user password
      */
     protected static void add(String username, String password) {
         database = FirebaseDatabase.getInstance();
