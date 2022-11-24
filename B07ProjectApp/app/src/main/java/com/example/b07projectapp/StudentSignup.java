@@ -1,10 +1,15 @@
 package com.example.b07projectapp;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.b07projectapp.databinding.FragmentStudentSignupBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -12,6 +17,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class StudentSignup extends Fragment {
+
+    private FragmentStudentSignupBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +53,17 @@ public class StudentSignup extends Fragment {
         args.putString(ARG_PARAM3, param3);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        view.findViewById(R.id.signUpButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseManager.search("username", "password", "student");
+            }
+        });
     }
 
     @Override
