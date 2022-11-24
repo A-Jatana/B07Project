@@ -36,6 +36,14 @@ public class StudentDecision extends Fragment {
                         .navigate(R.id.action_studentDecision_to_studentLogin);
             }
         });
+
+        binding.signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(com.example.b07projectapp.StudentDecision.this)
+                        .navigate(R.id.action_studentDecision_to_studentSignup2);
+            }
+        });
     }
 
     @Override

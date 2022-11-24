@@ -34,5 +34,13 @@
         <action
             android:id="@+id/action_studentDecision_to_studentLogin"
             app:destination="@id/studentLogin" />
+        <action
+            android:id="@+id/action_studentDecision_to_studentSignup2"
+            app:destination="@id/studentSignup2" />
     </fragment>
+    <fragment
+        android:id="@+id/studentSignup2"
+        android:name="com.example.b07projectapp.StudentSignup"
+        android:label="fragment_student_signup"
+        tools:layout="@layout/fragment_student_signup" />
 </navigation>

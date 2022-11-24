@@ -71,19 +71,19 @@
             app:layout_constraintStart_toStartOf="@+id/inputPassword"
             app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-15dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/material_dynamic_primary80"
-        android:text="Back"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/loginButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+<!--    <Button-->
+<!--        android:id="@+id/backButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="-15dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:backgroundTint="@color/material_dynamic_primary80"-->
+<!--        android:text="Back"-->
+<!--        android:textColor="@color/black"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/loginButton"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/loginButton" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

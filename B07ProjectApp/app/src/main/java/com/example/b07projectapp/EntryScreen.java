@@ -41,7 +41,7 @@ public class EntryScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(EntryScreen.this)
-                        .navigate(R.id.action_entryScreen_to_studentLogin);
+                        .navigate(R.id.action_entryScreen_to_studentDecision);
             }
         });
     }
