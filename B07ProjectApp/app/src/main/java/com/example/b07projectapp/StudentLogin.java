@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.b07projectapp.databinding.FragmentAdminLoginBinding;
 import com.example.b07projectapp.databinding.FragmentStudentLoginBinding;
@@ -62,7 +63,10 @@ public class StudentLogin extends Fragment {
                 EditText textPassword = binding.inputPassword;
                 password = textPassword.getText().toString();
 
-                DatabaseManager.search(username, password, "student");
+                if (!DatabaseManager.search(username, password, "admin")){
+                    Toast myToast = Toast.makeText(getActivity(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
             }
         });
     }

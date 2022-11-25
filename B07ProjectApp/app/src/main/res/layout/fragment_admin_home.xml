@@ -22,7 +22,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.083"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/admin_home_choice"
@@ -37,7 +38,8 @@
         app:layout_constraintBottom_toTopOf="@id/view_edit_course_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/view_edit_course_button"

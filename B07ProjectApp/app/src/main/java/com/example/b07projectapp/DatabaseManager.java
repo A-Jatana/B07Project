@@ -1,6 +1,7 @@
 package com.example.b07projectapp;
 
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DatabaseManager {
-
     private static FirebaseDatabase database;
     private static DatabaseReference dRef;
 
@@ -26,8 +26,9 @@ public class DatabaseManager {
      * @param password user password
      * @param type type of user
      */
-    protected static void search(String username, String password, String type) {
+    protected static boolean search(String username, String password, String type) {
         database = FirebaseDatabase.getInstance();
+        final boolean[] stringFound = new boolean[1];
 
         // Points dRef to the "type" (admin, student, or course) (look in Firebase)
         dRef = database.getReference().child(type);
@@ -42,8 +43,7 @@ public class DatabaseManager {
                     // Get the value of username & password
                     if (ds.child("password").getValue().toString().equals(password) &&
                         ds.child("username").getValue().toString().equals(username)) {
-                    } else { //Incorrect username or password
-
+                        stringFound[0] = true;
                     }
                 }
             }
@@ -53,6 +53,7 @@ public class DatabaseManager {
                 System.out.println("DATABASE ERROR");
             }
         });
+        return stringFound[0];
     }
 
     /**

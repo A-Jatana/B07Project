@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.b07projectapp.databinding.FragmentAdminLoginBinding;
 import com.example.b07projectapp.databinding.FragmentStudentDesicionBinding;
@@ -43,6 +44,12 @@ public class AdminLogin extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment AdminLogin.
      */
+    /*
+    View fragmentFirstLayout = inflater.inflate(R.layout.fragment_first, container, false);
+        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        showCountTextView = binding.textviewFirst;
+        return binding.getRoot();
+     */
     // TODO: Rename and change types and number of parameters
     public static AdminLogin newInstance(String param1, String param2) {
         AdminLogin fragment = new AdminLogin();
@@ -63,7 +70,10 @@ public class AdminLogin extends Fragment {
                 EditText textPassword = binding.adminTextPassword;
                 password = textPassword.getText().toString();
 
-                DatabaseManager.search(username, password, "admin");
+                if (!DatabaseManager.search(username, password, "admin")){
+                    Toast myToast = Toast.makeText(getActivity(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
                 //TODO if search comes back true, move to next admin page
 
             }
