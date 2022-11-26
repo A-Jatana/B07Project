@@ -1,22 +1,44 @@
 package com.example.b07projectapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.*;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class DatabaseManager {
-    private static FirebaseDatabase database;
+public class DatabaseManager extends Fragment {
+    private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference dRef;
+
+//    public void test() {
+//        dRef = database.getReference().child("student");
+//        dRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    String name = task.getResult().getValue(String.class);
+//                    callback.onResponse(name);
+//                } else {
+//                    Log.d(TAG, task.getException().getMessage());
+//                }
+//            }
+//        });
+//    }
 
     /**
      * WANT TO ADD:
@@ -26,35 +48,66 @@ public class DatabaseManager {
      * @param password user password
      * @param type type of user
      */
-    protected static boolean search(String username, String password, String type) {
-        database = FirebaseDatabase.getInstance();
-        final boolean[] stringFound = new boolean[1];
+    protected static void search(Context context, Class c, String username, String password, String type) {
 
-        // Points dRef to the "type" (admin, student, or course) (look in Firebase)
-        dRef = database.getReference().child(type);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(type);
 
-        dRef.addValueEventListener(new ValueEventListener() {
+        Query query_user = reference.orderByChild("username").equalTo(username);
+        query_user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i("Status", "Sign Up Success");
-                // snapshot.getChildren points towards the stuff inside STUDENTHASHCODE
-                for(DataSnapshot ds : snapshot.getChildren()) {
+                if (snapshot.exists()) {
 
-                    // Get the value of username & password
-                    if (ds.child("password").getValue().toString().equals(password) &&
-                        ds.child("username").getValue().toString().equals(username)) {
-                        stringFound[0] = true;
+                    String DBpass = snapshot.child(username).child("password").getValue(String.class);
+
+                    if (DBpass.equals(password)) {
+
+                        String DBUser = snapshot.child(username).child("username").getValue(String.class);
+
+                        Intent intent = new Intent(context, c);
+                        Log.i("STATUS", "BEFORE ACTIVITY");
+                        context.startActivity(intent);
+                        Log.i("STATUS", "AFTER ACTIVITY");
+
+
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("DATABASE ERROR");
+
             }
         });
-        return stringFound[0];
+//
+//        // Points dRef to the "type" (admin, student, or course) (look in Firebase)
+//        dRef = database.getReference().child(type);
+//
+//        dRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Log.i("Status", "Sign Up Success");
+//                // snapshot.getChildren points towards the stuff inside STUDENTHASHCODE
+//                if (snapshot.exists()) {
+//                    for (DataSnapshot ds : snapshot.getChildren()) {
+//
+//                        // Get the value of username & password
+//                        if (ds.child("password").getValue().toString().equals(password) &&
+//                                ds.child("username").getValue().toString().equals(username)) {
+//                            AdminLogin.test = true;
+//                        }
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                System.out.println("DATABASE ERROR");
+//            }
+//        });
     }
+
+
+
 
     /**
      * WANT TO ADD:
@@ -64,7 +117,6 @@ public class DatabaseManager {
      * @param password user password
      */
     protected static void add(String username, String password) {
-        database = FirebaseDatabase.getInstance();
 
         // Points dRef to "student"
         dRef = database.getReference().child("student");
@@ -80,12 +132,7 @@ public class DatabaseManager {
                 // We should eventually depend on User objects
                 Student student = new Student(username, password);
 
-                HashMap<String, String> studentMap = new HashMap<>();
-
-                studentMap.put("username", username);
-                studentMap.put("password", password);
-
-                dRef.push().setValue(studentMap);
+                dRef.child(username).setValue(student);
             }
 
             @Override

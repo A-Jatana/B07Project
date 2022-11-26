@@ -1,10 +1,13 @@
 package com.example.b07projectapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.b07projectapp.databinding.FragmentAdminLoginBinding;
 import com.example.b07projectapp.databinding.FragmentStudentDesicionBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +36,8 @@ public class AdminLogin extends Fragment {
     // TODO: Rename and change types of parameters
     private String username;
     private String password;
+    private FirebaseAuth auth;
+    static boolean test = false;
 
     public AdminLogin() {
         // Required empty public constructor
@@ -62,6 +69,8 @@ public class AdminLogin extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        auth = FirebaseAuth.getInstance();
+
         view.findViewById(R.id.adminSignInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,12 +79,18 @@ public class AdminLogin extends Fragment {
                 EditText textPassword = binding.adminTextPassword;
                 password = textPassword.getText().toString();
 
-                if (!DatabaseManager.search(username, password, "admin")){
+                DatabaseManager.search(getActivity(), EntryScreen.class, username, password, "admin");
+
+                if (!test){
                     Toast myToast = Toast.makeText(getActivity(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
                 //TODO if search comes back true, move to next admin page
-
+                else {
+                    test = false;
+                    NavHostFragment.findNavController(AdminLogin.this)
+                            .navigate(R.id.action_adminLogin_to_adminManagement);
+                }
             }
         });
     }
@@ -95,4 +110,5 @@ public class AdminLogin extends Fragment {
         binding = FragmentAdminLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
 }
