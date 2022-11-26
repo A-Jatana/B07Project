@@ -30,6 +30,9 @@
     <string name="add_button_text">Add Course</string>
     <string name="welcome_admin">Welcome Admin</string>
     <string name="choice">Choose</string>
+    <string name="course_list_message">Here is a list of courses you have taken: </string>
+    <string name="action_generate_timeline">Generate Timeline</string>
+    <string name="courses_to_add_message">Please select the courses you wish to add to your list:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
