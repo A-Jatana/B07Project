@@ -1,13 +1,18 @@
 package com.example.b07projectapp;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainer;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Use the {@link AdminLogin#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdminLogin extends Fragment {
+public class AdminLogin extends Login{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +42,8 @@ public class AdminLogin extends Fragment {
     private String username;
     private String password;
     private FirebaseAuth auth;
-    static boolean test = false;
+
+    static int check = 0;
 
     public AdminLogin() {
         // Required empty public constructor
@@ -79,20 +85,35 @@ public class AdminLogin extends Fragment {
                 EditText textPassword = binding.adminTextPassword;
                 password = textPassword.getText().toString();
 
-                DatabaseManager.search(getActivity(), EntryScreen.class, username, password, "admin");
-
-                if (!test){
-                    Toast myToast = Toast.makeText(getActivity(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
+                if (username.isEmpty() || password.isEmpty()){
+                    Toast myToast = Toast.makeText(getActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
-                //TODO if search comes back true, move to next admin page
                 else {
-                    test = false;
-                    NavHostFragment.findNavController(AdminLogin.this)
-                            .navigate(R.id.action_adminLogin_to_adminManagement);
+                    DatabaseManager dm = new DatabaseManager(username, password, "admin");
+                    dm.search(new DatabaseManager.SimpleCallback() {
+                        @Override
+                        public void callback(boolean data) {
+                            if (data) {
+                                Toast myToast = Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT);
+                                myToast.show();
+                                login();
+                            }
+                            else {
+                                Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
+                                myToast.show();
+                            }
+                        }
+                    });
                 }
             }
         });
+    }
+
+    @Override
+    void login() {
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_adminLogin_to_adminHome);
     }
 
     @Override

@@ -20,12 +20,20 @@
         android:id="@+id/adminLogin"
         android:name="com.example.b07projectapp.AdminLogin"
         android:label="fragment_admin_login"
-        tools:layout="@layout/fragment_admin_login" />
+        tools:layout="@layout/fragment_admin_login" >
+        <action
+            android:id="@+id/action_adminLogin_to_adminHome"
+            app:destination="@id/adminHome" />
+    </fragment>
     <fragment
         android:id="@+id/studentLogin"
         android:name="com.example.b07projectapp.StudentLogin"
         android:label="fragment_student_login"
-        tools:layout="@layout/fragment_student_login" />
+        tools:layout="@layout/fragment_student_login" >
+        <action
+            android:id="@+id/action_studentLogin_to_studentAddCourse2"
+            app:destination="@id/studentAddCourse2" />
+    </fragment>
     <fragment
         android:id="@+id/studentDecision"
         android:name="com.example.b07projectapp.StudentDecision"
@@ -42,5 +50,19 @@
         android:id="@+id/studentSignup2"
         android:name="com.example.b07projectapp.StudentSignup"
         android:label="fragment_student_signup"
-        tools:layout="@layout/fragment_student_signup" />
+        tools:layout="@layout/fragment_student_signup" >
+        <action
+            android:id="@+id/action_studentSignup2_to_studentAddCourse2"
+            app:destination="@id/studentAddCourse2" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminHome"
+        android:name="com.example.b07projectapp.AdminHome"
+        android:label="fragment_admin_home"
+        tools:layout="@layout/fragment_admin_home" />
+    <fragment
+        android:id="@+id/studentAddCourse2"
+        android:name="com.example.b07projectapp.StudentAddCourse"
+        android:label="fragment_student_add_course"
+        tools:layout="@layout/fragment_student_add_course" />
 </navigation>

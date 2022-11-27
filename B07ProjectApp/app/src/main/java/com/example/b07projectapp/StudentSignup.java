@@ -4,21 +4,28 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.b07projectapp.databinding.FragmentStudentLoginBinding;
 import com.example.b07projectapp.databinding.FragmentStudentSignupBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StudentLogin#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudentSignup extends Fragment {
+public class StudentSignup extends Login {
 
     private FragmentStudentSignupBinding binding;
 
@@ -79,12 +86,45 @@ public class StudentSignup extends Fragment {
                 * If (Database already has that username) {
                 * pop up message saying username is already taken
                 * }*/
-                if (password.equals(confirmPassword)){
-                    //Pop up message saying passwords don't match
+
+                if (username.isEmpty()){
+                    Toast myToast = Toast.makeText(getActivity(), "Username cannot be empty!", Toast.LENGTH_SHORT);
+                    myToast.show();
                 }
-                DatabaseManager.add(username, password);
+                else if (password.isEmpty() || confirmPassword.isEmpty()){
+                    Toast myToast = Toast.makeText(getActivity(), "Password cannot be empty!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+                else if (!password.equals(confirmPassword)){
+                    Toast myToast = Toast.makeText(getActivity(), "Passwords do not match!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+                else {
+                    DatabaseManager dm = new DatabaseManager(username, password, "student");
+                    dm.add(new DatabaseManager.addCallback() {
+                        @Override
+                        public void callback(boolean data) {
+                            Toast myToast;
+                            if (data) {
+                                myToast = Toast.makeText(getContext(), "Signup Success!", Toast.LENGTH_SHORT);
+                                login();
+                            }
+                            else {
+                                myToast = Toast.makeText(getContext(), "Username already exists!", Toast.LENGTH_SHORT);
+                            }
+                            myToast.show();
+                        }
+                    });
+                }
             }
         });
+    }
+
+    @Override
+    void login() {
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_studentSignup2_to_studentAddCourse2);
+        // Why do the ids contain 2?
     }
 
     @Override

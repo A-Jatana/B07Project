@@ -1,5 +1,8 @@
 package com.example.b07projectapp;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -21,9 +24,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class DatabaseManager extends Fragment {
+public class DatabaseManager{
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference dRef;
+
+    private String username;
+    private String password;
+    private String type;
+
+    public DatabaseManager() {}
+
+    public DatabaseManager(String username, String password, String type) {
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
 
 //    public void test() {
 //        dRef = database.getReference().child("student");
@@ -40,15 +55,45 @@ public class DatabaseManager extends Fragment {
 //        });
 //    }
 
-    /**
-     * WANT TO ADD:
-     * Let search() return 1 or 0 depending whether it found the user
-     *
-     * @param username user username
-     * @param password user password
-     * @param type type of user
-     */
-    protected static void search(Context context, Class c, String username, String password, String type) {
+//    protected void search(Context context, String username, String password, String type) {
+//
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(type);
+//
+//        Query query_user = reference.orderByChild("username").equalTo(username);
+//        query_user.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//
+//                    String DBpass = snapshot.child(username).child("password").getValue(String.class);
+//
+//                    if (DBpass.equals(password)) {
+//
+//                        String DBUser = snapshot.child(username).child("username").getValue(String.class);
+//
+//                        Log.i("STATUS", "BEFORE LOGIN");
+//                        //Intent intent = new Intent(getApplicationContext(), AdminManagement.class);
+//                        //startActivity(intent);
+//                        Log.i("STATUS", "AFTER LOGIN");
+//
+//                        AdminLogin.check = 1;
+//
+//
+//                    } else {
+//                        Toast myToast = Toast.makeText(context, "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
+//                        myToast.show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+
+    protected void search(SimpleCallback finishedCallback) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(type);
 
@@ -56,21 +101,15 @@ public class DatabaseManager extends Fragment {
         query_user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
+                // Checks if username exists
+                if (snapshot.getValue() != null) {
 
-                    String DBpass = snapshot.child(username).child("password").getValue(String.class);
+                    String DBpass = snapshot.child(username).child("password").getValue().toString();
 
-                    if (DBpass.equals(password)) {
-
-                        String DBUser = snapshot.child(username).child("username").getValue(String.class);
-
-                        Intent intent = new Intent(context, c);
-                        Log.i("STATUS", "BEFORE ACTIVITY");
-                        context.startActivity(intent);
-                        Log.i("STATUS", "AFTER ACTIVITY");
-
-
-                    }
+                    finishedCallback.callback(DBpass.equals(password));
+                }
+                else {
+                    finishedCallback.callback(false);
                 }
             }
 
@@ -79,44 +118,12 @@ public class DatabaseManager extends Fragment {
 
             }
         });
-//
-//        // Points dRef to the "type" (admin, student, or course) (look in Firebase)
-//        dRef = database.getReference().child(type);
-//
-//        dRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Log.i("Status", "Sign Up Success");
-//                // snapshot.getChildren points towards the stuff inside STUDENTHASHCODE
-//                if (snapshot.exists()) {
-//                    for (DataSnapshot ds : snapshot.getChildren()) {
-//
-//                        // Get the value of username & password
-//                        if (ds.child("password").getValue().toString().equals(password) &&
-//                                ds.child("username").getValue().toString().equals(username)) {
-//                            AdminLogin.test = true;
-//                        }
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                System.out.println("DATABASE ERROR");
-//            }
-//        });
     }
 
-
-
-
-    /**
-     * WANT TO ADD:
-     * Use search() to verify if user already exists
-     *
-     * @param username user username
-     * @param password user password
-     */
-    protected static void add(String username, String password) {
+    public interface SimpleCallback {
+        void callback(boolean data);
+    }
+    protected void add(addCallback finishedCallback) {
 
         // Points dRef to "student"
         dRef = database.getReference().child("student");
@@ -125,14 +132,18 @@ public class DatabaseManager extends Fragment {
         dRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i("Status", "Log In Success");
-
-                // This is where search() should be used to check if something already exists or not
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child("username").getValue().toString().equals(username)) {
+                        finishedCallback.callback(false);
+                        return;
+                    }
+                }
 
                 // We should eventually depend on User objects
                 Student student = new Student(username, password);
 
                 dRef.child(username).setValue(student);
+                finishedCallback.callback(true);
             }
 
             @Override
@@ -140,5 +151,8 @@ public class DatabaseManager extends Fragment {
                 System.out.println("DATABASE ERROR");
             }
         });
+    }
+    public interface addCallback {
+        void callback(boolean data);
     }
 }

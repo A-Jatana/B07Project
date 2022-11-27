@@ -55,13 +55,13 @@ public class AdminHome extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.addCourseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(AdminHome.this)
-                        .navigate(R.id.action_adminHome_to_adminAddCourse);
-            }
-        });
+//        binding.addCourseButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(AdminHome.this)
+//                        .navigate(R.id.action_adminHome_to_adminAddCourse);
+//            }
+//        });
     }
 
     @Override

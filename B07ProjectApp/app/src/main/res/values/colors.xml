@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="royalBlue">#246EE9</color>
     <color name="screenBackground">#3EB489</color>
+    <color name="lightGrey">#ededed</color>
+    <color name="oldNavy">#2e3549</color>
 </resources>

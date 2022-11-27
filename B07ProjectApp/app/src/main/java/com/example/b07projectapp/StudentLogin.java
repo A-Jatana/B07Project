@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import com.example.b07projectapp.databinding.FragmentStudentLoginBinding;
  * Use the {@link StudentLogin#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudentLogin extends Fragment {
+public class StudentLogin extends Login {
     private FragmentStudentLoginBinding binding;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,12 +64,34 @@ public class StudentLogin extends Fragment {
                 EditText textPassword = binding.inputPassword;
                 password = textPassword.getText().toString();
 
-                if (!DatabaseManager.search(username, password, "admin")){
-                    Toast myToast = Toast.makeText(getActivity(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast myToast = Toast.makeText(getActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT);
                     myToast.show();
+                } else {
+                    DatabaseManager dm = new DatabaseManager(username, password, "student");
+                    dm.search(new DatabaseManager.SimpleCallback() {
+                        @Override
+                        public void callback(boolean data) {
+                            if (data) {
+                                Toast myToast = Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT);
+                                myToast.show();
+                                login();
+                            }
+                            else {
+                                Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
+                                myToast.show();
+                            }
+                        }
+                    });
                 }
             }
         });
+    }
+
+    @Override
+    void login() {
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_studentLogin_to_studentAddCourse2);
     }
 
     @Override
@@ -86,4 +109,5 @@ public class StudentLogin extends Fragment {
         binding = FragmentStudentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
 }
