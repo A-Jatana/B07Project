@@ -27,15 +27,15 @@ Any impediments or stumbling blocks?
  Name: Amitoz Jatana
 
 What have you done since yesterday?
-	- <What you have done>
+	- made progress on add course feature
 
 What are you planning on doing today?
-	- <What you plan on doing 1...>
-    - <What you plan on doing 2...>
-    - <What you plan on doing 3...>
+	- finish add course feature for admin
+	- have popups if you try to add a course without filling the required fields
 
 Any impediments or stumbling blocks?
-	- None
+	- getting a nullpointerexepception error for some reason
+
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  Name: Kerry Zhang
 
