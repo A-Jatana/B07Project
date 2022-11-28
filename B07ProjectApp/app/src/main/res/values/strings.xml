@@ -12,13 +12,8 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_confirmPassword">Confirm Password</string>
-    <string name="prompt_courseCode">Course Code</string>
-    <string name="prompt_prerequisites">Prerequisites</string>
-    <string name="prompt_offeringSessions">Offering Sessions</string>
-    <string name="prompt_courseName">Course Name</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="action_add_course">Add Course</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
@@ -26,14 +21,6 @@
     <string name="login_text">Login</string>
     <string name="action_sign_up_short">Sign up</string>
     <string name="signup_text">Sign up</string>
-    <string name="view_edit_button_text">View/Edit Course List</string>
-    <string name="add_button_text">Add Course</string>
-    <string name="welcome_admin">Welcome Admin</string>
-    <string name="choice">Choose</string>
-    <string name="course_list_message">Here is a list of courses you have taken: </string>
-    <string name="action_generate_timeline">Generate Timeline</string>
-    <string name="courses_to_add_message">Please select the courses you wish to add to your list:</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="software_name">Software Name</string>
@@ -43,6 +30,14 @@
     <string name="hello_first_fragment">Would you like to log in using an existing account or register a new account?</string>
     <string name="login_button_text">Login</string>
     <string name="signup_button_text">Sign-up</string>
-    <string name="title_activity_course">CourseActivity</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Strings related to admin add course page -->
+    <string name="prompt_courseName">Course Name</string>
+    <string name="prompt_courseCode">Course Code</string>
+    <string name="prompt_offeringSessions">Offering Sessions</string>
+    <string name="prompt_prerequisites">Prerequisites</string>
+    <string name="add_button_text">Add Course</string>
+    <!-- Strings related to admin home page-->
+    <string name="welcome_admin">Welcome Admin</string>
+    <string name="choice">Do you want to...</string>
+    <string name="view_edit_button_text">View/Edit Courses</string>
 </resources>
