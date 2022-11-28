@@ -93,7 +93,7 @@ public class DatabaseManager{
 //        });
 //    }
 
-    protected void search(SimpleCallback finishedCallback) {
+    protected void search(searchCallback finishedCallback) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(type);
 
@@ -120,7 +120,7 @@ public class DatabaseManager{
         });
     }
 
-    public interface SimpleCallback {
+    public interface searchCallback {
         void callback(boolean data);
     }
     protected void add(addCallback finishedCallback) {
@@ -133,7 +133,7 @@ public class DatabaseManager{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (ds.child("username").getValue().toString().equals(username)) {
+                    if (ds.getValue().toString().equals(username)) {
                         finishedCallback.callback(false);
                         return;
                     }
@@ -142,7 +142,11 @@ public class DatabaseManager{
                 // We should eventually depend on User objects
                 Student student = new Student(username, password);
 
-                dRef.child(username).setValue(student);
+                // why does this happen - the stuff below sets the keys to "pass" & "user"
+                // instead of password & username
+                // dRef.child(username).setValue(student)
+                dRef.child(username).child("username").setValue(student.username);
+                dRef.child(username).child("password").setValue(student.password);
                 finishedCallback.callback(true);
             }
 
