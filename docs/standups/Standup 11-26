@@ -27,15 +27,13 @@ Any impediments or stumbling blocks?
  Name: Amitoz Jatana
 
 What have you done since yesterday?
-	- <What you have done>
+	- started working on admin add course feature 
 
 What are you planning on doing today?
-	- <What you plan on doing 1...>
-    - <What you plan on doing 2...>
-    - <What you plan on doing 3...>
+	- finish implementing the add course feature for admin
 
 Any impediments or stumbling blocks?
-	- None
+	- every time the add course button is pressed, the app crashes
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  Name: Kerry Zhang
 
