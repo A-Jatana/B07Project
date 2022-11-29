@@ -56,6 +56,14 @@ public class StudentLogin extends Login {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.donthaveanaccountbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(StudentLogin.this)
+                        .navigate(R.id.action_studentLogin_to_studentSignup);
+            }
+        });
+
         view.findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +77,7 @@ public class StudentLogin extends Login {
                     myToast.show();
                 } else {
                     DatabaseManager dm = new DatabaseManager(username, password, "student");
-                    dm.search(new DatabaseManager.SimpleCallback() {
+                    dm.search(new DatabaseManager.searchCallback() {
                         @Override
                         public void callback(boolean data) {
                             if (data) {
