@@ -1,16 +1,18 @@
 package com.example.b07projectapp;
 
+import java.util.List;
+
 public class Course {
     String courseName;
     String courseCode;
-    String offeringSessions;
-    String prerequisites;
+    List<String> offeringSessions;
+    List<Course> prerequisites;
 
     public Course(){
         //this constructor is required
     }
 
-    public Course(String courseName, String courseCode, String offeringSessions, String prerequisites) {
+    public Course(String courseName, String courseCode, List<String> offeringSessions, List<Course> prerequisites) {
         this.courseName = courseName;
         this.courseCode = courseCode;
         this.offeringSessions = offeringSessions;
@@ -25,11 +27,8 @@ public class Course {
         return courseCode;
     }
 
-    public String getOfferingSessions() {
-        return offeringSessions;
-    }
+    public List<String> getOfferingSessions() { return offeringSessions; }
 
-    public String getPrerequisites() {
-        return prerequisites;
-    }
+    public List<Course> getPrerequisites() { return prerequisites; }
+
 }
