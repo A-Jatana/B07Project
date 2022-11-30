@@ -40,4 +40,6 @@
     <string name="welcome_admin">Welcome Admin</string>
     <string name="choice">Do you want to...</string>
     <string name="view_edit_button_text">View/Edit Courses</string>
+    <!-- Strings related to admin edit course-->
+    <string name="edit_message">Enter the name of the course you wish to edit</string>
 </resources>

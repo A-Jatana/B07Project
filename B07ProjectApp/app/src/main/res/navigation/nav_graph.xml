@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_adminHome_to_adminAddCourse"
             app:destination="@id/adminAddCourse" />
+        <action
+            android:id="@+id/action_adminHome_to_editCoursesHome"
+            app:destination="@id/editCoursesHome" />
     </fragment>
     <fragment
         android:id="@+id/studentAddCourse2"
@@ -69,4 +72,9 @@
             android:id="@+id/action_studentSignup_to_studentAddCourse2"
             app:destination="@id/studentAddCourse2" />
     </fragment>
+    <fragment
+        android:id="@+id/editCoursesHome"
+        android:name="com.example.b07projectapp.EditCoursesHome"
+        android:label="fragment_edit_courses_home"
+        tools:layout="@layout/fragment_edit_courses_home" />
 </navigation>
