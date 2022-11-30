@@ -13,13 +13,14 @@ Any impediments or stumbling blocks?
 Name: Syeda Sumaiya Ahmed
 
 What have you done since yesterday?
-	- 
+	- Almost finished the student course list layout designed using information from database entirely
 
 What are you planning on doing today?
-	- 
+	- Finish the student course list layout designed using information from database entirely
+	- start working on student add course feature layout and implementation
 
 Any impediments or stumbling blocks?
-	- None
+	- AdminAddCourse and AdminLogin seem to have some errors preventing the app from running and testing the new functions
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  Name: Amitoz Jatana
 
