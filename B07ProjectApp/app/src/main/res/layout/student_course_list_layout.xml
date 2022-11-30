@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TableRow
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/courseName_tv"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/courseCode_tv"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/offeringSessions_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+           android:id="@+id/prerequisites_tv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:fontFamily="sans-serif-medium"
+           android:textColor="@color/black"
+           android:textSize="14sp" />
+    </TableRow>
+
+</TableLayout>
+

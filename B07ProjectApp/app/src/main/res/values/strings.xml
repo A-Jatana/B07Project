@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">B07ProjectApp</string>
     <string name="action_settings">Settings</string>
@@ -40,4 +41,9 @@
     <string name="welcome_admin">Welcome Admin</string>
     <string name="choice">Do you want to...</string>
     <string name="view_edit_button_text">View/Edit Courses</string>
+    <!-- Strings related to student course list page-->
+    <string name="course_list_message">Here is your course list</string>
+    <string name="action_add_course">Add courses</string>
+    <string name="action_generate_timeline">Generate Course Timeline</string>
+    <string name="courses_to_add_message"></string>
 </resources>
