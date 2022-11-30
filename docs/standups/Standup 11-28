@@ -1,12 +1,12 @@
 Name: Jamie Hvizdos
 
 What have you done since yesterday?
-	- <What you have done>
+	- Finished generate timeline code
 
 What are you planning on doing today?
-	- <What you plan on doing 1...>
-    - <What you plan on doing 2...>
-    - <What you plan on doing 3...>
+	- Bug test code
+	- Have database read course information into program
+	- Figure out making a table 
 
 Any impediments or stumbling blocks?
 	- None
@@ -45,16 +45,4 @@ What are you planning on doing today?
 
 Any impediments or stumbling blocks?
 	- None
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   Name: Yuhei Fukuhara
 
-What have you done since yesterday?
-	- <What you have done>
-
-What are you planning on doing today?
-	- <What you plan on doing 1...>
-    - <What you plan on doing 2...>
-    - <What you plan on doing 3...>
-
-Any impediments or stumbling blocks?
-	- None
