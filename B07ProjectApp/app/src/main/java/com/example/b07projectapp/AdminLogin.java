@@ -91,7 +91,7 @@ public class AdminLogin extends Login{
                 }
                 else {
                     DatabaseManager dm = new DatabaseManager(username, password, "admin");
-                    dm.search(new DatabaseManager.SimpleCallback() {
+                    dm.search(new DatabaseManager.searchCallback() {
                         @Override
                         public void callback(boolean data) {
                             if (data) {
