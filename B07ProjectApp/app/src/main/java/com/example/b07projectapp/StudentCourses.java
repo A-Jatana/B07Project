@@ -1,16 +1,25 @@
 package com.example.b07projectapp;
-import java.util.*;
-public class CourseList {
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class StudentCourses {
     static ArrayList<String> courseCode = new ArrayList<String>();
     static ArrayList<String> sessions = new ArrayList<String>();
     static ArrayList<String> prerequisites = new ArrayList<String>();
-
+    static String studentName;
     public static void addCourse(String course, String session, String prereq) {
         courseCode.add(course);
         sessions.add(session);
         prerequisites.add(prereq);
     }
+    public static void setStudentName(String name){
+        studentName = name;
+    }
 
+    public static String getStudentName(){
+        return studentName;
+    }
     public static ArrayList<String> getCourseCodes() {
         return courseCode;
     }

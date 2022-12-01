@@ -157,4 +157,76 @@ import com.google.firebase.database.ValueEventListener;
         public interface addCallback {
             void callback(boolean data);
         }
+
+        protected void generateCourseList (){
+            dRef = database.getReference().child("course");
+            //ArrayList of the form < <"Course Code", <"Session 1", "Session 2",...>, <"Prereq1","Prereq2",...>>, <...>, <...>>
+            //ArrayList<ArrayList<ArrayList<String>>> finalCourseList = new ArrayList<ArrayList<ArrayList<String>>>();
+            int index = 0;
+            dRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        String course = ds.child("courseCode").getValue().toString();
+                        String sessionsOffered = ds.child("offeringSessions").getValue().toString();
+                        String prerequisites = ds.child("prerequisites").getValue().toString();
+                        CourseList.addCourse(course,sessionsOffered,prerequisites);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        protected void generateStudentCourseList (String studentName){
+            dRef = database.getReference().child("student").child(studentName).child("course");
+            //ArrayList of the form < <"Course Code", <"Session 1", "Session 2",...>, <"Prereq1","Prereq2",...>>, <...>, <...>>
+            //ArrayList<ArrayList<ArrayList<String>>> finalCourseList = new ArrayList<ArrayList<ArrayList<String>>>();
+            int index = 0;
+            dRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        String course = ds.child("courseCode").getValue().toString();
+                        String sessionsOffered = ds.child("offeringSessions").getValue().toString();
+                        String prerequisites = ds.child("prerequisites").getValue().toString();
+                        StudentCourses.addCourse(course,sessionsOffered,prerequisites);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        protected void getStudentName(String username, String password){
+            dRef = database.getReference().child("student");
+            String name;
+            //ArrayList of the form < <"Course Code", <"Session 1", "Session 2",...>, <"Prereq1","Prereq2",...>>, <...>, <...>>
+            //ArrayList<ArrayList<ArrayList<String>>> finalCourseList = new ArrayList<ArrayList<ArrayList<String>>>();
+            int index = 0;
+            dRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if (ds.child("username").equals(username) && ds.child("password").equals(password)){
+                            StudentCourses.setStudentName(ds.getKey());
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
 }

@@ -50,9 +50,12 @@ public class StudentCourseList extends AppCompatActivity {
         recyclerView.setAdapter(studentCourseListAdapter);
     }
 
-    private ArrayList<Course> getList(){
 
-        ArrayList<Course> course_list = new ArrayList<>();
+
+    private ArrayList<Course> getList(){
+        ArrayList<Course> temp = new ArrayList<Course>();
+        return temp;
+        //ArrayList<Course> course_list = new ArrayList<>();
         /*for(int i = 0; i<student_course_list.courseCode.size(); i++){
 
             String offering_sessions = "";
@@ -67,9 +70,11 @@ public class StudentCourseList extends AppCompatActivity {
 
         }*/
 
-        course_list.add(new Course("Intro", "CSCB07", "Winter", "A48"));
-        return course_list;
+        //course_list.add(new Course("Intro", "CSCB07", "Winter", "A48"));
+       // return course_list;
     }
+
+
 
      /*   database = FirebaseDatabase.getInstance().getReference("Users"); //??
         recyclerView.setHasFixedSize(true);
