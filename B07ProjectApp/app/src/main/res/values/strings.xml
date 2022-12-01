@@ -45,4 +45,8 @@
     <string name="course_list_message">Course List</string>
     <string name="action_add_course">Add Course</string>
     <string name="action_generate_timeline">Generate timetable</string>
+    <!-- Strings related to student course list page-->
+    <string name="course_list_message">Here is your course list</string>
+    <string name="action_add_course">Add courses</string>
+    <string name="action_generate_timeline">Generate Course Timeline</string>
 </resources>
