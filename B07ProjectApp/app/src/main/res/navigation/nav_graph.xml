@@ -22,8 +22,8 @@
         android:label="fragment_admin_login"
         tools:layout="@layout/fragment_admin_login" >
         <action
-            android:id="@+id/action_adminLogin_to_adminHome"
-            app:destination="@id/adminHome" />
+            android:id="@+id/action_adminLogin_to_adminCourseList"
+            app:destination="@id/adminCourseList" />
     </fragment>
     <fragment
         android:id="@+id/studentLogin"
@@ -77,4 +77,8 @@
         android:name="com.example.b07projectapp.EditCoursesHome"
         android:label="fragment_edit_courses_home"
         tools:layout="@layout/fragment_edit_courses_home" />
+    <fragment
+        android:id="@+id/adminCourseList"
+        android:name="com.example.b07projectapp.AdminCourseList"
+        android:label="AdminCourseList" />
 </navigation>
