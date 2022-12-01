@@ -1,17 +1,29 @@
 package com.example.b07projectapp;
 
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import androidx.appcompat.widget.SearchView;
 
+import androidx.annotation.NonNull;
+
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.b07projectapp.databinding.FragmentAdminAddCourseBinding;
+import com.example.b07projectapp.databinding.FragmentAdminCourseListBinding;
+//import com.firebase.ui.database.FirebaseRecyclerAdapter;
+//import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,91 +32,109 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+public class StudentCourseList extends Fragment {
 
-public class StudentCourseList extends AppCompatActivity {
-
-    CourseList student_course_list; //using a function, we need to store the student's list of courses from the database here
-    RecyclerView recyclerView;
-    //DatabaseReference database;
-    StudentCourseListAdapter studentCourseListAdapter;
+    DatabaseReference dRef;
     ArrayList<Course> list;
-
-
-
-
-
+    RecyclerView recyclerView;
+    SearchView searchView;
+    private View courseView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_student_course_list);
-
-        recyclerView = findViewById(R.id.studentCourseList);
-        setRecylerView();
-
-    }
-    private void setRecylerView() {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        studentCourseListAdapter = new StudentCourseListAdapter(this,getList());
-        recyclerView.setAdapter(studentCourseListAdapter);
     }
 
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-
-    private ArrayList<Course> getList(){
-        ArrayList<Course> temp = new ArrayList<Course>();
-        return temp;
-        //ArrayList<Course> course_list = new ArrayList<>();
-        /*for(int i = 0; i<student_course_list.courseCode.size(); i++){
-
-            String offering_sessions = "";
-            String prereqs = "";
-            for(int j = 0; j<student_course_list.sessions.get(i).size(); i++){
-                offering_sessions += student_course_list.sessions.get(i).get(j);
-            }
-            for(int j = 0; j<student_course_list.prerequisites.get(i).size(); i++){
-                prereqs += student_course_list.prerequisites.get(i).get(j);
-            }
-            course_list.add(new Course("", student_course_list.courseCode.get(i), offering_sessions,prereqs));
-
-        }*/
-
-        //course_list.add(new Course("Intro", "CSCB07", "Winter", "A48"));
-       // return course_list;
-    }
-
-
-
-     /*   database = FirebaseDatabase.getInstance().getReference("Users"); //??
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        list = new ArrayList<>();
-        studentCourseListAdapter = new StudentCourseListAdapter(this,list);
-        recyclerView.setAdapter(studentCourseListAdapter);
-
-        database.addValueEventListener(new ValueEventListener() {
+        Button btn_add = getView().findViewById(R.id.studentAddCourse);
+        btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                     Course course = dataSnapshot.getValue(Course.class);
-                     list.add(course);
-                 }
-                 studentCourseListAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onClick(View v) {
+                NavHostFragment.findNavController(StudentCourseList.this)
+                        .navigate(R.id.action_studentCourseList_to_studentAddCourse);
             }
         });
 
+        Button btn_edit_delete = getView().findViewById(R.id.generateTimeline);
+        btn_edit_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(StudentCourseList.this)
+                        .navigate(R.id.action_studentCourseList_to_generateTimeline);
+            }
+        });
+    }
 
-    }*/
+    @Override
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        courseView = inflater.inflate(R.layout.fragment_admin_course_list, container, false);
 
+        recyclerView = (RecyclerView) courseView.findViewById(R.id.rv);
+        searchView = (SearchView) courseView.findViewById(R.id.search_course);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        dRef = FirebaseDatabase.getInstance().getReference().child("course");
+
+//        binding = FragmentAdminAddCourseBinding.inflate(inflater, container, false);
+//        return binding.getRoot();
+        return courseView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (dRef != null) {
+            dRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        list = new ArrayList<>();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            list.add(new Course(ds.child("courseName").getValue().toString(),
+                                    ds.child("courseCode").getValue().toString(),
+                                    ds.child("offeringSessions").getValue().toString(),
+                                    ds.child("prerequisites").getValue().toString()));
+                        }
+                        Log.i("STATUS", list.get(0).getCourseName());
+                        StudentCourseListAdapter adapter = new StudentCourseListAdapter(list);
+                        recyclerView.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    search(s);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void search(String s) {
+        ArrayList<Course> myList = new ArrayList<>();
+        for (Course course : list) {
+            if (course.getCourseName().toLowerCase().contains(s.toLowerCase())
+                    || course.getCourseCode().toLowerCase().contains(s.toLowerCase())) {
+                myList.add(course);
+            }
+        }
+        StudentCourseListAdapter adapter = new StudentCourseListAdapter(myList);
+        recyclerView.setAdapter(adapter);
+    }
 }

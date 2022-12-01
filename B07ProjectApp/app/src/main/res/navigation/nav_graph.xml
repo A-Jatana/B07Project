@@ -78,6 +78,17 @@
             app:destination="@id/adminUpdateCourse" />
     </fragment>
     <fragment
+        android:id="@+id/StudentCourseList"
+        android:name="com.example.b07projectapp.AdminCourseList"
+        android:label="StudentCourseList" >
+        <action
+            android:id="@+id/action_studentCourseList_to_studentAddCourse"
+            app:destination="@id/studentAddCourse" />
+        <action
+            android:id="@+id/action_studentCourseList_to_generateTimeline"
+            app:destination="@id/generateTimeline" />
+    </fragment>
+    <fragment
         android:id="@+id/adminUpdateCourse"
         android:name="com.example.b07projectapp.AdminUpdateCourse"
         android:label="fragment_admin_update_course"

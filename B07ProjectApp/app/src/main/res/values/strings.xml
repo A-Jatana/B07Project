@@ -47,4 +47,9 @@
     <string name="prompt_updatedcourseCode">Updated Course Code</string>
     <string name="prompt_updatedofferingSessions">Updated Offering Sessions</string>
     <string name="prompt_updatedprerequisites">Updated Prerequisites</string>
+    <!-- Strings related to student course list page-->
+    <string name="course_list_message">Here is your course list</string>
+    <string name="action_add_course">Add courses</string>
+    <string name="action_generate_timeline">Generate Course Timeline</string>
+    <string name="courses_to_add_message" ></string>
 </resources>
