@@ -10,5 +10,7 @@
     <color name="royalBlue">#246EE9</color>
     <color name="screenBackground">#3EB489</color>
     <color name="lightGrey">#ededed</color>
-    <color name="oldNavy">#2e3549</color>
+    <color name="oldNavy">#023047</color>
+    <color name="turquoise">#219ebc</color>
+    <color name="darkOrange">#fb8500</color>
 </resources>

@@ -7,14 +7,13 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".StudentLogin">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Enter the name of the course you wish to edit."
+        android:text="Enter the name of the course you wish to edit/delete."
         android:textSize = "28sp" />
 
     <EditText
@@ -47,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update"
-            android:backgroundTint="#90E"
+            android:backgroundTint="@color/royalBlue"
             android:textColor="@color/white"
             android:textAllCaps="false"/>
     </LinearLayout>

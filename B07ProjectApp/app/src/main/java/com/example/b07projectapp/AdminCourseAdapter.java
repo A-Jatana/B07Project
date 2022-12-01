@@ -12,33 +12,42 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.core.Context;
 
-public class AdminCourseListAdapter extends FirebaseRecyclerAdapter<Course, AdminCourseListAdapter.myViewHolder>{
+import java.util.ArrayList;
 
-    public AdminCourseListAdapter(@NonNull FirebaseRecyclerOptions<Course> options) {
-        super(options);
-    }
+public class AdminCourseAdapter extends RecyclerView.Adapter<AdminCourseAdapter.courseViewHolder>{
 
-    @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull Course model) {
-        holder.courseName.setText(model.getCourseCode() + ": " + model.getCourseName());
-        holder.course_offering.setText("Seasonal Offerings: " + model.getOfferingSessions());
-        holder.course_prereq.setText("Prerequisites: " +model.getPrerequisites());
+    ArrayList<Course> list;
+
+    public AdminCourseAdapter(ArrayList<Course> list) {
+        this.list = list;
     }
 
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public courseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.admin_course_item, parent, false);
-        return new AdminCourseListAdapter.myViewHolder(view);
+        return new courseViewHolder(view);
     }
 
-    class myViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onBindViewHolder(@NonNull courseViewHolder holder, int i) {
+        holder.courseName.setText(list.get(i).getCourseCode() + ": " + list.get(i).getCourseName());
+        holder.course_offering.setText("Seasonal Offerings: " + list.get(i).getOfferingSessions());
+        holder.course_prereq.setText("Prerequisites: " + list.get(i).getPrerequisites());
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    class courseViewHolder extends RecyclerView.ViewHolder {
 
         TableRow title_row, offering_row, prerequisite_row;
         TextView courseName, course_offering, course_prereq;
 
-        public myViewHolder(@NonNull View itemView) {
+        public courseViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title_row = (TableRow)itemView.findViewById(R.id.table_title_row);
