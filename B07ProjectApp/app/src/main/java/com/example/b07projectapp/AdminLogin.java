@@ -113,7 +113,7 @@ public class AdminLogin extends Login{
     @Override
     void login() {
         NavHostFragment.findNavController(this)
-                .navigate(R.id.action_adminLogin_to_adminHome);
+                .navigate(R.id.action_adminLogin_to_adminCourseList);
     }
 
     @Override

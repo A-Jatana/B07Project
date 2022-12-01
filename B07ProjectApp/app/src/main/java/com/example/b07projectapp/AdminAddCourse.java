@@ -66,7 +66,7 @@ public class AdminAddCourse extends AddCourse {
         view.findViewById(R.id.adminAddCourseButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText textName = binding.inputFullName;
+                EditText textName = binding.inputCourseName;
                 name = textName.getText().toString();
                 EditText textCode = binding.inputCourseCode;
                 code = textCode.getText().toString();

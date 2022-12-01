@@ -39,7 +39,12 @@
     <!-- Strings related to admin home page-->
     <string name="welcome_admin">Welcome Admin</string>
     <string name="choice">Do you want to...</string>
-    <string name="view_edit_button_text">View/Edit Courses</string>
+    <string name="view_edit_button_text">Edit Courses</string>
     <!-- Strings related to admin edit course-->
     <string name="edit_message">Enter the name of the course you wish to edit</string>
+
+    <string name="prompt_updatedcourseName">Updated Course Name</string>
+    <string name="prompt_updatedcourseCode">Updated Course Code</string>
+    <string name="prompt_updatedofferingSessions">Updated Offering Sessions</string>
+    <string name="prompt_updatedprerequisites">Updated Prerequisites</string>
 </resources>

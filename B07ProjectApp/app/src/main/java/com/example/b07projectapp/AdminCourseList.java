@@ -56,12 +56,21 @@ public class AdminCourseList extends Fragment{
             }
         });
 
-        Button btn_edit_delete = getView().findViewById(R.id.button_edit_delete);
+        Button btn_edit_delete = getView().findViewById(R.id.button_delete);
         btn_edit_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(AdminCourseList.this)
                         .navigate(R.id.action_adminCourseList_to_editCoursesHome);
+            }
+        });
+
+        Button update_course = getView().findViewById(R.id.button_update);
+        update_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(AdminCourseList.this)
+                        .navigate(R.id.action_adminCourseList_to_adminUpdateCourse);
             }
         });
     }

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Enter the name of the course you wish to edit/delete."
+        android:text="Enter the name of the course you wish to delete."
         android:textSize = "28sp" />
 
     <EditText
@@ -25,29 +25,12 @@
         android:hint="@string/prompt_courseName"
         android:textSize="18sp"/>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/delete_course_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/delete_course_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:text="Delete"
-            android:backgroundTint="#FF00"
-            android:textColor="@color/white"
-            android:textAllCaps="false"/>
-
-        <Button
-            android:id="@+id/update_course_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update"
-            android:backgroundTint="@color/royalBlue"
-            android:textColor="@color/white"
-            android:textAllCaps="false"/>
-    </LinearLayout>
+        android:backgroundTint="#FF00"
+        android:text="Delete"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 </LinearLayout>

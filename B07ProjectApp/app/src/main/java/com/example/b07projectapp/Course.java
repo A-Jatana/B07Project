@@ -5,14 +5,14 @@ import java.util.List;
 public class Course {
     String courseName;
     String courseCode;
-    List<String> offeringSessions;
-    List<Course> prerequisites;
+    String offeringSessions;
+    String prerequisites;
 
     public Course(){
         //this constructor is required
     }
 
-    public Course(String courseName, String courseCode, List<String> offeringSessions, List<Course> prerequisites) {
+    public Course(String courseName, String courseCode, String offeringSessions, String prerequisites) {
         this.courseName = courseName;
         this.courseCode = courseCode;
         this.offeringSessions = offeringSessions;
@@ -27,8 +27,8 @@ public class Course {
         return courseCode;
     }
 
-    public List<String> getOfferingSessions() { return offeringSessions; }
+    public String getOfferingSessions() { return offeringSessions; }
 
-    public List<Course> getPrerequisites() { return prerequisites; }
+    public String getPrerequisites() { return prerequisites; }
 
 }

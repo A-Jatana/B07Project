@@ -52,9 +52,9 @@ public class AdminHome extends Fragment {
         return fragment;
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+//    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
 //        binding.addCourseButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -62,7 +62,15 @@ public class AdminHome extends Fragment {
 //                        .navigate(R.id.action_adminHome_to_adminAddCourse);
 //            }
 //        });
-    }
+//
+//        binding.viewEditCourseButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(AdminHome.this)
+//                        .navigate(R.id.action_adminHome_to_editCoursesHome);
+//            }
+//        });
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
