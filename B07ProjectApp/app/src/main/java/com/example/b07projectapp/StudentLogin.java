@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.b07projectapp.databinding.FragmentAdminLoginBinding;
 import com.example.b07projectapp.databinding.FragmentStudentLoginBinding;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,10 +86,11 @@ public class StudentLogin extends Login {
                                 Toast myToast = Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT);
                                 myToast.show();
                                 login();
-                                String name = "";
-                                //TODO get name of student somehow
+                                //Generates list of student courses
+                                //Sets student name in student courses
                                 CourseManager temp = new CourseManager();
-                                temp.generateStudentCourseList(name);
+                                temp.getStudentName(username, password);
+                                temp.generateStudentCourseList(StudentCourses.getStudentName());
                             }
                             else {
                                 Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);

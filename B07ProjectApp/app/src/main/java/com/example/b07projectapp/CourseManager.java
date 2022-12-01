@@ -204,5 +204,29 @@ import com.google.firebase.database.ValueEventListener;
             });
         }
 
+        protected void getStudentName(String username, String password){
+            dRef = database.getReference().child("student");
+            String name;
+            //ArrayList of the form < <"Course Code", <"Session 1", "Session 2",...>, <"Prereq1","Prereq2",...>>, <...>, <...>>
+            //ArrayList<ArrayList<ArrayList<String>>> finalCourseList = new ArrayList<ArrayList<ArrayList<String>>>();
+            int index = 0;
+            dRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if (ds.child("username").equals(username) && ds.child("password").equals(password)){
+                            StudentCourses.setStudentName(ds.getKey());
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
 
 }
