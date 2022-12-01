@@ -42,9 +42,6 @@
     <string name="view_edit_button_text">View/Edit Courses</string>
     <!-- Strings related to admin edit course-->
     <string name="edit_message">Enter the name of the course you wish to edit</string>
-    <string name="course_list_message">Course List</string>
-    <string name="action_add_course">Add Course</string>
-    <string name="action_generate_timeline">Generate timetable</string>
     <!-- Strings related to student course list page-->
     <string name="course_list_message">Here is your course list</string>
     <string name="action_add_course">Add courses</string>
