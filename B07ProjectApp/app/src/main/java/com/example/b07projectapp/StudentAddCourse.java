@@ -2,63 +2,114 @@ package com.example.b07projectapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StudentAddCourse#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+
 public class StudentAddCourse extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public StudentAddCourse() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StudentAddCourse.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StudentAddCourse newInstance(String param1, String param2) {
-        StudentAddCourse fragment = new StudentAddCourse();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    DatabaseReference dRef;
+    ArrayList<Course> list;
+    RecyclerView recyclerView;
+    StudentCourseListAdapterCheckboxes adapter;
+    private View courseView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_add_course, container, false);
+
+        courseView = inflater.inflate(R.layout.fragment_student_add_course, container, false);
+
+        recyclerView = (RecyclerView) courseView.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
+        return courseView;
+    }
+
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button btn_add = getView().findViewById(R.id.generate_timeline);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ArrayList<Course> chosenCourses = adapter.getCheckList();
+                if (chosenCourses.isEmpty()){
+                    Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                } else {
+                    ArrayList<String> list = new ArrayList<>();
+                    for (int i = 0; i< chosenCourses.size();i++){
+                        list.add(chosenCourses.get(i).getCourseCode());
+                    }
+                    StudentCourses.setCoursesToTake(list);
+                    NavHostFragment.findNavController(StudentAddCourse.this)
+                            .navigate(R.id.action_studentChooseCourse_to_studentTimeline);
+                }
+
+            }
+        });
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (dRef != null) {
+            dRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        list = new ArrayList<>();
+                        for (DataSnapshot ds: snapshot.getChildren()) {
+                            list.add(new Course(ds.child("courseName").getValue().toString(),
+                                    ds.child("courseCode").getValue().toString(),
+                                    ds.child("offeringSessions").getValue().toString(),
+                                    ds.child("prerequisites").getValue().toString()));
+                        }
+
+                        ArrayList<String> studentCourses = StudentCourses.getCourseCodes();
+                        for (int i = 0; i< list.size();i++){
+                            if (studentCourses.contains(list.get(i).getCourseCode())){
+                                list.remove(i);
+                            }
+                        }
+                        Log.i("STATUS", list.get(0).getCourseName());
+                        adapter = new StudentCourseListAdapterCheckboxes(list);
+                        recyclerView.setAdapter(adapter);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
     }
 }

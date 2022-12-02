@@ -147,6 +147,7 @@ public class DatabaseManager{
                 // dRef.child(username).setValue(student)
                 dRef.child(username).child("username").setValue(student.username);
                 dRef.child(username).child("password").setValue(student.password);
+                dRef.child("course").setValue("course");
                 finishedCallback.callback(true);
             }
 
