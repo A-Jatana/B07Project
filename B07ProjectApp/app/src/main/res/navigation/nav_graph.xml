@@ -38,11 +38,6 @@
             app:destination="@id/studentSignup" />
     </fragment>
     <fragment
-        android:id="@+id/studentAddCourse2"
-        android:name="com.example.b07projectapp.StudentAddCourse"
-        android:label="fragment_student_add_course"
-        tools:layout="@layout/fragment_student_add_course" />
-    <fragment
         android:id="@+id/adminAddCourse"
         android:name="com.example.b07projectapp.AdminAddCourse"
         android:label="fragment_admin_add_course"
@@ -75,17 +70,6 @@
             app:destination="@id/deleteCourse" />
     </fragment>
     <fragment
-        android:id="@+id/studentCourseList"
-        android:name="com.example.b07projectapp.AdminCourseList"
-        android:label="StudentCourseList" >
-        <action
-            android:id="@+id/action_studentCourseList_to_studentAddCourse"
-            app:destination="@id/studentAddCourse" />
-        <action
-            android:id="@+id/action_studentCourseList_to_generateTimeline"
-            app:destination="@id/generateTimeline" />
-    </fragment>
-    <fragment
         android:id="@+id/adminUpdateCourse"
         android:name="com.example.b07projectapp.AdminUpdateCourse"
         android:label="fragment_admin_update_course"
@@ -108,19 +92,35 @@
         android:label="StudentChooseCoursesTimeline" >
         <action
             android:id="@+id/action_studentChooseCourse_to_studentTimeline"
-            app:destination="@id/student_timeline" />
+            app:destination="@id/studentTimeline" />
     </fragment>
     <fragment
-        android:id="@+id/student_timeline"
+        android:id="@+id/studentTimeline"
         android:name="com.example.b07projectapp.StudentTimeline"
         android:label="StudentTimeline" >
+        <action
+            android:id="@+id/action_studentTimeline_to_studentCourseList"
+            app:destination="@id/studentCourseList" />
     </fragment>
     <fragment
-        android:id="@+id/student_add_course"
+        android:id="@+id/StudentAddCourse"
         android:name="com.example.b07projectapp.StudentAddCourse"
-        android:label="StudentAddCourse" >
+        android:label="StudentAddCourse"
+        tools:layout="@layout/fragment_student_add_course">
         <action
             android:id="@+id/action_studentAddCourse_to_studentCourseList"
             app:destination="@id/studentCourseList" />
     </fragment>
+    <fragment
+        android:id="@+id/studentCourseList"
+        android:name="com.example.b07projectapp.StudentCourseList"
+        android:label="StudentCourseList" >
+        <action
+            android:id="@+id/action_studentCourseList_to_studentAddCourse"
+            app:destination="@id/studentAddCourse" />
+        <action
+            android:id="@+id/action_studentCourseList_to_generateTimeline"
+            app:destination="@id/studentChooseCoursesTimeline" />
+    </fragment>
+
 </navigation>

@@ -54,4 +54,6 @@
     <string name="courses_to_add_message">Select the courses you wish to add to your course list</string>
     <string name="courses">Courses:</string>
     <string name="action_choose_timeline_courses">Choose the courses you wish to add to your timeline: </string>
+    <string name="timetable">Timetable</string>
+    <string name="action_to_courselist">Back to Course List</string>
 </resources>
