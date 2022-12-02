@@ -17,7 +17,7 @@
         <!-- Table Heading -->
 
         <TableRow
-            android:id="@+id/table_title_row"
+            android:id="@+id/table_title_row_ch"
             android:background="@drawable/round_title">
 
             <CheckBox
@@ -29,7 +29,7 @@
 
             </CheckBox>
             <TextView
-                android:id="@+id/table_title_name"
+                android:id="@+id/table_title_name_ch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
@@ -44,12 +44,12 @@
         <!-- Table Data -->
 
         <TableRow
-            android:id="@+id/table_prerequisite_row"
+            android:id="@+id/table_prerequisite_row_ch"
             android:background="@drawable/table_border">
 
 
             <TextView
-                android:id="@+id/table_prerequisite_name"
+                android:id="@+id/table_prerequisite_name_ch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
@@ -62,11 +62,11 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/table_offering_row"
+            android:id="@+id/table_offering_row_ch"
             android:background="@drawable/round_offer">
 
             <TextView
-                android:id="@+id/table_offering_name"
+                android:id="@+id/table_offering_name_ch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
