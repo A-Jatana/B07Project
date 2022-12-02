@@ -115,4 +115,12 @@
         android:name="com.example.b07projectapp.StudentTimeline"
         android:label="StudentTimeline" >
     </fragment>
+    <fragment
+        android:id="@+id/student_add_course"
+        android:name="com.example.b07projectapp.StudentAddCourse"
+        android:label="StudentAddCourse" >
+        <action
+            android:id="@+id/action_studentAddCourse_to_studentCourseList"
+            app:destination="@id/studentCourseList" />
+    </fragment>
 </navigation>

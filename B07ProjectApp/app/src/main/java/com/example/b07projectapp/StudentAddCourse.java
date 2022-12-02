@@ -54,23 +54,23 @@ public class StudentAddCourse extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btn_add = getView().findViewById(R.id.generate_timeline);
+        Button btn_add = getView().findViewById(R.id.studentAddCourse);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ArrayList<Course> chosenCourses = adapter.getCheckList();
-                if (chosenCourses.isEmpty()){
+                ArrayList<Course> coursesToAdd = adapter.getCheckList();
+                if (coursesToAdd.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
                     myToast.show();
                 } else {
                     ArrayList<String> list = new ArrayList<>();
-                    for (int i = 0; i< chosenCourses.size();i++){
-                        list.add(chosenCourses.get(i).getCourseCode());
+                    for (int i = 0; i< coursesToAdd.size();i++){
+                        list.add(coursesToAdd.get(i).getCourseCode());
                     }
                     StudentCourses.setCoursesToTake(list);
                     NavHostFragment.findNavController(StudentAddCourse.this)
-                            .navigate(R.id.action_studentChooseCourse_to_studentTimeline);
+                            .navigate(R.id.action_studentAddCourse_to_studentCourseList);
                 }
 
             }
