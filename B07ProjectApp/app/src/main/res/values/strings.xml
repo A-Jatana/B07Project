@@ -51,5 +51,6 @@
     <string name="course_list_message">Here is your course list</string>
     <string name="action_add_course">Add courses</string>
     <string name="action_generate_timeline">Generate Course Timeline</string>
-    <string name="courses_to_add_message" ></string>
+    <string name="courses_to_add_message"></string>
+    <string name="courses">Courses:</string>
 </resources>

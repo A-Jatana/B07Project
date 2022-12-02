@@ -85,17 +85,7 @@ public class StudentTimeline extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                        /*
-                        list = new ArrayList<>();
-                        for (DataSnapshot ds: snapshot.getChildren()) {
-                            list.add(new Course(ds.child("courseName").getValue().toString(),
-                                    ds.child("courseCode").getValue().toString(),
-                                    ds.child("offeringSessions").getValue().toString(),
-                                    ds.child("prerequisites").getValue().toString()));
-                        }
-                        Log.i("STATUS", list.get(0).getCourseName());
-
-                         */
+                        Timeline.generateTimeline(StudentCourses.getCoursesToTake(),2022);
                         AdminCourseAdapter adapter = new AdminCourseAdapter(list);
                         recyclerView.setAdapter(adapter);
                     }

@@ -7,7 +7,9 @@ public class StudentCourses {
     static ArrayList<String> courseCode = new ArrayList<String>();
     static ArrayList<String> sessions = new ArrayList<String>();
     static ArrayList<String> prerequisites = new ArrayList<String>();
+    static ArrayList<String> coursesToTake = new ArrayList<String>();
     static String studentName;
+
     public static void addCourse(String course, String session, String prereq) {
         courseCode.add(course);
         sessions.add(session);
@@ -48,5 +50,8 @@ public class StudentCourses {
             prereqList.add(temp);
         }
         return prereqList;
+    }
+    public static ArrayList<String> getCoursesToTake(){
+        return coursesToTake;
     }
 }
