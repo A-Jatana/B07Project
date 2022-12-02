@@ -1,25 +1,20 @@
 package com.example.b07projectapp;
 
-import androidx.fragment.app.Fragment;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import androidx.appcompat.widget.SearchView;
 
-import androidx.annotation.NonNull;
-
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,12 +23,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AdminCourseList extends Fragment{
+
+public class StudentChooseCoursesTimeline extends Fragment {
 
     DatabaseReference dRef;
     ArrayList<Course> list;
     RecyclerView recyclerView;
-    SearchView searchView;
     private View courseView;
 
     @Override
@@ -41,14 +36,28 @@ public class AdminCourseList extends Fragment{
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        courseView = inflater.inflate(R.layout.fragment_student_choose_courses_timeline, container, false);
+
+        recyclerView = (RecyclerView) courseView.findViewById(R.id.rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
+        return courseView;
+    }
+
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btn_add = getView().findViewById(R.id.button_add_course);
+        Button btn_add = getView().findViewById(R.id.generate_timeline);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(AdminCourseList.this)
+                NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
                         .navigate(R.id.action_adminCourseList_to_adminAddCourse);
             }
         });
@@ -57,7 +66,7 @@ public class AdminCourseList extends Fragment{
         btn_edit_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(AdminCourseList.this)
+                NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
                         .navigate(R.id.action_adminCourseList_to_deleteCourse);
             }
         });
@@ -66,28 +75,12 @@ public class AdminCourseList extends Fragment{
         update_course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(AdminCourseList.this)
+                NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
                         .navigate(R.id.action_adminCourseList_to_adminUpdateCourse);
             }
         });
     }
 
-    @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        courseView = inflater.inflate(R.layout.fragment_admin_course_list, container, false);
-
-        recyclerView = (RecyclerView) courseView.findViewById(R.id.rv);
-        searchView = (SearchView) courseView.findViewById(R.id.search_course);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        dRef = FirebaseDatabase.getInstance().getReference().child("course");
-
-//        binding = FragmentAdminAddCourseBinding.inflate(inflater, container, false);
-//        return binding.getRoot();
-        return courseView;
-    }
 
     @Override
     public void onStart() {
@@ -115,31 +108,5 @@ public class AdminCourseList extends Fragment{
                 }
             });
         }
-        if (searchView != null) {
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    search(s);
-                    return true;
-                }
-            });
-        }
-    }
-
-    private void search(String s) {
-        ArrayList<Course> myList = new ArrayList<>();
-        for (Course course : list) {
-            if (course.getCourseName().toLowerCase().contains(s.toLowerCase())
-                    || course.getCourseCode().toLowerCase().contains(s.toLowerCase())) {
-                myList.add(course);
-            }
-        }
-        AdminCourseAdapter adapter = new AdminCourseAdapter(myList);
-        recyclerView.setAdapter(adapter);
     }
 }

@@ -31,8 +31,8 @@
         android:label="fragment_student_login"
         tools:layout="@layout/fragment_student_login" >
         <action
-            android:id="@+id/action_studentLogin_to_studentAddCourse2"
-            app:destination="@id/studentAddCourse2" />
+            android:id="@+id/action_studentLogin_to_studentCourseList"
+            app:destination="@id/studentCourseList" />
         <action
             android:id="@+id/action_studentLogin_to_studentSignup"
             app:destination="@id/studentSignup" />
@@ -75,7 +75,7 @@
             app:destination="@id/deleteCourse" />
     </fragment>
     <fragment
-        android:id="@+id/StudentCourseList"
+        android:id="@+id/studentCourseList"
         android:name="com.example.b07projectapp.AdminCourseList"
         android:label="StudentCourseList" >
         <action
@@ -96,10 +96,23 @@
     </fragment>
     <fragment
         android:id="@+id/deleteCourse"
-        android:name="com.example.b07projectapp.DeleteCourse"
+        android:name="com.example.b07projectapp.AdminDeleteCourse"
         android:label="DeleteCourse" >
         <action
             android:id="@+id/action_deleteCourse_to_adminCourseList"
             app:destination="@id/adminCourseList" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentChooseCoursesTimeline"
+        android:name="com.example.b07projectapp.StudentChooseCoursesTimeline"
+        android:label="StudentChooseCoursesTimeline" >
+        <action
+            android:id="@+id/action_studentChooseCourse_to_generateTimeline"
+            app:destination="@id/student_timeline" />
+    </fragment>
+    <fragment
+        android:id="@+id/student_timeline"
+        android:name="com.example.b07projectapp.StudentTimeline"
+        android:label="StudentTimeline" >
     </fragment>
 </navigation>
