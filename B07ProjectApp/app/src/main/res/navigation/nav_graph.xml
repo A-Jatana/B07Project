@@ -68,22 +68,38 @@
             android:id="@+id/action_adminCourseList_to_adminAddCourse"
             app:destination="@id/adminAddCourse" />
         <action
-            android:id="@+id/action_adminCourseList_to_editCoursesHome"
-            app:destination="@id/deleteCourse" />
+            android:id="@+id/action_adminCourseList_to_adminUpdateCourse"
+            app:destination="@id/adminUpdateCourse" />
         <action
             android:id="@+id/action_adminCourseList_to_deleteCourse"
             app:destination="@id/deleteCourse" />
+    </fragment>
+    <fragment
+        android:id="@+id/StudentCourseList"
+        android:name="com.example.b07projectapp.AdminCourseList"
+        android:label="StudentCourseList" >
         <action
-            android:id="@+id/action_adminCourseList_to_adminUpdateCourse"
-            app:destination="@id/adminUpdateCourse" />
+            android:id="@+id/action_studentCourseList_to_studentAddCourse"
+            app:destination="@id/studentAddCourse" />
+        <action
+            android:id="@+id/action_studentCourseList_to_generateTimeline"
+            app:destination="@id/generateTimeline" />
     </fragment>
     <fragment
         android:id="@+id/adminUpdateCourse"
         android:name="com.example.b07projectapp.AdminUpdateCourse"
         android:label="fragment_admin_update_course"
-        tools:layout="@layout/fragment_admin_update_course" />
+        tools:layout="@layout/fragment_admin_update_course" >
+        <action
+            android:id="@+id/action_adminUpdateCourse_to_adminCourseList"
+            app:destination="@id/adminCourseList" />
+    </fragment>
     <fragment
         android:id="@+id/deleteCourse"
         android:name="com.example.b07projectapp.DeleteCourse"
-        android:label="DeleteCourse" />
+        android:label="DeleteCourse" >
+        <action
+            android:id="@+id/action_deleteCourse_to_adminCourseList"
+            app:destination="@id/adminCourseList" />
+    </fragment>
 </navigation>
