@@ -154,6 +154,35 @@ import com.google.firebase.database.ValueEventListener;
                 }
             });
         }
+        protected void addStudentCourse(com.example.b07projectapp.CourseManager.addCallback finishedCallback) {
+
+            // Points dRef to "student"
+            dRef = database.getReference().child("student").child(StudentCourses.getStudentName()).child("course");
+
+            // Notice how it says SingleValueEvent - yeah it will loop infinitely without it
+            dRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if (ds.getValue().toString().equals(name)) {
+                            finishedCallback.callback(false);
+                            return;
+                        }
+                    }
+
+                    // We should eventually depend on User objects
+                    Course course = new Course(name, code, sessions, prereq);
+
+                    dRef.child(name).setValue(course);
+                    finishedCallback.callback(true);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    System.out.println("DATABASE ERROR");
+                }
+            });
+        }
         public interface addCallback {
             void callback(boolean data);
         }

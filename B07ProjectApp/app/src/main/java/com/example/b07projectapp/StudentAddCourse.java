@@ -43,7 +43,7 @@ public class StudentAddCourse extends Fragment {
 
         courseView = inflater.inflate(R.layout.fragment_student_add_course, container, false);
 
-        recyclerView = (RecyclerView) courseView.findViewById(R.id.recyclerView);
+        recyclerView = courseView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
@@ -54,7 +54,7 @@ public class StudentAddCourse extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btn_add = getView().findViewById(R.id.studentAddCourse);
+        Button btn_add = requireView().findViewById(R.id.studentAddCourse);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,11 +64,16 @@ public class StudentAddCourse extends Fragment {
                     Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
                     myToast.show();
                 } else {
-                    ArrayList<String> list = new ArrayList<>();
                     for (int i = 0; i< coursesToAdd.size();i++){
-                        list.add(coursesToAdd.get(i).getCourseCode());
+                        StudentCourses.addCourse(coursesToAdd.get(i).getCourseCode(),coursesToAdd.get(i).getOfferingSessions(),coursesToAdd.get(i).getPrerequisites());
+                        CourseManager dm = new CourseManager(coursesToAdd.get(i).getCourseName(), coursesToAdd.get(i).getCourseCode(), coursesToAdd.get(i).getOfferingSessions(), coursesToAdd.get(i).getPrerequisites(), "course");
+                        dm.add(new CourseManager.addCallback() {
+                            @Override
+                            public void callback(boolean data) {
+                            }
+                        });
                     }
-                    StudentCourses.setCoursesToTake(list);
+
                     NavHostFragment.findNavController(StudentAddCourse.this)
                             .navigate(R.id.action_studentAddCourse_to_studentCourseList);
                 }
@@ -76,6 +81,23 @@ public class StudentAddCourse extends Fragment {
             }
         });
     }
+    /*
+    CourseManager dm = new CourseManager(name, code, sessions, prereq, "course");
+                    dm.add(new CourseManager.addCallback() {
+                        @Override
+                        public void callback(boolean data) {
+                            Toast myToast;
+                            if (data) {
+                                myToast = Toast.makeText(getContext(), "Course Added!", Toast.LENGTH_SHORT);
+                                //add_course();
+                            }
+                            else {
+                                myToast = Toast.makeText(getContext(), "Course already exists!", Toast.LENGTH_SHORT);
+                            }
+                            myToast.show();
+                        }
+                    });
+     */
 
 
     @Override
