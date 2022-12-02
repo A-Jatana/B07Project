@@ -85,12 +85,13 @@ public class StudentLogin extends Login {
                             if (data) {
                                 Toast myToast = Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT);
                                 myToast.show();
-                                login();
+
                                 //Generates list of student courses
                                 //Sets student name in student courses
                                 CourseManager temp = new CourseManager();
                                 temp.getStudentName(username, password);
                                 temp.generateStudentCourseList(StudentCourses.getStudentName());
+                                login();
                             }
                             else {
                                 Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +30,8 @@ public class StudentChooseCoursesTimeline extends Fragment {
     DatabaseReference dRef;
     ArrayList<Course> list;
     RecyclerView recyclerView;
+    ArrayList<String> coursesToTake;
+    StudentCourseListAdapterCheckboxes adapter;
     private View courseView;
 
     @Override
@@ -57,26 +60,21 @@ public class StudentChooseCoursesTimeline extends Fragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
-                        .navigate(R.id.action_adminCourseList_to_adminAddCourse);
-            }
-        });
 
-        Button btn_edit_delete = getView().findViewById(R.id.button_delete);
-        btn_edit_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
-                        .navigate(R.id.action_adminCourseList_to_deleteCourse);
-            }
-        });
+                ArrayList<Course> chosenCourses = adapter.getCheckList();
+                if (chosenCourses.isEmpty()){
+                    Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                } else {
+                    ArrayList<String> list = new ArrayList<>();
+                    for (int i = 0; i< chosenCourses.size();i++){
+                        list.add(chosenCourses.get(i).getCourseCode());
+                    }
+                    StudentCourses.setCoursesToTake(list);
+                    NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
+                            .navigate(R.id.action_studentChooseCourse_to_studentTimeline);
+                }
 
-        Button update_course = getView().findViewById(R.id.button_update);
-        update_course.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
-                        .navigate(R.id.action_adminCourseList_to_adminUpdateCourse);
             }
         });
     }
@@ -97,8 +95,15 @@ public class StudentChooseCoursesTimeline extends Fragment {
                                     ds.child("offeringSessions").getValue().toString(),
                                     ds.child("prerequisites").getValue().toString()));
                         }
+
+                        ArrayList<String> studentCourses = StudentCourses.getCourseCodes();
+                        for (int i = 0; i< list.size();i++){
+                            if (studentCourses.contains(list.get(i).getCourseCode())){
+                                list.remove(i);
+                            }
+                        }
                         Log.i("STATUS", list.get(0).getCourseName());
-                        AdminCourseAdapter adapter = new AdminCourseAdapter(list);
+                        adapter = new StudentCourseListAdapterCheckboxes(list);
                         recyclerView.setAdapter(adapter);
                     }
                 }
@@ -109,4 +114,5 @@ public class StudentChooseCoursesTimeline extends Fragment {
             });
         }
     }
+
 }

@@ -51,6 +51,9 @@ public class StudentCourses {
         }
         return prereqList;
     }
+    public static void setCoursesToTake(ArrayList<String> list){
+        coursesToTake = list;
+    }
     public static ArrayList<String> getCoursesToTake(){
         return coursesToTake;
     }

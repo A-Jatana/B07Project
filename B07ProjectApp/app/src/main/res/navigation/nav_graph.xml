@@ -107,7 +107,7 @@
         android:name="com.example.b07projectapp.StudentChooseCoursesTimeline"
         android:label="StudentChooseCoursesTimeline" >
         <action
-            android:id="@+id/action_studentChooseCourse_to_generateTimeline"
+            android:id="@+id/action_studentChooseCourse_to_studentTimeline"
             app:destination="@id/student_timeline" />
     </fragment>
     <fragment
