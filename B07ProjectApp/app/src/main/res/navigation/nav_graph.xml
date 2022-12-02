@@ -57,8 +57,8 @@
         android:label="fragment_student_signup"
         tools:layout="@layout/fragment_student_signup" >
         <action
-            android:id="@+id/action_studentSignup_to_studentAddCourse2"
-            app:destination="@id/studentAddCourse2" />
+            android:id="@+id/action_studentSignup_to_studentCourseList"
+            app:destination="@id/studentCourseList" />
     </fragment>
     <fragment
         android:id="@+id/adminCourseList"

@@ -106,7 +106,7 @@ public class StudentLogin extends Login {
     @Override
     void login() {
         NavHostFragment.findNavController(this)
-                .navigate(R.id.action_studentLogin_to_studentAddCourse2);
+                .navigate(R.id.action_studentLogin_to_studentCourseList);
     }
 
     @Override
