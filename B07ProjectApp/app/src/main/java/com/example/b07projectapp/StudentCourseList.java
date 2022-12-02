@@ -71,13 +71,13 @@ public class StudentCourseList extends Fragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        courseView = inflater.inflate(R.layout.fragment_admin_course_list, container, false);
+        courseView = inflater.inflate(R.layout.fragment_student_course_list, container, false);
 
         recyclerView = (RecyclerView) courseView.findViewById(R.id.rv);
         searchView = (SearchView) courseView.findViewById(R.id.search_course);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        dRef = FirebaseDatabase.getInstance().getReference().child("course");
+        dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
 
 //        binding = FragmentAdminAddCourseBinding.inflate(inflater, container, false);
 //        return binding.getRoot();
