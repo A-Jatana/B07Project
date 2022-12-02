@@ -7,21 +7,22 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
-    tools:context=".StudentLogin">
+    tools:context=".AdminUpdateCourse">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Enter the name of the course you wish to update."
-        android:textSize = "24sp" />
+        android:layout_marginTop="0dp"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/inputCourseToBeUpdated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/prompt_courseName"
         android:textSize="18sp"/>
 
@@ -29,15 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Now enter the updated information. NOTE: If you do not wish to update a certian field, please leave it blank."
-        android:textSize = "20sp" />
+        android:text="Now enter the updated information.
+        NOTE: If you do not wish to update a field, please fill it in with the original data."
+        android:textSize = "18sp" />
 
     <EditText
         android:id="@+id/updateCourseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/prompt_updatedcourseName"
         android:textSize="18sp"/>
 
@@ -45,8 +47,8 @@
         android:id="@+id/updateCourseCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/prompt_updatedcourseCode"
         android:textSize="18sp"/>
 
@@ -54,8 +56,8 @@
         android:id="@+id/updateOfferingSessions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/prompt_updatedofferingSessions"
         android:textSize="18sp"/>
 
@@ -63,8 +65,8 @@
         android:id="@+id/updatePrerequisites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="17dp"
         android:hint="@string/prompt_updatedprerequisites"
         android:textSize="18sp"/>
 

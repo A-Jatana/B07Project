@@ -17,9 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.b07projectapp.databinding.FragmentAdminAddCourseBinding;
-import com.example.b07projectapp.databinding.FragmentAdminCourseListBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,7 +58,7 @@ public class AdminCourseList extends Fragment{
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(AdminCourseList.this)
-                        .navigate(R.id.action_adminCourseList_to_editCoursesHome);
+                        .navigate(R.id.action_adminCourseList_to_adminDeleteCourse);
             }
         });
 
