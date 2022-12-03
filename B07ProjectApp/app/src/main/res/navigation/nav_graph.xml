@@ -26,23 +26,6 @@
             app:destination="@id/adminCourseList" />
     </fragment>
     <fragment
-        android:id="@+id/studentLogin"
-        android:name="com.example.b07projectapp.StudentLogin"
-        android:label="fragment_student_login"
-        tools:layout="@layout/fragment_student_login" >
-        <action
-            android:id="@+id/action_studentLogin_to_studentAddCourse2"
-            app:destination="@id/studentAddCourse2" />
-        <action
-            android:id="@+id/action_studentLogin_to_studentSignup"
-            app:destination="@id/studentSignup" />
-    </fragment>
-    <fragment
-        android:id="@+id/studentAddCourse2"
-        android:name="com.example.b07projectapp.StudentAddCourse"
-        android:label="fragment_student_add_course"
-        tools:layout="@layout/fragment_student_add_course" />
-    <fragment
         android:id="@+id/adminAddCourse"
         android:name="com.example.b07projectapp.AdminAddCourse"
         android:label="fragment_admin_add_course"
@@ -50,15 +33,6 @@
         <action
             android:id="@+id/action_adminAddCourse_to_adminCourseList"
             app:destination="@id/adminCourseList" />
-    </fragment>
-    <fragment
-        android:id="@+id/studentSignup"
-        android:name="com.example.b07projectapp.StudentSignup"
-        android:label="fragment_student_signup"
-        tools:layout="@layout/fragment_student_signup" >
-        <action
-            android:id="@+id/action_studentSignup_to_studentAddCourse2"
-            app:destination="@id/studentAddCourse2" />
     </fragment>
     <fragment
         android:id="@+id/adminCourseList"
@@ -84,4 +58,65 @@
         android:name="com.example.b07projectapp.AdminDeleteCourse"
         android:label="fragment_admin_delete_course"
         tools:layout="@layout/fragment_admin_delete_course" />
+    <fragment
+        android:id="@+id/studentSignup"
+        android:name="com.example.b07projectapp.StudentSignup"
+        android:label="fragment_student_signup"
+        tools:layout="@layout/fragment_student_signup" >
+        <action
+            android:id="@+id/action_studentSignup_to_studentLogin"
+            app:destination="@id/studentLogin" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentLogin"
+        android:name="com.example.b07projectapp.StudentLogin"
+        android:label="fragment_student_login"
+        tools:layout="@layout/fragment_student_login" >
+        <action
+            android:id="@+id/action_studentLogin_to_studentCourseList"
+            app:destination="@id/studentCourseList" />
+        <action
+            android:id="@+id/action_studentLogin_to_studentSignup"
+            app:destination="@id/studentSignup" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentCourseList"
+        android:name="com.example.b07projectapp.StudentCourseList"
+        android:label="fragment_student_course_list"
+        tools:layout="@layout/fragment_student_course_list">
+        <action
+            android:id="@+id/action_studentCourseList_to_studentChooseCoursesTimeline"
+            app:destination="@id/studentChooseCoursesTimeline" />
+        <action
+            android:id="@+id/action_studentCourseList_to_studentAddCourse"
+            app:destination="@id/studentAddCourse" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentAddCourse"
+        android:name="com.example.b07projectapp.StudentAddCourse"
+        android:label="fragment_student_add_course"
+        tools:layout="@layout/fragment_student_add_course" >
+        <action
+            android:id="@+id/action_studentAddCourse_to_studentCourseList"
+            app:destination="@id/studentCourseList" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentTimeline"
+        android:name="com.example.b07projectapp.StudentTimeline"
+        android:label="fragment_student_timeline"
+        tools:layout="@layout/fragment_student_timeline">
+        <action
+            android:id="@+id/action_studentTimeline_to_studentCourseList"
+            app:destination="@id/studentCourseList" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentChooseCoursesTimeline"
+        android:name="com.example.b07projectapp.StudentChooseCoursesTimeline"
+        android:label="fragment_student_choose_courses_timeline"
+        tools:layout="@layout/fragment_student_choose_courses_timeline">
+        <action
+            android:id="@+id/action_studentChooseCoursesTimeline_to_studentTimeline"
+            app:destination="@id/studentTimeline" />
+    </fragment>
+
 </navigation>

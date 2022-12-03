@@ -58,7 +58,7 @@ public class AdminCourseList extends Fragment{
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(AdminCourseList.this)
-                        .navigate(R.id.action_adminCourseList_to_deleteCourse);
+                        .navigate(R.id.action_adminCourseList_to_adminDeleteCourse);
             }
         });
 

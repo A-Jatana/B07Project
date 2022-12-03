@@ -123,7 +123,7 @@ public class StudentSignup extends Login {
     @Override
     void login() {
         NavHostFragment.findNavController(this)
-                .navigate(R.id.action_studentSignup_to_studentCourseList);
+                .navigate(R.id.action_studentSignup_to_studentLogin);
         // Why do the ids contain 2?
     }
 

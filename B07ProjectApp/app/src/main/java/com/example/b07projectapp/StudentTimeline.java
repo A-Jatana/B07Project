@@ -71,7 +71,7 @@ public class StudentTimeline extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(StudentTimeline.this)
-                        .navigate(R.id.action_studentCourseList_to_generateTimeline);
+                        .navigate(R.id.action_studentTimeline_to_studentCourseList);
             }
         });
     }

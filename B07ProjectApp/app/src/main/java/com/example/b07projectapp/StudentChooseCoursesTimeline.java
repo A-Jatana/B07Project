@@ -72,7 +72,7 @@ public class StudentChooseCoursesTimeline extends Fragment {
                     }
                     StudentCourses.setCoursesToTake(list);
                     NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
-                            .navigate(R.id.action_studentChooseCourse_to_studentTimeline);
+                            .navigate(R.id.action_studentChooseCoursesTimeline_to_studentTimeline);
                 }
 
             }
