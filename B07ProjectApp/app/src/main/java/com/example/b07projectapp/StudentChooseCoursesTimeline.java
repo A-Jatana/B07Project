@@ -48,7 +48,7 @@ public class StudentChooseCoursesTimeline extends Fragment {
         recyclerView = (RecyclerView) courseView.findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
+        dRef = FirebaseDatabase.getInstance().getReference().child("course");
         return courseView;
     }
 
@@ -90,22 +90,19 @@ public class StudentChooseCoursesTimeline extends Fragment {
                     if (snapshot.exists()) {
                         list = new ArrayList<>();
                         for (DataSnapshot ds: snapshot.getChildren()) {
-                            list.add(new Course(ds.child("courseName").getValue().toString(),
-                                    ds.child("courseCode").getValue().toString(),
-                                    ds.child("offeringSessions").getValue().toString(),
-                                    ds.child("prerequisites").getValue().toString()));
-                        }
-
-                        //Removes courses students have already taken
-                        ArrayList<String> studentCourses = StudentCourses.getCourseCodes();
-                        for (int i = 0; i< list.size();i++){
-                            if (studentCourses.contains(list.get(i).getCourseCode())){
-                                list.remove(i);
+                            if (!StudentCourses.getCourseCodes().contains(ds.child("courseCode").getValue().toString())){
+                                list.add(new Course(ds.child("courseName").getValue().toString(),
+                                        ds.child("courseCode").getValue().toString(),
+                                        ds.child("offeringSessions").getValue().toString(),
+                                        ds.child("prerequisites").getValue().toString()));
                             }
+
                         }
 
-                        adapter = new StudentCourseListAdapterCheckboxes(list);
-                        recyclerView.setAdapter(adapter);
+                        //adapter = new StudentCourseListAdapterCheckboxes(list);
+                        StudentCourseListAdapter adapter2;
+                        adapter2 = new StudentCourseListAdapter(list);
+                        recyclerView.setAdapter(adapter2);
                     }
                 }
 
