@@ -81,24 +81,6 @@ public class StudentAddCourse extends Fragment {
             }
         });
     }
-    /*
-    CourseManager dm = new CourseManager(name, code, sessions, prereq, "course");
-                    dm.add(new CourseManager.addCallback() {
-                        @Override
-                        public void callback(boolean data) {
-                            Toast myToast;
-                            if (data) {
-                                myToast = Toast.makeText(getContext(), "Course Added!", Toast.LENGTH_SHORT);
-                                //add_course();
-                            }
-                            else {
-                                myToast = Toast.makeText(getContext(), "Course already exists!", Toast.LENGTH_SHORT);
-                            }
-                            myToast.show();
-                        }
-                    });
-     */
-
 
     @Override
     public void onStart() {
@@ -122,7 +104,6 @@ public class StudentAddCourse extends Fragment {
                                 list.remove(i);
                             }
                         }
-                        Log.i("STATUS", list.get(0).getCourseName());
                         adapter = new StudentCourseListAdapterCheckboxes(list);
                         recyclerView.setAdapter(adapter);
                     }

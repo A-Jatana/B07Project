@@ -96,13 +96,14 @@ public class StudentChooseCoursesTimeline extends Fragment {
                                     ds.child("prerequisites").getValue().toString()));
                         }
 
+                        //Removes courses students have already taken
                         ArrayList<String> studentCourses = StudentCourses.getCourseCodes();
                         for (int i = 0; i< list.size();i++){
                             if (studentCourses.contains(list.get(i).getCourseCode())){
                                 list.remove(i);
                             }
                         }
-                        Log.i("STATUS", list.get(0).getCourseName());
+
                         adapter = new StudentCourseListAdapterCheckboxes(list);
                         recyclerView.setAdapter(adapter);
                     }
