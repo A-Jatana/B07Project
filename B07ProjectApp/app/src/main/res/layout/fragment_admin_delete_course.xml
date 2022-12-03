@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
-    tools:context=".StudentLogin">
+    tools:context=".AdminDeleteCourse">
 
     <TextView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:textSize = "28sp" />
 
     <EditText
-        android:id="@+id/inputEditCourseName"
+        android:id="@+id/inputDeleteCourseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
