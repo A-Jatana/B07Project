@@ -99,10 +99,8 @@ public class StudentChooseCoursesTimeline extends Fragment {
 
                         }
 
-                        //adapter = new StudentCourseListAdapterCheckboxes(list);
-                        StudentCourseListAdapter adapter2;
-                        adapter2 = new StudentCourseListAdapter(list);
-                        recyclerView.setAdapter(adapter2);
+                        adapter = new StudentCourseListAdapterCheckboxes(list);
+                        recyclerView.setAdapter(adapter);
                     }
                 }
 

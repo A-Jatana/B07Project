@@ -40,7 +40,6 @@ public class StudentCourseListAdapterCheckboxes extends RecyclerView.Adapter<Stu
             checked_list.add(list.get(i));
         }
 
-
     }
 
     @Override
@@ -59,6 +58,8 @@ public class StudentCourseListAdapterCheckboxes extends RecyclerView.Adapter<Stu
             title_row = (TableRow)itemView.findViewById(R.id.table_title_row_ch);
             offering_row = (TableRow)itemView.findViewById(R.id.table_offering_row_ch);
             prerequisite_row = (TableRow)itemView.findViewById(R.id.table_prerequisite_row_ch);
+
+            check_box=(CheckBox) itemView.findViewById((R.id.checkbox));
 
             courseName = (TextView)itemView.findViewById(R.id.table_title_name_ch);
             course_offering = (TextView)itemView.findViewById(R.id.table_offering_name_ch);

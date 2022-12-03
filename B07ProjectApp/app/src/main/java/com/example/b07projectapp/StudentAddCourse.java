@@ -60,24 +60,28 @@ public class StudentAddCourse extends Fragment {
             public void onClick(View v) {
 
                 ArrayList<Course> coursesToAdd = adapter.getCheckList();
-                if (coursesToAdd.isEmpty()){
-                    Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
-                    myToast.show();
-                } else {
-                    for (int i = 0; i< coursesToAdd.size();i++){
-                        StudentCourses.addCourse(coursesToAdd.get(i).getCourseCode(),coursesToAdd.get(i).getOfferingSessions(),coursesToAdd.get(i).getPrerequisites());
-                        CourseManager dm = new CourseManager(coursesToAdd.get(i).getCourseName(), coursesToAdd.get(i).getCourseCode(), coursesToAdd.get(i).getOfferingSessions(), coursesToAdd.get(i).getPrerequisites(), "course");
-                        dm.add(new CourseManager.addCallback() {
-                            @Override
-                            public void callback(boolean data) {
-                            }
-                        });
+                if (coursesToAdd != null){
+                    if (coursesToAdd.isEmpty()){
+                        Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
+                        myToast.show();
+                    } else {
+                        for (int i = 0; i< coursesToAdd.size();i++){
+                            StudentCourses.addCourse(coursesToAdd.get(i).getCourseCode(),coursesToAdd.get(i).getOfferingSessions(),coursesToAdd.get(i).getPrerequisites());
+                            CourseManager dm = new CourseManager(coursesToAdd.get(i).getCourseName(), coursesToAdd.get(i).getCourseCode(), coursesToAdd.get(i).getOfferingSessions(), coursesToAdd.get(i).getPrerequisites(), "course");
+                            dm.add(new CourseManager.addCallback() {
+                                @Override
+                                public void callback(boolean data) {
+                                }
+                            });
+                        }
+
+                        NavHostFragment.findNavController(StudentAddCourse.this)
+                                .navigate(R.id.action_studentAddCourse_to_studentCourseList);
                     }
-
-                    NavHostFragment.findNavController(StudentAddCourse.this)
-                            .navigate(R.id.action_studentAddCourse_to_studentCourseList);
+                } else{
+                    Toast myToast = Toast.makeText(getActivity(), "Hehe somethings fucked", Toast.LENGTH_SHORT);
+                    myToast.show();
                 }
-
             }
         });
     }
@@ -109,10 +113,14 @@ public class StudentAddCourse extends Fragment {
                         }
 
                          */
-                        //adapter = new StudentCourseListAdapterCheckboxes(list);
+                        adapter = new StudentCourseListAdapterCheckboxes(list);
+                        recyclerView.setAdapter(adapter);
+                        /*
                         StudentCourseListAdapter adapter2;
                         adapter2 = new StudentCourseListAdapter(list);
                         recyclerView.setAdapter(adapter2);
+
+                         */
                     }
                 }
 
