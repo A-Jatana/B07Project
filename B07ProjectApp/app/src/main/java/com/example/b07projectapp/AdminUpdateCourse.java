@@ -189,7 +189,7 @@ public class AdminUpdateCourse extends UpdateCourse {
                 if (snapshot.getValue() != null) {
 
                     HashMap Course = new HashMap();
-                    //Course.put("courseCode", course_code);
+                    Course.put("courseCode", course_code);
                     Course.put("courseName", course_name);
                     Course.put("offeringSessions", offering_sess);
                     Course.put("prerequisites", prereq);
