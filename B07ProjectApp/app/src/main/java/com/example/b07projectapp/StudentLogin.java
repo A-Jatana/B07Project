@@ -85,12 +85,13 @@ public class StudentLogin extends Login {
                             if (data) {
                                 Toast myToast = Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT);
                                 myToast.show();
-                                login();
+
                                 //Generates list of student courses
                                 //Sets student name in student courses
                                 CourseManager temp = new CourseManager();
-                                temp.getStudentName(username, password);
-                                temp.generateStudentCourseList(StudentCourses.getStudentName());
+                                StudentCourses.setStudentName(username);
+                                temp.generateStudentCourseList(username);
+                                login();
                             }
                             else {
                                 Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
@@ -106,7 +107,7 @@ public class StudentLogin extends Login {
     @Override
     void login() {
         NavHostFragment.findNavController(this)
-                .navigate(R.id.action_studentLogin_to_studentAddCourse2);
+                .navigate(R.id.action_studentLogin_to_studentCourseList);
     }
 
     @Override

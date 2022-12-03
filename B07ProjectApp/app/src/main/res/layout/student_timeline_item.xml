@@ -17,17 +17,17 @@
         <!-- Table Heading -->
 
         <TableRow
-            android:id="@+id/table_title_row"
+            android:id="@+id/table_offering_session"
             android:background="@drawable/round_title">
 
             <TextView
-                android:id="@+id/table_title_name"
+                android:id="@+id/table_session_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:gravity="left"
                 android:padding="10sp"
-                android:text="Course Code and Course Name"
+                android:text="@string/prompt_offeringSessions"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
@@ -36,35 +36,17 @@
         <!-- Table Data -->
 
         <TableRow
-            android:id="@+id/table_prerequisite_row"
+            android:id="@+id/table_courses"
             android:background="@drawable/table_border">
 
-
             <TextView
-                android:id="@+id/table_prerequisite_name"
+                android:id="@+id/table_course_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:gravity="left"
                 android:padding="14sp"
-                android:text="Prerequisites:"
-                android:textColor="@color/oldNavy"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/table_offering_row"
-            android:background="@drawable/round_offer">
-
-            <TextView
-                android:id="@+id/table_offering_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="left"
-                android:padding="10sp"
-                android:text="Seasonal Offerings: "
+                android:text="@string/courses"
                 android:textColor="@color/oldNavy"
                 android:textSize="14sp" />
 

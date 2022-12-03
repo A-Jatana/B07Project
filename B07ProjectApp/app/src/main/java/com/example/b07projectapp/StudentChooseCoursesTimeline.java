@@ -3,6 +3,7 @@ package com.example.b07projectapp;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,11 +25,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class StudentAddCourse extends Fragment {
+public class StudentChooseCoursesTimeline extends Fragment {
 
     DatabaseReference dRef;
     ArrayList<Course> list;
     RecyclerView recyclerView;
+    ArrayList<String> coursesToTake;
     StudentCourseListAdapterCheckboxes adapter;
     private View courseView;
 
@@ -41,9 +43,9 @@ public class StudentAddCourse extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        courseView = inflater.inflate(R.layout.fragment_student_add_course, container, false);
+        courseView = inflater.inflate(R.layout.fragment_student_choose_courses_timeline, container, false);
 
-        recyclerView = courseView.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) courseView.findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
@@ -54,50 +56,28 @@ public class StudentAddCourse extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btn_add = requireView().findViewById(R.id.studentAddCourse);
+        Button btn_add = getView().findViewById(R.id.generate_timeline);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ArrayList<Course> coursesToAdd = adapter.getCheckList();
-                if (coursesToAdd.isEmpty()){
+                ArrayList<Course> chosenCourses = adapter.getCheckList();
+                if (chosenCourses.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
                     myToast.show();
                 } else {
-                    for (int i = 0; i< coursesToAdd.size();i++){
-                        StudentCourses.addCourse(coursesToAdd.get(i).getCourseCode(),coursesToAdd.get(i).getOfferingSessions(),coursesToAdd.get(i).getPrerequisites());
-                        CourseManager dm = new CourseManager(coursesToAdd.get(i).getCourseName(), coursesToAdd.get(i).getCourseCode(), coursesToAdd.get(i).getOfferingSessions(), coursesToAdd.get(i).getPrerequisites(), "course");
-                        dm.add(new CourseManager.addCallback() {
-                            @Override
-                            public void callback(boolean data) {
-                            }
-                        });
+                    ArrayList<String> list = new ArrayList<>();
+                    for (int i = 0; i< chosenCourses.size();i++){
+                        list.add(chosenCourses.get(i).getCourseCode());
                     }
-
-                    NavHostFragment.findNavController(StudentAddCourse.this)
-                            .navigate(R.id.action_studentAddCourse_to_studentCourseList);
+                    StudentCourses.setCoursesToTake(list);
+                    NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
+                            .navigate(R.id.action_studentChooseCourse_to_studentTimeline);
                 }
 
             }
         });
     }
-    /*
-    CourseManager dm = new CourseManager(name, code, sessions, prereq, "course");
-                    dm.add(new CourseManager.addCallback() {
-                        @Override
-                        public void callback(boolean data) {
-                            Toast myToast;
-                            if (data) {
-                                myToast = Toast.makeText(getContext(), "Course Added!", Toast.LENGTH_SHORT);
-                                //add_course();
-                            }
-                            else {
-                                myToast = Toast.makeText(getContext(), "Course already exists!", Toast.LENGTH_SHORT);
-                            }
-                            myToast.show();
-                        }
-                    });
-     */
 
 
     @Override
@@ -134,4 +114,5 @@ public class StudentAddCourse extends Fragment {
             });
         }
     }
+
 }

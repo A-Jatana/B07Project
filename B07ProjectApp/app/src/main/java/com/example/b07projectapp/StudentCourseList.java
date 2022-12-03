@@ -57,8 +57,8 @@ public class StudentCourseList extends Fragment {
             }
         });
 
-        Button btn_edit_delete = getView().findViewById(R.id.generateTimeline);
-        btn_edit_delete.setOnClickListener(new View.OnClickListener() {
+        Button btn_timeline = getView().findViewById(R.id.generateTimeline);
+        btn_timeline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(StudentCourseList.this)
@@ -77,7 +77,7 @@ public class StudentCourseList extends Fragment {
         searchView = (SearchView) courseView.findViewById(R.id.search_course);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
+        dRef = FirebaseDatabase.getInstance().getReference().child("course");
 
 //        binding = FragmentAdminAddCourseBinding.inflate(inflater, container, false);
 //        return binding.getRoot();
@@ -94,12 +94,15 @@ public class StudentCourseList extends Fragment {
                     if (snapshot.exists()) {
                         list = new ArrayList<>();
                         for (DataSnapshot ds : snapshot.getChildren()) {
-                            list.add(new Course(ds.child("courseName").getValue().toString(),
-                                    ds.child("courseCode").getValue().toString(),
-                                    ds.child("offeringSessions").getValue().toString(),
-                                    ds.child("prerequisites").getValue().toString()));
+                            if (StudentCourses.getCourseCodes().contains(ds.child("courseCode").getValue().toString())){
+
+                                list.add(new Course(ds.child("courseName").getValue().toString(),
+                                        ds.child("courseCode").getValue().toString(),
+                                        ds.child("offeringSessions").getValue().toString(),
+                                        ds.child("prerequisites").getValue().toString()));
+                            }
                         }
-                        Log.i("STATUS", list.get(0).getCourseName());
+
                         StudentCourseListAdapter adapter = new StudentCourseListAdapter(list);
                         recyclerView.setAdapter(adapter);
                     }

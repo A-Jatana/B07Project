@@ -13,59 +13,46 @@ import java.util.ArrayList;
 
 public class StudentTimelineAdapter extends RecyclerView.Adapter<StudentTimelineAdapter.courseViewHolder> {
 
-    ArrayList<Course> list;
 
-    public StudentTimelineAdapter(ArrayList<Course> list) {
-        this.list = list;
+    ArrayList<String> sessionList = Timeline.getSessionList();
+    ArrayList<String> coursesList = Timeline.getCourseList();
+
+    public StudentTimelineAdapter() {
     }
 
     @NonNull
     @Override
     public StudentTimelineAdapter.courseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.student_course_item, parent, false);
+                .inflate(R.layout.student_timeline_item, parent, false);
         return new StudentTimelineAdapter.courseViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentTimelineAdapter.courseViewHolder holder, int position) {
-        holder.courseName.setText(list.get(i).getCourseCode() + ": " + list.get(i).getCourseName());
-        holder.course_offering.setText("Seasonal Offerings: " + list.get(i).getOfferingSessions());
-        holder.course_prereq.setText("Prerequisites: " + list.get(i).getPrerequisites());
+    public void onBindViewHolder(@NonNull StudentTimelineAdapter.courseViewHolder holder, int i) {
+        holder.session_offering.setText(sessionList.get(i));
+        holder.course_offering.setText(coursesList.get(i));
     }
-
-
-/*
-    public void onBindViewHolder(@NonNull StudentCourseListAdapter.courseViewHolder holder, int i) {
-        holder.courseName.setText(list.get(i).getCourseCode() + ": " + list.get(i).getCourseName());
-        holder.course_offering.setText("Seasonal Offerings: " + list.get(i).getOfferingSessions());
-        holder.course_prereq.setText("Prerequisites: " + list.get(i).getPrerequisites());
-
-
-    }
-    */
-
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return sessionList.size();
     }
 
     class courseViewHolder extends RecyclerView.ViewHolder {
 
         TableRow session_row, courses_row;
-        TextView courseName, course_offering, course_prereq;
+        TextView session_offering, course_offering;
 
         public courseViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            session_row = (TableRow)itemView.findViewById(R.id.table_title_row);
-            courses_row = (TableRow)itemView.findViewById(R.id.table_offering_row);
+            session_row = (TableRow)itemView.findViewById(R.id.table_offering_session);
+            courses_row = (TableRow)itemView.findViewById(R.id.table_courses);
             //prerequisite_row = (TableRow)itemView.findViewById(R.id.table_prerequisite_row);
 
-            courseName = (TextView)itemView.findViewById(R.id.table_title_name);
-            course_offering = (TextView)itemView.findViewById(R.id.table_offering_name);
-            course_prereq = (TextView)itemView.findViewById(R.id.table_prerequisite_name);
+            session_offering= (TextView)itemView.findViewById(R.id.table_session_name);
+            course_offering = (TextView)itemView.findViewById(R.id.table_course_name);
         }
     }
 }

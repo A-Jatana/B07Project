@@ -65,5 +65,9 @@ public class StudentCourseListAdapterCheckboxes extends RecyclerView.Adapter<Stu
             course_prereq = (TextView)itemView.findViewById(R.id.table_prerequisite_name_ch);
         }
     }
+
+    public ArrayList<Course> getCheckList(){
+        return checked_list;
+    }
 }
 

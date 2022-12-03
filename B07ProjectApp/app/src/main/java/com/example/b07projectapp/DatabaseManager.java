@@ -1,22 +1,7 @@
 package com.example.b07projectapp;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import java.util.*;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -147,6 +132,7 @@ public class DatabaseManager{
                 // dRef.child(username).setValue(student)
                 dRef.child(username).child("username").setValue(student.username);
                 dRef.child(username).child("password").setValue(student.password);
+                dRef.child(username).child("course").setValue("");
                 finishedCallback.callback(true);
             }
 

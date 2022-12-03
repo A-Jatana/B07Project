@@ -58,7 +58,7 @@ public class AdminCourseList extends Fragment{
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(AdminCourseList.this)
-                        .navigate(R.id.action_adminCourseList_to_adminDeleteCourse);
+                        .navigate(R.id.action_adminCourseList_to_deleteCourse);
             }
         });
 
@@ -104,7 +104,6 @@ public class AdminCourseList extends Fragment{
                                     ds.child("offeringSessions").getValue().toString(),
                                     ds.child("prerequisites").getValue().toString()));
                         }
-                        Log.i("STATUS", list.get(0).getCourseName());
                         AdminCourseAdapter adapter = new AdminCourseAdapter(list);
                         recyclerView.setAdapter(adapter);
                     }
@@ -142,36 +141,4 @@ public class AdminCourseList extends Fragment{
         AdminCourseAdapter adapter = new AdminCourseAdapter(myList);
         recyclerView.setAdapter(adapter);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
