@@ -89,8 +89,8 @@ public class StudentLogin extends Login {
                                 //Generates list of student courses
                                 //Sets student name in student courses
                                 CourseManager temp = new CourseManager();
-                                temp.getStudentName(username, password);
-                                temp.generateStudentCourseList(StudentCourses.getStudentName());
+                                StudentCourses.setStudentName(username);
+                                temp.generateStudentCourseList(username);
                                 login();
                             }
                             else {
