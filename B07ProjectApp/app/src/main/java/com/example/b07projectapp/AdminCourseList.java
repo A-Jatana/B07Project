@@ -104,7 +104,6 @@ public class AdminCourseList extends Fragment{
                                     ds.child("offeringSessions").getValue().toString(),
                                     ds.child("prerequisites").getValue().toString()));
                         }
-                        Log.i("STATUS", list.get(0).getCourseName());
                         AdminCourseAdapter adapter = new AdminCourseAdapter(list);
                         recyclerView.setAdapter(adapter);
                     }

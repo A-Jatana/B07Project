@@ -102,9 +102,6 @@ public class StudentCourseList extends Fragment {
                                         ds.child("prerequisites").getValue().toString()));
                             }
                         }
-                        if (!list.isEmpty()){
-                            Log.i("STATUS", list.get(0).getCourseName());
-                        }
 
                         StudentCourseListAdapter adapter = new StudentCourseListAdapter(list);
                         recyclerView.setAdapter(adapter);
