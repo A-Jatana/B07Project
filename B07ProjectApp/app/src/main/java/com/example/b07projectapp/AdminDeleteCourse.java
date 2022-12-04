@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,17 +121,60 @@ public class AdminDeleteCourse extends DeleteCourse {
         return binding.getRoot();
     }
 
+//    public boolean check_prereq(String course_name){
+//
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("course");
+//        DataSnapshot snapshot = null;
+//
+//
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot info : snapshot.getChildren()){
+//                    String checker = info.child("prerequisites").getValue().toString();
+//                    if(course_name.equals(checker)){
+//
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        })
+//    }
+
     void delete_course(String course_name) {
+
+        Log.i("status", "check1");
 
         dRef = FirebaseDatabase.getInstance().getReference("course");
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("course");
         Query query_user = reference.orderByChild("courseName").equalTo(course_name);
-        query_user.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("status", "check2");
                 // Checks if course exists
-                if (snapshot.getValue() != null) {
+                if (snapshot.child(course_name).exists()) {
+
+                    String check_code = snapshot.child(course_name).child("courseCode").getValue().toString();
+
+                    for(DataSnapshot info : snapshot.getChildren()){
+                        String checker = info.child("prerequisites").getValue().toString();
+
+                        if(checker.contains(check_code)){
+                            binding.inputDeleteCourseName.setText("");
+                            Toast myToast = Toast.makeText(getActivity(), "This course is a prerequisite for one or more courses!", Toast.LENGTH_SHORT);
+                            myToast.show();
+                            return;
+                        }
+                    }
+                    Log.i("status", "check3");
+
+
 
                     dRef.child(course_name).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -159,7 +203,7 @@ public class AdminDeleteCourse extends DeleteCourse {
             }
         });
 
-
+        Log.i("status", "check4");
     }
 }
 
