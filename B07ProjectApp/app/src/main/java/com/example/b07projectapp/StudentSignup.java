@@ -19,6 +19,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +49,13 @@ public class StudentSignup extends Login {
     private String confirmPassword;
     private String email;
     private String fullName;
+    DatabaseReference dRef;
+    ArrayList<String> list = new ArrayList<>();
+    final private String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    final private String lowerCase = "abcdefghijklmnopqrstuvwxyz";
+    final private String numbers = "0123456789";
+    final private String symbols = "~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/";
+
 
     public StudentSignup() {
         // Required empty public constructor
@@ -66,6 +81,47 @@ public class StudentSignup extends Login {
         return fragment;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dRef = FirebaseDatabase.getInstance().getReference().child("student");
+
+        if (dRef != null) {
+            dRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            list.add(ds.child("username").getValue(String.class));
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });
+        }
+
+        if (getArguments() != null) {
+            //mParam1 = getArguments().getString(ARG_PARAM1);
+            //mParam2 = getArguments().getString(ARG_PARAM2);
+            //mParam3 = getArguments().getString(ARG_PARAM3);
+        }
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentStudentSignupBinding.inflate(inflater, container, false);
+        //
+        return binding.getRoot();
+    }
+
+
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -83,12 +139,18 @@ public class StudentSignup extends Login {
                 EditText textFullName = binding.inputFullName;
                 fullName = textFullName.getText().toString();
                 /* TODO implement if statement
-                * If (Database already has that username) {
-                * pop up message saying username is already taken
-                * }*/
+                 * If (Database already has that username) {
+                 * pop up message saying username is already taken
+                 * }*/
+
 
                 if (username.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Username cannot be empty!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+
+                else if (list.contains(username)){
+                    Toast myToast = Toast.makeText(getActivity(), "Username already exists!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
                 else if (password.isEmpty() || confirmPassword.isEmpty()){
@@ -97,6 +159,19 @@ public class StudentSignup extends Login {
                 }
                 else if (!password.equals(confirmPassword)){
                     Toast myToast = Toast.makeText(getActivity(), "Passwords do not match!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+                else if (password.length()<8){
+                    Toast myToast = Toast.makeText(getActivity(), "Password too short! Must have atleast 8 characters!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+                else if (password.length()>20){
+                    Toast myToast = Toast.makeText(getActivity(), "Password too long! Must have less than 21 characters!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+
+                else if (!containsUpperCase(password) || !containsLowerCase(password) || (!containsNumber(password)&&!containsSymbol(password))){
+                    Toast myToast = Toast.makeText(getActivity(), "Password must contain an uppercase, a lowercase, and a symbol/number!", Toast.LENGTH_LONG);
                     myToast.show();
                 }
                 else {
@@ -127,20 +202,50 @@ public class StudentSignup extends Login {
         // Why do the ids contain 2?
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            //mParam1 = getArguments().getString(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
-            //mParam3 = getArguments().getString(ARG_PARAM3);
+    private boolean containsUpperCase(String password){
+        char[] upperCasech = upperCase.toCharArray();
+        for (char ch: upperCasech) {
+            if (password.indexOf(ch)!=-1){
+                return true;
+            }
         }
+        return false;
+    }
+    private boolean containsLowerCase(String password){
+        char[] lowerCasech = lowerCase.toCharArray();
+        for (char ch: lowerCasech) {
+            if (password.indexOf(ch)!=-1){
+                return true;
+            }
+        }
+        return false;
+
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentStudentSignupBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    private boolean containsNumber(String password){
+        char[] numbersch = numbers.toCharArray();
+        for (char ch: numbersch) {
+            if (password.indexOf(ch)!=-1){
+                return true;
+            }
+        }
+        return false;
+
     }
+
+    private boolean containsSymbol(String password){
+        char[] symbolsch = symbols.toCharArray();
+        for (char ch: symbolsch) {
+            if (password.indexOf(ch)!=-1){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
+
+
+
 }

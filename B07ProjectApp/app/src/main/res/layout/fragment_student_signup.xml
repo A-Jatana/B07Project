@@ -122,7 +122,82 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/inputPassword"
         app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword"
-        app:layout_constraintVertical_bias="0.284"
+        app:layout_constraintVertical_bias="0.459"
         tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/star"
+        android:layout_width="11dp"
+        android:layout_height="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="*"
+        android:textColor="#B60505"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+        app:layout_constraintEnd_toStartOf="@+id/cumpulsoryField"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword"
+        app:layout_constraintVertical_bias="0.233" />
+
+    <TextView
+        android:id="@+id/star2"
+        android:layout_width="11dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="55dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="*"
+        android:textColor="#B60505"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/inputConfirmPassword"
+        app:layout_constraintEnd_toEndOf="@+id/inputConfirmPassword"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/inputConfirmPassword"
+        app:layout_constraintTop_toTopOf="@+id/inputConfirmPassword"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <TextView
+        android:id="@+id/star4"
+        android:layout_width="11dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="55dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="*"
+        android:textColor="#B60505"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/inputPassword"
+        app:layout_constraintEnd_toEndOf="@+id/inputPassword"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/inputPassword"
+        app:layout_constraintTop_toTopOf="@+id/inputPassword"
+        app:layout_constraintVertical_bias="0.51" />
+
+    <TextView
+        android:id="@+id/star5"
+        android:layout_width="11dp"
+        android:layout_height="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="*"
+        android:textColor="#B60505"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/inputUsername"
+        app:layout_constraintEnd_toEndOf="@+id/inputUsername"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/inputUsername"
+        app:layout_constraintTop_toTopOf="@+id/inputUsername"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <TextView
+        android:id="@+id/cumpulsoryField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/cumpulsoryField_text"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
