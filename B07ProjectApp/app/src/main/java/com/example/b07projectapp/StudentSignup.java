@@ -55,6 +55,9 @@ public class StudentSignup extends Login {
     final private String lowerCase = "abcdefghijklmnopqrstuvwxyz";
     final private String numbers = "0123456789";
     final private String symbols = "~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/";
+    final private int minPwdChar = 8;
+    final private int maxPwdChar= 20;
+
 
 
     public StudentSignup() {
@@ -161,11 +164,11 @@ public class StudentSignup extends Login {
                     Toast myToast = Toast.makeText(getActivity(), "Passwords do not match!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
-                else if (password.length()<8){
+                else if (password.length()<minPwdChar){
                     Toast myToast = Toast.makeText(getActivity(), "Password too short! Must have atleast 8 characters!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
-                else if (password.length()>20){
+                else if (password.length()>maxPwdChar){
                     Toast myToast = Toast.makeText(getActivity(), "Password too long! Must have less than 21 characters!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }

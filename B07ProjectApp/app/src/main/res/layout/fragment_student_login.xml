@@ -28,7 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/prompt_password"
-        android:textSize="22sp"/>
+        android:inputType="textPassword"
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/loginButton"
