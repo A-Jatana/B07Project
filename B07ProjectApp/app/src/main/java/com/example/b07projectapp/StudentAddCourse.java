@@ -75,7 +75,7 @@ public class StudentAddCourse extends Fragment {
                         for (int i = 0; i< coursesToAdd.size();i++){
                             StudentCourses.addCourse(coursesToAdd.get(i).getCourseCode(),coursesToAdd.get(i).getOfferingSessions(),coursesToAdd.get(i).getPrerequisites());
                             CourseManager dm = new CourseManager(coursesToAdd.get(i).getCourseName(), coursesToAdd.get(i).getCourseCode(), coursesToAdd.get(i).getOfferingSessions(), coursesToAdd.get(i).getPrerequisites(), "course");
-                            dm.add(new CourseManager.addCallback() {
+                            dm.addStudentCourse(new CourseManager.addCallback() {
                                 @Override
                                 public void callback(boolean data) {
                                 }
