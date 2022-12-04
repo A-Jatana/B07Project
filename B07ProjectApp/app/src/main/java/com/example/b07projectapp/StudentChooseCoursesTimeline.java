@@ -1,5 +1,7 @@
 package com.example.b07projectapp;
 
+import static com.example.b07projectapp.StudentCourseListAdapterCheckboxes.list_adapter;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,7 @@ public class StudentChooseCoursesTimeline extends Fragment {
     RecyclerView recyclerView;
     ArrayList<String> coursesToTake;
     StudentCourseListAdapterCheckboxes adapter;
+    ArrayList<Course> chosenCourses = new ArrayList<Course>();
     private View courseView;
 
     @Override
@@ -60,8 +63,12 @@ public class StudentChooseCoursesTimeline extends Fragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (int i=0;i<list_adapter.size();i++){
+                    if (list_adapter.get(i).getSelected()==true){
+                        chosenCourses.add(list_adapter.get(i));
+                    }
+                }
 
-                ArrayList<Course> chosenCourses = adapter.getCheckList();
                 if (chosenCourses.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
                     myToast.show();
