@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -13,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class StudentCourseListAdapterCheckboxes extends RecyclerView.Adapter<StudentCourseListAdapterCheckboxes.courseViewHolder> {
-    ArrayList<Course> list;
+    public static ArrayList<Course> list_adapter;
     ArrayList<Course> checked_list;
 
 
-    public StudentCourseListAdapterCheckboxes(ArrayList<Course> list) {
-        this.list = list;
+    public StudentCourseListAdapterCheckboxes(ArrayList<Course> list_adapter) {
+        this.list_adapter = list_adapter;
     }
 
     @NonNull
@@ -31,20 +32,46 @@ public class StudentCourseListAdapterCheckboxes extends RecyclerView.Adapter<Stu
 
     @Override
     public void onBindViewHolder(@NonNull StudentCourseListAdapterCheckboxes.courseViewHolder holder, int i) {
-        holder.courseName.setText(list.get(i).getCourseCode() + ": " + list.get(i).getCourseName());
-        holder.course_offering.setText("Seasonal Offerings: " + list.get(i).getOfferingSessions());
-        holder.course_prereq.setText("Prerequisites: " + list.get(i).getPrerequisites());
+        holder.courseName.setText(list_adapter.get(i).getCourseCode() + ": " + list_adapter.get(i).getCourseName());
+        holder.course_offering.setText("Seasonal Offerings: " + list_adapter.get(i).getOfferingSessions());
+        holder.course_prereq.setText("Prerequisites: " + list_adapter.get(i).getPrerequisites());
 
-        holder.check_box.setText("");
-        if (holder.check_box.isChecked()){
-            checked_list.add(list.get(i));
+        final Course course = list_adapter.get(i);
+        holder.check_box.setOnCheckedChangeListener(null);
+        holder.check_box.setChecked(course.getSelected());
+        holder.check_box.setTag(course);
+
+        if (course.getSelected()) {
+            holder.check_box.setChecked(true);
+            holder.check_box.setSelected(true);
+        } else {
+            holder.check_box.setChecked(false);
+            holder.check_box.setSelected(false);
         }
+
+        holder.check_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    holder.check_box.setSelected(true);
+                    course.setSelected(true);
+                }else {
+                    holder.check_box.setSelected(false);
+                    course.setSelected(false);
+                }
+            }
+        });
+
+
+
 
     }
 
+
+
     @Override
     public int getItemCount() {
-        return list.size();
+        return list_adapter.size();
     }
 
     class courseViewHolder extends RecyclerView.ViewHolder {
@@ -67,8 +94,5 @@ public class StudentCourseListAdapterCheckboxes extends RecyclerView.Adapter<Stu
         }
     }
 
-    public ArrayList<Course> getCheckList(){
-        return checked_list;
-    }
 }
 
