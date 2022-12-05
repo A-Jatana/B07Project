@@ -97,6 +97,8 @@ public class StudentLogin extends Login {
                                 Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
                                 myToast.show();
                             }
+                            textUser.setText("");
+                            textPassword.setText("");
                         }
                     });
                 }

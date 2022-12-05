@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class StudentAddCourse extends Fragment {
@@ -71,7 +72,10 @@ public class StudentAddCourse extends Fragment {
                     if (coursesToAdd.isEmpty()){
                         Toast myToast = Toast.makeText(getActivity(), "Please choose at least one course!", Toast.LENGTH_SHORT);
                         myToast.show();
-                    } else {
+                    } else if(needPrereq(coursesToAdd)){
+                        Toast myToast = Toast.makeText(getActivity(), "You do not have all prerequisites for the(se) course(s)!", Toast.LENGTH_SHORT);
+                        myToast.show();
+                    }else {
                         for (int i = 0; i< coursesToAdd.size();i++){
                             StudentCourses.addCourse(coursesToAdd.get(i).getCourseCode(),coursesToAdd.get(i).getOfferingSessions(),coursesToAdd.get(i).getPrerequisites());
                             CourseManager dm = new CourseManager(coursesToAdd.get(i).getCourseName(), coursesToAdd.get(i).getCourseCode(), coursesToAdd.get(i).getOfferingSessions(), coursesToAdd.get(i).getPrerequisites(), "course");
@@ -92,7 +96,23 @@ public class StudentAddCourse extends Fragment {
             }
         });
     }
+    public boolean needPrereq(ArrayList<Course> list){
+        ArrayList<String> coursesTaken = StudentCourses.getCourseCodes();
+        ArrayList<String> prereqsNeeded = new ArrayList<>();
+        //Go through all prerequisites needed for the courses to add
+        for (int i =0; i< list.size();i++){
+            ArrayList<String> temp = new ArrayList<>(Arrays.asList(list.get(i).getPrerequisites().split(",")));
+            prereqsNeeded.addAll(temp);
+        }
 
+        //Compare prereqs needed to courses already taken
+        for (int i = 0; i< prereqsNeeded.size();i++){
+            if (!coursesTaken.contains(prereqsNeeded.get(i))){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void onStart() {
         super.onStart();

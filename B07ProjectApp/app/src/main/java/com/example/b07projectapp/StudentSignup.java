@@ -186,9 +186,15 @@ public class StudentSignup extends Login {
                             if (data) {
                                 myToast = Toast.makeText(getContext(), "Signup Success!", Toast.LENGTH_SHORT);
                                 login();
+                                textUser.setText("");
+                                textPassword.setText("");
+                                textConfirm.setText("");
+                                textEmail.setText("");
+                                textFullName.setText("");
                             }
                             else {
                                 myToast = Toast.makeText(getContext(), "Username already exists!", Toast.LENGTH_SHORT);
+                                textUser.setText("");
                             }
                             myToast.show();
                         }
