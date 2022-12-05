@@ -13,6 +13,7 @@ public class Timeline {
     static ArrayList<String> courseCode = CourseList.getCourseCodes();
     static ArrayList<ArrayList<String>> session = CourseList.getSessionsAsList();
     static ArrayList<ArrayList<String>> prereq = CourseList.getPrereqsAsList();
+    //static ArrayList<String> prereqs = CourseList.getPrereqsAsList();
 
     //static ArrayList<String> chosenCourses;
     static ArrayList<String> coursesTaken = StudentCourses.getCourseCodes();
@@ -45,8 +46,11 @@ public class Timeline {
         for (int i = 0; i < finalCourseList.size(); i++){
             Log.i("TIMELINE", "Session: " + finalSessionList.get(i) + ", Courses: " + finalCourseList.get(i).toString());
         }
-        for (int i = 0; i < coursesTaken.size(); i++){
-            Log.i("TIMELINE", "Courses Taken: " + coursesTaken.get(i));
+        for (int i = 0; i < courseCode.size(); i++){
+            Log.i("TIMELINE", "Courses: " + courseCode.get(i));
+            Log.i("TIMELINE", "Prereqs: " + prereq.get(i).toString());
+            Log.i("TIMELINE", "Sessions: " + session.get(i).toString());
+            Log.i("TIMELINE", "~~~~~~~~~~~~~~~");
         }
         //Finds index of last non-empty element in list
         int index = -1;

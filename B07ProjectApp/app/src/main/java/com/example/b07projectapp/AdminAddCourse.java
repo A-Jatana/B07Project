@@ -111,7 +111,7 @@ public class AdminAddCourse extends AddCourse {
                     }
                     code = toValidCourse(code);
                     prereq = toValidCourse(prereq);
-                    sessions = toValidCourse(sessions);
+                    sessions = toValidSession(sessions);
                     CourseManager dm = new CourseManager(name, code, sessions, prereq, "course");
                     dm.add(new CourseManager.addCallback() {
                         @Override
@@ -217,7 +217,7 @@ public class AdminAddCourse extends AddCourse {
         int endIdx = -1;
         String s = "";
         char array[] = text.toCharArray();
-
+        int length = 0;
         while (i<text.length()) {
             char c = array[i];
             if (c== ' ' || c == ',') {
@@ -226,15 +226,19 @@ public class AdminAddCourse extends AddCourse {
                 }
             } else {
                 if (startIdx == -1) {
-                    startIdx = i;
-                }
-                if (i == text.length()-1) {
+                        startIdx = i;
+                    }
+                if (i == text.length()-1 || length == 5) {
                     endIdx = i+1;
+                    length = 0;
+                } else {
+                    length++;
                 }
             }
 
             if (startIdx != -1 && endIdx != -1) {
-                if (!s.equals("")) {
+
+                if (!(s.equals(""))) {
                     s+=",";
                 }
                 s +=text.substring(startIdx, endIdx);

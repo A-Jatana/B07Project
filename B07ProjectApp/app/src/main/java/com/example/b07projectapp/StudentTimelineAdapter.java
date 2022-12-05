@@ -30,7 +30,6 @@ public class StudentTimelineAdapter extends RecyclerView.Adapter<StudentTimeline
     public StudentTimelineAdapter.courseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.student_timeline_item, parent, false);
-        Log.i("TIMELINE", "ADAPTER IS REACHER");
         return new StudentTimelineAdapter.courseViewHolder(view);
     }
 
