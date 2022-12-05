@@ -23,13 +23,14 @@ Any impediments or stumbling blocks?
  Name: Amitoz Jatana
 
 What have you done since yesterday?
-	- 
+	- nothing
 
 What are you planning on doing today?
-	- 
+	- add an extra prerequisite check for delete course feature for admin
+	- make a logo and color scheme for the app
   
 Any impediments or stumbling blocks?
-	- none
+	- getting a nullpointerexception for some reason
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  Name: Kerry Zhang
