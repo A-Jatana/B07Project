@@ -146,10 +146,6 @@ public class AdminUpdateCourse extends UpdateCourse {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the updated or original offering sessions of the course!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
-                else if (prereq.isEmpty()) {
-                    Toast myToast = Toast.makeText(getActivity(), "Please provide the updated or original prerequisites of the course", Toast.LENGTH_SHORT);
-                    myToast.show();
-                }
                 else if (!SyntaxCheck.isValidCourse(code)){
                     Toast myToast = Toast.makeText(getActivity(), "Invalid course code", Toast.LENGTH_SHORT);
                     myToast.show();
