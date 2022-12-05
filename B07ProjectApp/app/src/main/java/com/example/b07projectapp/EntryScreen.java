@@ -28,8 +28,7 @@ public class EntryScreen extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CourseManager cm = new CourseManager();
-        cm.generateCourseList();
+        CourseManager.generateCourseList();
 
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override

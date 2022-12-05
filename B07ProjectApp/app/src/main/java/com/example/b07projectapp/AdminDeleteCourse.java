@@ -96,7 +96,7 @@ public class AdminDeleteCourse extends DeleteCourse {
                     myToast.show();
                 }
                 else {
-
+                    CourseManager.generateCourseList();
                     delete_course(key);
 
                 }

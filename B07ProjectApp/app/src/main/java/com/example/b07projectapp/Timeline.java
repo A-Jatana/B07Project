@@ -1,5 +1,7 @@
 package com.example.b07projectapp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Timeline {
@@ -39,6 +41,13 @@ public class Timeline {
         addYear();
         timeline(courses);
         addYearNumbers();
+
+        for (int i = 0; i < finalCourseList.size(); i++){
+            Log.i("TIMELINE", "Session: " + finalSessionList.get(i) + ", Courses: " + finalCourseList.get(i).toString());
+        }
+        for (int i = 0; i < coursesTaken.size(); i++){
+            Log.i("TIMELINE", "Courses Taken: " + coursesTaken.get(i));
+        }
         //Finds index of last non-empty element in list
         int index = -1;
         for (int i = 0; i< finalSessionList.size();i++) {

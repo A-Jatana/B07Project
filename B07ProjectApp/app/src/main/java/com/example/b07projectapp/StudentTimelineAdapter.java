@@ -1,10 +1,12 @@
 package com.example.b07projectapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,14 +19,18 @@ public class StudentTimelineAdapter extends RecyclerView.Adapter<StudentTimeline
     ArrayList<String> sessionList = Timeline.getSessionList();
     ArrayList<String> coursesList = Timeline.getCourseList();
 
+    ArrayList<Course> list;
+
     public StudentTimelineAdapter() {
     }
+
 
     @NonNull
     @Override
     public StudentTimelineAdapter.courseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.student_timeline_item, parent, false);
+        Log.i("TIMELINE", "ADAPTER IS REACHER");
         return new StudentTimelineAdapter.courseViewHolder(view);
     }
 
@@ -32,12 +38,16 @@ public class StudentTimelineAdapter extends RecyclerView.Adapter<StudentTimeline
     public void onBindViewHolder(@NonNull StudentTimelineAdapter.courseViewHolder holder, int i) {
         holder.session_offering.setText(sessionList.get(i));
         holder.course_offering.setText(coursesList.get(i));
+        //holder.session_offering.setText(list.get(i).getOfferingSessions());
+        //holder.course_offering.setText(list.get(i).getCourseCode());
     }
 
     @Override
     public int getItemCount() {
         return sessionList.size();
     }
+
+
 
     class courseViewHolder extends RecyclerView.ViewHolder {
 

@@ -151,7 +151,7 @@ public class AdminUpdateCourse extends UpdateCourse {
                     myToast.show();
                 }
                 else {
-
+                    CourseManager.generateCourseList();
                     modify_course(key, name, code, sessions, prereq);
 
                 }

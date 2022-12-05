@@ -187,7 +187,7 @@ import com.google.firebase.database.ValueEventListener;
             void callback(boolean data);
         }
 
-        protected void generateCourseList (){
+        protected static void generateCourseList (){
             dRef = database.getReference().child("course");
             //ArrayList of the form < <"Course Code", <"Session 1", "Session 2",...>, <"Prereq1","Prereq2",...>>, <...>, <...>>
             //ArrayList<ArrayList<ArrayList<String>>> finalCourseList = new ArrayList<ArrayList<ArrayList<String>>>();

@@ -85,8 +85,8 @@ public class StudentTimeline extends Fragment {
             recyclerView = (RecyclerView) courseView.findViewById(R.id.rv);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-            dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
-
+            //dRef = FirebaseDatabase.getInstance().getReference().child("student").child(StudentCourses.getStudentName()).child("course");
+        dRef = FirebaseDatabase.getInstance().getReference().child("course");
 //        binding = FragmentAdminAddCourseBinding.inflate(inflater, container, false);
 //        return binding.getRoot();
             return courseView;
@@ -100,8 +100,48 @@ public class StudentTimeline extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
+                        /*
                         Timeline.generateTimeline(StudentCourses.getCoursesToTake(),2022);
-                        AdminCourseAdapter adapter = new AdminCourseAdapter(list);
+
+                        StudentTimelineAdapter adapter = new StudentTimelineAdapter();
+                        recyclerView.setAdapter(adapter);
+
+                         */
+/*
+                        if (Timeline.getCourseList().equals("") || Timeline.getCourseList().equals(null)){
+                            Toast myToast = Toast.makeText(getActivity(), "empty course list", Toast.LENGTH_SHORT);
+                            myToast.show();
+                        } else {
+                            Toast myToast = Toast.makeText(getActivity(), "no prob", Toast.LENGTH_SHORT);
+                            myToast.show();
+                        }
+
+ */
+                        /*
+                        list = new ArrayList<>();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            //if (StudentCourses.getCourseCodes().contains(ds.child("courseCode").getValue().toString())){
+
+                                list.add(new Course(ds.child("courseName").getValue().toString(),
+                                        ds.child("courseCode").getValue().toString(),
+                                        ds.child("offeringSessions").getValue().toString(),
+                                        ds.child("prerequisites").getValue().toString()));
+                            //}
+                        }
+
+                         */
+                        /*
+                        ArrayList<String> sessionList = Timeline.getSessionList();
+                        ArrayList<String> coursesList = Timeline.getCourseList();
+
+                        for (int i = 0; i< sessionList.size();i++){
+                            Toast myToast = Toast.makeText(getActivity(), "WE GET HERE LOL", Toast.LENGTH_SHORT);
+                            myToast.show();
+                            Log.i("TIMELINE", "Session: " + sessionList.get(i) + ", Courses: " + coursesList.get(i));
+                        }
+
+                         */
+                        StudentTimelineAdapter adapter = new StudentTimelineAdapter();
                         recyclerView.setAdapter(adapter);
                     }
                 }

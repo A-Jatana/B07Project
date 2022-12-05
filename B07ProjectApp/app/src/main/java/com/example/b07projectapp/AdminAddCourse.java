@@ -97,7 +97,7 @@ public class AdminAddCourse extends AddCourse {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the offering sessions of the course!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
-                else if (isValidSession(sessions)){
+                else if (!isValidSession(sessions)){
                     Toast myToast = Toast.makeText(getActivity(), "Invalid session offerings", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
@@ -124,6 +124,7 @@ public class AdminAddCourse extends AddCourse {
                                 textSessions.setText("");
                                 textPrereq.setText("");
                                 //add_course();
+                                CourseManager.generateCourseList();
                             }
                             else {
                                 myToast = Toast.makeText(getContext(), "Course already exists!", Toast.LENGTH_SHORT);

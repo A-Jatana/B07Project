@@ -77,7 +77,26 @@ public class StudentChooseCoursesTimeline extends Fragment {
                     for (int i = 0; i< chosenCourses.size();i++){
                         list.add(chosenCourses.get(i).getCourseCode());
                     }
+                    /*
                     StudentCourses.setCoursesToTake(list);
+                    ArrayList<String> course = StudentCourses.getCoursesToTake();
+                    for (int i = 0; i<course.size();i++){
+                        Log.i("TIMELINE", "Courses: " + course.get(i));
+                    }
+
+                     */
+                    Timeline.generateTimeline(StudentCourses.getCoursesToTake(),2022);
+                    /*
+                    ArrayList<String> sessionList = Timeline.getSessionList();
+                    ArrayList<String> coursesList = Timeline.getCourseList();
+
+                    for (int i = 0; i< sessionList.size();i++){
+                        Toast myToast = Toast.makeText(getActivity(), "WE GET HERE LOL", Toast.LENGTH_SHORT);
+                        myToast.show();
+                        Log.i("TIMELINE", "Session: " + sessionList.get(i) + ", Courses: " + coursesList.get(i));
+                    }
+
+                     */
                     NavHostFragment.findNavController(StudentChooseCoursesTimeline.this)
                             .navigate(R.id.action_studentChooseCoursesTimeline_to_studentTimeline);
                 }
