@@ -90,11 +90,15 @@ public class AdminAddCourse extends AddCourse {
                     myToast.show();
                 }
                 else if (!isValidCourse(code)){
-                    Toast myToast = Toast.makeText(getActivity(), "Course Code Invalid!", Toast.LENGTH_SHORT);
+                    Toast myToast = Toast.makeText(getActivity(), "Invalid course code", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
                 else if (sessions.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the offering sessions of the course!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+                else if (isValidSession(sessions)){
+                    Toast myToast = Toast.makeText(getActivity(), "Invalid session offerings", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
                 else if (!isValidCourse(prereq)){
@@ -107,6 +111,7 @@ public class AdminAddCourse extends AddCourse {
                     }
                     code = toValidCourse(code);
                     prereq = toValidCourse(prereq);
+                    sessions = toValidCourse(sessions);
                     CourseManager dm = new CourseManager(name, code, sessions, prereq, "course");
                     dm.add(new CourseManager.addCallback() {
                         @Override
@@ -238,6 +243,114 @@ public class AdminAddCourse extends AddCourse {
             i++;
         }
 
+        return s;
+    }
+
+    public static boolean isValidSession(String text) {
+        int i = 0;
+        char array[] = text.toCharArray();
+        while (i< text.length()) {
+            char c = array[i];
+            if (("FSW".indexOf(c) == -1) && !(c==' ') && !(c==',')) { //If c is none of the valid letter
+                return false;
+            } else if (c == 'F'){
+                if (!isFall(text,i)) {
+                    return false;
+                } else {
+                    i += 4;
+                }
+            } else if (c == 'W') {
+                if (!isWinter(text,i)) {
+                    return false;
+                } else {
+                    i += 6;
+                }
+            } else if (c=='S') {
+                if (!isSummer(text,i)) {
+                    return false;
+                } else {
+                    i += 6;
+                }
+            } else {
+                i++;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isFall(String text, int i) {
+        String sub = text.substring(i);
+        if (sub.length()<4) {
+            return false;
+        } else {
+            String fallSub = sub.substring(0, 4).toUpperCase();
+            if (!fallSub.equals("FALL")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isWinter(String text, int i) {
+        String sub = text.substring(i);
+        if (sub.length()<6) {
+            return false;
+        } else {
+            String winterSub = sub.substring(0, 6).toUpperCase();
+            if (!winterSub.equals("WINTER")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean isSummer(String text, int i) {
+        String sub = text.substring(i);
+        if (sub.length()<6) {
+            return false;
+        } else {
+            String summerSub = sub.substring(0, 6).toUpperCase();
+            if (!summerSub.equals("SUMMER")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static String toValidSession(String text) {
+        //MAX THREE SESSIONS in order: [F,W,S]
+        boolean sessions[] = {false, false, false};
+        String sessionNames [] = {"Fall","Winter","Summer"};
+        int i = 0;
+        char array[] = text.toCharArray();
+        while (i< text.length()) {
+            char c = array[i];
+
+            if (c == 'F'){
+                i += 4;
+                sessions[0] = true;
+            }
+            if (c == 'W') {
+                i+=6;
+                sessions[1] = true;
+            }
+            if (c =='S') {
+                i+= 6;
+                sessions[2]=true;
+            }
+
+            if ("FSW".indexOf(c) == -1) {
+                i++;
+            }
+        }
+
+        String s = "";
+        for (int j = 0; j< 3; j++) {
+            if (sessions[j] == true) {
+                if (!s.equals("")) {
+                    s+=",";
+                }
+                s+= sessionNames[j];
+            }
+        }
         return s;
     }
 }
