@@ -15,7 +15,7 @@
             android:id="@+id/textView"
             android:layout_width="265dp"
             android:layout_height="53dp"
-            android:text="@string/courses_to_add_message"
+            android:text="courses_to_add_message"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/scrollView2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:text="@string/action_add_course"
+            android:text="Add Course"
+            android:backgroundTint="#005900"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

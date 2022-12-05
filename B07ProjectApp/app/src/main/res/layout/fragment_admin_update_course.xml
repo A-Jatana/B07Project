@@ -74,8 +74,6 @@
         android:id="@+id/off_update_course_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#90EE90"
         android:text="Update Course!"
-        android:textColor="@color/black"
         tools:ignore="DuplicateSpeakableTextCheck" />
 </LinearLayout>

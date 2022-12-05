@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/adminLogin"
         android:name="com.example.b07projectapp.AdminLogin"
-        android:label="fragment_admin_login"
+        android:label="Admin Login Page"
         tools:layout="@layout/fragment_admin_login" >
         <action
             android:id="@+id/action_adminLogin_to_adminCourseList"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/adminAddCourse"
         android:name="com.example.b07projectapp.AdminAddCourse"
-        android:label="fragment_admin_add_course"
+        android:label="Add Course Page"
         tools:layout="@layout/fragment_admin_add_course" >
         <action
             android:id="@+id/action_adminAddCourse_to_adminCourseList"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/adminCourseList"
         android:name="com.example.b07projectapp.AdminCourseList"
-        android:label="AdminCourseList" >
+        android:label="Admin Home Page" >
         <action
             android:id="@+id/action_adminCourseList_to_adminAddCourse"
             app:destination="@id/adminAddCourse" />
@@ -51,12 +51,12 @@
     <fragment
         android:id="@+id/adminUpdateCourse"
         android:name="com.example.b07projectapp.AdminUpdateCourse"
-        android:label="fragment_admin_update_course"
+        android:label="Update Course Page"
         tools:layout="@layout/fragment_admin_update_course" />
     <fragment
         android:id="@+id/adminDeleteCourse"
         android:name="com.example.b07projectapp.AdminDeleteCourse"
-        android:label="fragment_admin_delete_course"
+        android:label="Delete Course Page"
         tools:layout="@layout/fragment_admin_delete_course" />
     <fragment
         android:id="@+id/studentSignup"
