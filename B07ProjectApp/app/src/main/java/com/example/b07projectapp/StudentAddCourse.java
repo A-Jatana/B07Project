@@ -107,7 +107,7 @@ public class StudentAddCourse extends Fragment {
 
         //Compare prereqs needed to courses already taken
         for (int i = 0; i< prereqsNeeded.size();i++){
-            if (!coursesTaken.contains(prereqsNeeded.get(i))){
+            if (!coursesTaken.contains(prereqsNeeded.get(i)) && !prereqsNeeded.get(i).equals("NONE")){
                 return true;
             }
         }
