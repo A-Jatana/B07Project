@@ -12,11 +12,11 @@ Any impediments or stumbling blocks?
 Name: Syeda Sumaiya Ahmed
 
 What have you done since yesterday?
-	- Found errors for the student course view user story and checkbox implementation and worked on their solutions
+	- Finished testing to make sure student login, student signup, and student course list viewing works properly
+	- Added details to the app such as signup password condtions, username checks, etc.
 
 What are you planning on doing today?
-	- Start testing to make sure student login, student signup, and student course list viewing works properly
-	- Start adding details to the app such as password condtions, username checks, etc.
+	- Work on MVP model for student/admin login
 
 Any impediments or stumbling blocks?
 	- None
