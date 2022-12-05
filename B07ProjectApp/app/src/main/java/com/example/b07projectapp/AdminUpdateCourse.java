@@ -174,6 +174,10 @@ public class AdminUpdateCourse extends UpdateCourse {
                     CourseManager.generateCourseList();
                     modify_course(key, name, code, sessions, prereq);
 
+                    textToBe.setText("");
+                    textName.setText("");
+                    textCode.setText("");
+                    textPrereq.setText("");
                 }
             }
         });

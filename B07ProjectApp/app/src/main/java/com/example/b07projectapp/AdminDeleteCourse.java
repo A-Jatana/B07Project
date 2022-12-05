@@ -98,7 +98,7 @@ public class AdminDeleteCourse extends DeleteCourse {
                 else {
                     CourseManager.generateCourseList();
                     delete_course(key);
-
+                    textToBe.setText("");
                 }
             }
         });
