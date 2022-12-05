@@ -29,14 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
  * Use the {@link AdminLogin#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdminLogin extends Login{
+public class AdminLogin extends Login implements Control.View{
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private FragmentAdminLoginBinding binding;
-
+    private Control.Presenter presenter;
+    private AdminLoginModel model;
     // TODO: Rename and change types of parameters
     private String username;
     private String password;
@@ -48,26 +45,10 @@ public class AdminLogin extends Login{
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdminLogin.
-     */
-    /*
-    View fragmentFirstLayout = inflater.inflate(R.layout.fragment_first, container, false);
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
-        showCountTextView = binding.textviewFirst;
-        return binding.getRoot();
-     */
     // TODO: Rename and change types and number of parameters
     public static AdminLogin newInstance(String param1, String param2) {
         AdminLogin fragment = new AdminLogin();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,11 +60,8 @@ public class AdminLogin extends Login{
         view.findViewById(R.id.adminSignInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText textUser = binding.adminTextUsername;
-                username = textUser.getText().toString();
-                EditText textPassword = binding.adminTextPassword;
-                password = textPassword.getText().toString();
-
+                presenter.checkLogin();
+                /*
                 if (username.isEmpty() || password.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT);
                     myToast.show();
@@ -102,12 +80,12 @@ public class AdminLogin extends Login{
                                 Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
                                 myToast.show();
                             }
-                            textUser.setText("");
-                            textPassword.setText("");
                         }
                     });
                 }
+                */
             }
+
         });
     }
 
@@ -120,10 +98,7 @@ public class AdminLogin extends Login{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            //mParam1 = getArguments().getString(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        presenter = new Presenter(model, this);
     }
 
     @Override
@@ -133,4 +108,25 @@ public class AdminLogin extends Login{
         return binding.getRoot();
     }
 
+    @Override
+    public String getUsername() {
+        EditText textUser = binding.adminTextUsername;
+        username = textUser.getText().toString();
+        textUser.setText("");
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        EditText textPassword = binding.adminTextPassword;
+        password = textPassword.getText().toString();
+        textPassword.setText("");
+        return password;
+    }
+
+    @Override
+    public void displayMessage(String msg) {
+        Toast myToast = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
+        myToast.show();
+    }
 }
