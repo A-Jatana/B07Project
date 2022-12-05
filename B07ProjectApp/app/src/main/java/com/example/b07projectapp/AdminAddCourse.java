@@ -18,6 +18,8 @@ import com.example.b07projectapp.databinding.FragmentAdminAddCourseBinding;
 import com.example.b07projectapp.databinding.FragmentEntryScreenBinding;
 import com.example.b07projectapp.databinding.FragmentStudentSignupBinding;
 
+import java.util.Locale;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AdminAddCourse#newInstance} factory method to
@@ -69,11 +71,11 @@ public class AdminAddCourse extends AddCourse {
                 EditText textName = binding.inputCourseName;
                 name = textName.getText().toString();
                 EditText textCode = binding.inputCourseCode;
-                code = textCode.getText().toString();
+                code = textCode.getText().toString().toUpperCase();
                 EditText textSessions = binding.inputOfferingSessions;
-                sessions = textSessions.getText().toString();
+                sessions = textSessions.getText().toString().toUpperCase();
                 EditText textPrereq= binding.inputPrerequisites;
-                prereq = textPrereq.getText().toString();
+                prereq = textPrereq.getText().toString().toUpperCase();
                 /* TODO implement if statement
                  * If (Database already has that username) {
                  * pop up message saying username is already taken
@@ -87,11 +89,24 @@ public class AdminAddCourse extends AddCourse {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the course code!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
+                else if (!isValidCourse(code)){
+                    Toast myToast = Toast.makeText(getActivity(), "Course Code Invalid!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
                 else if (sessions.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the offering sessions of the course!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
+                else if (!isValidCourse(prereq)){
+                    Toast myToast = Toast.makeText(getActivity(), "Prerequisites have an invalid course code!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
                 else {
+                    if (prereq == null){
+                        prereq = "NONE";
+                    }
+                    code = toValidCourse(code);
+                    prereq = toValidCourse(prereq);
                     CourseManager dm = new CourseManager(name, code, sessions, prereq, "course");
                     dm.add(new CourseManager.addCallback() {
                         @Override
@@ -99,6 +114,10 @@ public class AdminAddCourse extends AddCourse {
                             Toast myToast;
                             if (data) {
                                 myToast = Toast.makeText(getContext(), "Course Added!", Toast.LENGTH_SHORT);
+                                textName.setText("");
+                                textCode.setText("");
+                                textSessions.setText("");
+                                textPrereq.setText("");
                                 //add_course();
                             }
                             else {
@@ -133,5 +152,92 @@ public class AdminAddCourse extends AddCourse {
                              Bundle savedInstanceState) {
         binding = FragmentAdminAddCourseBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    public static boolean isValidCourse(String text) {
+        int i = 0;
+        int j = 0;
+
+        char array[] = text.toCharArray();
+
+        while (i<text.length()) {
+            char c = array[i];
+            if (c == ' ' || c == ',') {
+                if (j != 0) {
+                    return false;
+                }
+            } else if (!isNumber(c)&&!isLetter(c)) {
+                return false;
+            } else {
+                if (j >= 0 && j<= 3) { //First three characters of a course code
+                    if (isNumber(c)) {
+                        return false;
+                    }
+                } else if (j==4 || j==5) {
+                    if (isLetter(c)) {
+                        return false;
+                    }
+                }
+
+                if (j==5) {
+                    j=0;
+                } else {
+                    j++;
+                }
+            }
+            i++;
+
+        }
+        return true;
+    }
+
+    public static boolean isNumber(char c) {
+        if ("1234567890".indexOf(c) == -1) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isLetter(char c) {
+        if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(c) == -1) {
+            return false;
+        }
+        return true;
+    }
+
+    public static String toValidCourse(String text) {
+        int i = 0;
+        int startIdx = -1;
+        int endIdx = -1;
+        String s = "";
+        char array[] = text.toCharArray();
+
+        while (i<text.length()) {
+            char c = array[i];
+            if (c== ' ' || c == ',') {
+                if (startIdx != -1) {
+                    endIdx = i;
+                }
+            } else {
+                if (startIdx == -1) {
+                    startIdx = i;
+                }
+                if (i == text.length()-1) {
+                    endIdx = i+1;
+                }
+            }
+
+            if (startIdx != -1 && endIdx != -1) {
+                if (!s.equals("")) {
+                    s+=",";
+                }
+                s +=text.substring(startIdx, endIdx);
+                startIdx = -1;
+                endIdx = -1;
+            }
+            i++;
+        }
+
+        return s;
     }
 }
