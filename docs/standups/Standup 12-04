@@ -14,6 +14,7 @@ Name: Syeda Sumaiya Ahmed
 What have you done since yesterday?
 	- Finished testing to make sure student login, student signup, and student course list viewing works properly
 	- Added details to the app such as signup password condtions, username checks, etc.
+	- updated the labels of the entry and student pages 
 
 What are you planning on doing today?
 	- Work on MVP model for student/admin login
