@@ -12,10 +12,12 @@ Any impediments or stumbling blocks?
 Name: Syeda Sumaiya Ahmed
 
 What have you done since yesterday?
-	- 
+	- Figured out checkboxes functionality for student choosing courses to add and generate timeline
+	- Completely implememted student course view user story. 
+	  Now, the student would be able to view their taken list of  courses when they login.
 
 What are you planning on doing today?
-	- 
+	- Find and fix any errors for the student course view user story and checkbox implementation
 
 Any impediments or stumbling blocks?
 	- None
