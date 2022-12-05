@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/entryScreen"
         android:name="com.example.b07projectapp.EntryScreen"
-        android:label="fragment_entry_screen"
+        android:label="Welcome!"
         tools:layout="@layout/fragment_entry_screen" >
         <action
             android:id="@+id/action_entryScreen_to_studentLogin"
@@ -61,7 +61,7 @@
     <fragment
         android:id="@+id/studentSignup"
         android:name="com.example.b07projectapp.StudentSignup"
-        android:label="fragment_student_signup"
+        android:label="Student Signup Page"
         tools:layout="@layout/fragment_student_signup" >
         <action
             android:id="@+id/action_studentSignup_to_studentLogin"
@@ -70,7 +70,7 @@
     <fragment
         android:id="@+id/studentLogin"
         android:name="com.example.b07projectapp.StudentLogin"
-        android:label="fragment_student_login"
+        android:label="Student Login Page"
         tools:layout="@layout/fragment_student_login" >
         <action
             android:id="@+id/action_studentLogin_to_studentCourseList"
@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/studentCourseList"
         android:name="com.example.b07projectapp.StudentCourseList"
-        android:label="fragment_student_course_list"
+        android:label="Student's Course List Page"
         tools:layout="@layout/fragment_student_course_list">
         <action
             android:id="@+id/action_studentCourseList_to_studentChooseCoursesTimeline"
@@ -94,7 +94,7 @@
     <fragment
         android:id="@+id/studentAddCourse"
         android:name="com.example.b07projectapp.StudentAddCourse"
-        android:label="fragment_student_add_course"
+        android:label="Add Courses Page"
         tools:layout="@layout/fragment_student_add_course" >
         <action
             android:id="@+id/action_studentAddCourse_to_studentCourseList"
@@ -103,7 +103,7 @@
     <fragment
         android:id="@+id/studentTimeline"
         android:name="com.example.b07projectapp.StudentTimeline"
-        android:label="fragment_student_timeline"
+        android:label="Student Timeline Page"
         tools:layout="@layout/fragment_student_timeline">
         <action
             android:id="@+id/action_studentTimeline_to_studentCourseList"
@@ -112,7 +112,7 @@
     <fragment
         android:id="@+id/studentChooseCoursesTimeline"
         android:name="com.example.b07projectapp.StudentChooseCoursesTimeline"
-        android:label="fragment_student_choose_courses_timeline"
+        android:label="Generate Timeline Page"
         tools:layout="@layout/fragment_student_choose_courses_timeline">
         <action
             android:id="@+id/action_studentChooseCoursesTimeline_to_studentTimeline"
