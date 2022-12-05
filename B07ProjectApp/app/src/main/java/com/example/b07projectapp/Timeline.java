@@ -28,7 +28,11 @@ public class Timeline {
     public static ArrayList<String> getCourseList(){
         ArrayList<String> temp = new ArrayList<>();
         for (int i = 0; i < finalCourseList.size(); i++){
-            temp.add(String.join(", ",finalCourseList.get(i)));
+            if (finalCourseList.get(i).isEmpty()){
+                temp.add("NONE");
+            } else{
+                temp.add(String.join(", ",finalCourseList.get(i)));
+            }
         }
         return temp;
     }
@@ -46,12 +50,15 @@ public class Timeline {
         for (int i = 0; i < finalCourseList.size(); i++){
             Log.i("TIMELINE", "Session: " + finalSessionList.get(i) + ", Courses: " + finalCourseList.get(i).toString());
         }
+        /*
         for (int i = 0; i < courseCode.size(); i++){
             Log.i("TIMELINE", "Courses: " + courseCode.get(i));
-            Log.i("TIMELINE", "Prereqs: " + prereq.get(i).toString());
-            Log.i("TIMELINE", "Sessions: " + session.get(i).toString());
+            Log.i("TIMELINE", "Prereqs: " + CourseList.getPrereqs().get(i));
+            Log.i("TIMELINE", "Sessions: " + CourseList.getSessions().get(i));
             Log.i("TIMELINE", "~~~~~~~~~~~~~~~");
         }
+
+         */
         //Finds index of last non-empty element in list
         int index = -1;
         for (int i = 0; i< finalSessionList.size();i++) {
@@ -99,11 +106,14 @@ public class Timeline {
     }
 
     public static void timeline(ArrayList<String> list) {
+        Log.i("RECURSION","Size: " + list.size());
         for (int i = 0; i < list.size(); i++) {
+            Log.i("RECURSION", "Index of code: " + getIdxInTimeline(list.get(i)) + ", is in courses taken: " +coursesTaken.contains(list.get(i)));
             if (getIdxInTimeline(list.get(i)) == -1 && !coursesTaken.contains(list.get(i))) {//Course is not already in timeline
                 if (!allPrereqInTimeline(list.get(i))){ //Not all prerequisites are in the timeline yet
                     //int index = getIndex(list.get(i)); //Finds corresponding index in coursecode list
                     int index = courseCode.indexOf(list.get(i));//Finds corresponding index in coursecode list
+                    //Log.i("RECURSION", "indexOf: " +index + ", getIndex: " + getIndex(list.get(i)));
                     timeline(prereq.get(index));//Recursively calls the function to add the prereqs first
                 }
                 addToTimeline(list.get(i)); //Adds every course to the timeline
@@ -184,7 +194,6 @@ public class Timeline {
     public static boolean allPrereqInTimeline(String course) {
         int index = getIndex(course);
         ArrayList<String> prereqList = prereq.get(index);
-
         if (prereqList.get(0).equals("NONE")) {
             return true;
         }

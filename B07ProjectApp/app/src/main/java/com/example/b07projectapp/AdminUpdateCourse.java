@@ -150,7 +150,27 @@ public class AdminUpdateCourse extends UpdateCourse {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the updated or original prerequisites of the course", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
+                else if (!SyntaxCheck.isValidCourse(code)){
+                    Toast myToast = Toast.makeText(getActivity(), "Invalid course code", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+                else if (!SyntaxCheck.isValidSession(sessions)){
+                    Toast myToast = Toast.makeText(getActivity(), "Invalid session offerings", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+                else if (!SyntaxCheck.isValidCourse(prereq)){
+                    Toast myToast = Toast.makeText(getActivity(), "Prerequisites have an invalid course code!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
                 else {
+                    if (prereq.isEmpty()){
+                        prereq = "NONE";
+                    } else {
+                        prereq = SyntaxCheck.toValidCourse(prereq);
+                    }
+                    code = SyntaxCheck.toValidCourse(code);
+                    sessions = SyntaxCheck.toValidSession(sessions);
+
                     CourseManager.generateCourseList();
                     modify_course(key, name, code, sessions, prereq);
 

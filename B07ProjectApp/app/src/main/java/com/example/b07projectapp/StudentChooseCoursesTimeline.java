@@ -77,14 +77,11 @@ public class StudentChooseCoursesTimeline extends Fragment {
                     for (int i = 0; i< chosenCourses.size();i++){
                         list.add(chosenCourses.get(i).getCourseCode());
                     }
-                    /*
-                    StudentCourses.setCoursesToTake(list);
-                    ArrayList<String> course = StudentCourses.getCoursesToTake();
-                    for (int i = 0; i<course.size();i++){
-                        Log.i("TIMELINE", "Courses: " + course.get(i));
-                    }
 
-                     */
+                    StudentCourses.setCoursesToTake(list);
+
+
+                    //Log.i("RECURSION", "size of first list: " +StudentCourses.getCoursesToTake().size());
                     Timeline.generateTimeline(StudentCourses.getCoursesToTake(),2022);
                     /*
                     ArrayList<String> sessionList = Timeline.getSessionList();
