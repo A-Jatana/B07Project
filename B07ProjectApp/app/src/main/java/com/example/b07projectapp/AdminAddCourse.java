@@ -18,7 +18,13 @@ import android.widget.Toast;
 import com.example.b07projectapp.databinding.FragmentAdminAddCourseBinding;
 import com.example.b07projectapp.databinding.FragmentEntryScreenBinding;
 import com.example.b07projectapp.databinding.FragmentStudentSignupBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -36,6 +42,9 @@ public class AdminAddCourse extends AddCourse {
     private static final String ARG_PARAM4 = "param4";
 
     private String name, code, sessions, prereq;
+    DatabaseReference dRef;
+    ArrayList<String> list_Cname = new ArrayList<>();
+    ArrayList<String> list_Ccode = new ArrayList<>();
 
     public AdminAddCourse(){
 
@@ -86,10 +95,20 @@ public class AdminAddCourse extends AddCourse {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the name of the course!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
+
+                else if (list_Cname.contains(name)){
+                    Toast myToast = Toast.makeText(getActivity(), "A course with this name already exists!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
                 else if (code.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the course code!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
+                else if (list_Ccode.contains(code)){
+                    Toast myToast = Toast.makeText(getActivity(), "A course with this code already exists!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                }
+
                 else if (sessions.isEmpty()){
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the offering sessions of the course!", Toast.LENGTH_SHORT);
                     myToast.show();
@@ -102,13 +121,13 @@ public class AdminAddCourse extends AddCourse {
                     Toast myToast = Toast.makeText(getActivity(), "Invalid session offerings", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
-                else if (!SyntaxCheck.isValidCourse(prereq)){
+                else if (!SyntaxCheck.isValidCourse(prereq) && !prereq.equalsIgnoreCase("None")){
                     Toast myToast = Toast.makeText(getActivity(), "Prerequisites have an invalid course code!", Toast.LENGTH_SHORT);
                     myToast.show();
                 }
                 else {
-                    if (prereq.isEmpty()){
-                        prereq = "None";
+                    if (prereq.isEmpty() || prereq.equalsIgnoreCase("None")){
+                        prereq = "NONE";
                     } else {
                         prereq = SyntaxCheck.toValidCourse(prereq);
                     }
@@ -149,6 +168,30 @@ public class AdminAddCourse extends AddCourse {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dRef = FirebaseDatabase.getInstance().getReference().child("course");
+
+        if (dRef != null) {
+            dRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            list_Cname.add(ds.child("courseName").getValue(String.class));
+                            list_Ccode.add(ds.child("courseCode").getValue(String.class));
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });
+        }
+
         if (getArguments() != null) {
             //mParam1 = getArguments().getString(ARG_PARAM1);
             //mParam2 = getArguments().getString(ARG_PARAM2);

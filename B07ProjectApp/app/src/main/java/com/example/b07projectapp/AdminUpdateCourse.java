@@ -1,40 +1,3 @@
-//package com.example.b07projectapp;
-//
-//import android.os.Bundle;
-//
-//import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.fragment.app.Fragment;
-//import androidx.navigation.fragment.NavHostFragment;
-//
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.EditText;
-//import android.widget.Toast;
-//
-//import com.example.b07projectapp.databinding.FragmentAdminAddCourseBinding;
-//import com.example.b07projectapp.databinding.FragmentAdminUpdateCourseBinding;
-//
-//import android.os.Bundle;
-//
-//import androidx.annotation.NonNull;
-//import androidx.fragment.app.Fragment;
-//import androidx.navigation.fragment.NavHostFragment;
-//
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.EditText;
-//import android.widget.TableRow;
-//import android.widget.TextView;
-//import android.widget.Toast;
-//import com.google.android.gms.tasks.OnCompleteListener;
-//import com.google.android.gms.tasks.Task;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//
-//import java.util.HashMap;
 package com.example.b07projectapp;
 
 import android.os.Bundle;
@@ -43,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -85,6 +50,8 @@ public class AdminUpdateCourse extends UpdateCourse {
     private static final String ARG_PARAM4 = "param4";
 
     private String key, name, code, sessions, prereq;
+    ArrayList<String> list_Cname = new ArrayList<>();
+    ArrayList<String> list_Ccode = new ArrayList<>();
 
     public AdminUpdateCourse() {
 
@@ -124,43 +91,48 @@ public class AdminUpdateCourse extends UpdateCourse {
                 EditText textName = binding.updateCourseName;
                 name = textName.getText().toString();
                 EditText textCode = binding.updateCourseCode;
-                code = textCode.getText().toString().toUpperCase();
+                code = textCode.getText().toString();
                 EditText textSessions = binding.updateOfferingSessions;
-                sessions = textSessions.getText().toString().toUpperCase();
+                sessions = textSessions.getText().toString();
                 EditText textPrereq = binding.updatePrerequisites;
-                prereq = textPrereq.getText().toString().toUpperCase();
+                prereq = textPrereq.getText().toString();
                 /* TODO implement if statement
                  * If (Database already has that username) {
                  * pop up message saying username is already taken
                  * }*/
 
+                Log.i("", code);
+                Log.i("", String.valueOf(list_Ccode.contains(code)));
+                Log.i("", String.valueOf(key));
+                Log.i("", String.valueOf((list_Cname.get(list_Ccode.indexOf(code)))));
+
                 if (name.isEmpty()) {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the updated or original name of the course!", Toast.LENGTH_SHORT);
                     myToast.show();
-                }
-                else if (code.isEmpty()) {
+                } else if (list_Cname.contains(name) && !key.equals(name)) {
+                    Toast myToast = Toast.makeText(getActivity(), "A course with this name already exists!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                } else if (code.isEmpty()) {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the updated or original course code!", Toast.LENGTH_SHORT);
                     myToast.show();
-                }
-                else if (sessions.isEmpty()) {
+                } else if (list_Ccode.contains(code) && !(key.equals(list_Cname.get(list_Ccode.indexOf(code))))) {
+                    Toast myToast = Toast.makeText(getActivity(), "A course with this code already exists!", Toast.LENGTH_SHORT);
+                    myToast.show();
+                } else if (sessions.isEmpty()) {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the updated or original offering sessions of the course!", Toast.LENGTH_SHORT);
                     myToast.show();
-                }
-                else if (!SyntaxCheck.isValidCourse(code)){
+                } else if (!SyntaxCheck.isValidCourse(code)) {
                     Toast myToast = Toast.makeText(getActivity(), "Invalid course code", Toast.LENGTH_SHORT);
                     myToast.show();
-                }
-                else if (!SyntaxCheck.isValidSession(sessions)){
+                } else if (!SyntaxCheck.isValidSession(sessions)) {
                     Toast myToast = Toast.makeText(getActivity(), "Invalid session offerings", Toast.LENGTH_SHORT);
                     myToast.show();
-                }
-                else if (!SyntaxCheck.isValidCourse(prereq)){
+                } else if (!SyntaxCheck.isValidCourse(prereq)) {
                     Toast myToast = Toast.makeText(getActivity(), "Prerequisites have an invalid course code!", Toast.LENGTH_SHORT);
                     myToast.show();
-                }
-                else {
-                    if (prereq.isEmpty()){
-                        prereq = "None";
+                } else {
+                    if (prereq.isEmpty()) {
+                        prereq = "NONE";
                     } else {
                         prereq = SyntaxCheck.toValidCourse(prereq);
                     }
@@ -182,6 +154,32 @@ public class AdminUpdateCourse extends UpdateCourse {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dRef = FirebaseDatabase.getInstance().getReference().child("course");
+
+        if (dRef != null) {
+            dRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+
+                            list_Cname.add(ds.child("courseName").getValue().toString());
+                            list_Ccode.add(ds.child("courseCode").getValue().toString());
+
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });
+        }
+
         if (getArguments() != null) {
             //mParam1 = getArguments().getString(ARG_PARAM1);
             //mParam2 = getArguments().getString(ARG_PARAM2);
