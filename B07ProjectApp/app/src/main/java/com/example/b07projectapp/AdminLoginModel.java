@@ -70,6 +70,23 @@ public class AdminLoginModel extends Login implements Control.Model{
         return found;
     }
 
+    @Override
+    public void isFound2(String username, String password, Control.View view) {
+        AdminModelDatabase adminModelDatabase = new AdminModelDatabase(username, password, "admin");
+        adminModelDatabase.search(new AdminModelDatabase.adminModelCallback() {
+            @Override
+            public void callback(boolean data) {
+                if (data) {
+                    view.displayMessage("Login successful!");
+                    view.loginToProgram();
+                }
+                else {
+                    view.displayMessage("Incorrect username or password");
+                }
+            }
+        });
+    }
+
     void check(String password, String username, Control.View view) {
         AdminModelDatabase adminModelDatabase = new AdminModelDatabase(username, password, "admin");
         adminModelDatabase.search(new AdminModelDatabase.adminModelCallback() {

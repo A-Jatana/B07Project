@@ -5,4 +5,9 @@ public class StudentLoginModel implements Control.Model{
     public boolean isFound(String username, String password) {
         return false;
     }
+
+    @Override
+    public void isFound2(String username, String password, Control.View view) {
+
+    }
 }
