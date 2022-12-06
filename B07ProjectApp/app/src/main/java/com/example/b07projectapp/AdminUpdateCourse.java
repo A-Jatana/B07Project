@@ -101,10 +101,6 @@ public class AdminUpdateCourse extends UpdateCourse {
                  * pop up message saying username is already taken
                  * }*/
 
-                Log.i("", code);
-                Log.i("", String.valueOf(list_Ccode.contains(code)));
-                Log.i("", String.valueOf(key));
-                Log.i("", String.valueOf((list_Cname.get(list_Ccode.indexOf(code)))));
 
                 if (name.isEmpty()) {
                     Toast myToast = Toast.makeText(getActivity(), "Please provide the updated or original name of the course!", Toast.LENGTH_SHORT);
