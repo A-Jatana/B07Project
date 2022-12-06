@@ -1,11 +1,13 @@
 package com.example.b07projectapp;
 
-public class Presenter implements Control.Presenter{
+import com.google.firebase.database.FirebaseDatabase;
+
+public class AdminPresenter implements Control.Presenter{
     private Control.Model model;
     private Control.View view;
 
 
-    public Presenter (Control.Model model, Control.View view){
+    public AdminPresenter(Control.Model model, Control.View view){
         this.model=model;
         this.view=view;
     }
@@ -19,7 +21,7 @@ public class Presenter implements Control.Presenter{
             view.displayMessage("Fields cannot be empty!");
         }
         else {
-            AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view);
+            AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view, FirebaseDatabase.getInstance());
             adminLoginModel.check(username, password, view);
 
         }

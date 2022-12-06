@@ -8,10 +8,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class AdminModelDatabase {
+public class ModelDatabase {
     private String username;
     private String password;
     private String type;
@@ -19,7 +18,7 @@ public class AdminModelDatabase {
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference dRef;
 
-    public AdminModelDatabase(String username, String password, String type) {
+    public ModelDatabase(String username, String password, String type) {
         this.username = username;
         this.password = password;
         this.type = type;

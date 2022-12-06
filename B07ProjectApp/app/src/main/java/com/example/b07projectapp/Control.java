@@ -1,10 +1,10 @@
 package com.example.b07projectapp;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public interface Control{
     public interface Model {
-        public void validLogin(String username, String password);
-
-        void isFound2(String username, String password, Control.View view);
+        void isFound(String username, String password, Control.View view);
     }
 
     public interface View{

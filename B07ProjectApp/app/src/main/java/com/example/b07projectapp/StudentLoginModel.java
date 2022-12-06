@@ -1,14 +1,65 @@
 package com.example.b07projectapp;
 
-public class StudentLoginModel implements Control.Model{
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-    @Override
-    public void validLogin(String username, String password) {
+public class StudentLoginModel extends Login implements Control.Model{
+    boolean found;
+    //private static FirebaseDatabase dm = FirebaseDatabase.getInstance();
+    private static FirebaseDatabase dm;
+    private static DatabaseReference dRef;
+    private String username;
+    private String password;
+    private Control.View view;
 
+    public StudentLoginModel(){
+
+    }
+    public StudentLoginModel(String username, String password, Control.View view, FirebaseDatabase fb) {
+        this.dm = fb;
+        this.username = username;
+        this.password = password;
+        this.view = view;
     }
 
     @Override
-    public void isFound2(String username, String password, Control.View view) {
+    public void isFound(String username, String password, Control.View view) {
+        ModelDatabase modelDatabase = new ModelDatabase(username, password, "student");
+        modelDatabase.search(new ModelDatabase.adminModelCallback() {
+            @Override
+            public void callback(boolean data) {
+                if (data) {
+                    view.displayMessage("Login successful!");
+                    view.loginToProgram();
+                }
+                else {
+                    view.displayMessage("Incorrect username or password");
+                }
+            }
+        });
+    }
+
+    void check(String password, String username, Control.View view) {
+        ModelDatabase modelDatabase = new ModelDatabase(username, password, "student");
+        modelDatabase.search(new ModelDatabase.adminModelCallback() {
+            @Override
+            public void callback(boolean data) {
+                if (data) {
+                    view.displayMessage("Login successful!");
+                    view.loginToProgram();
+                }
+                else {
+                    view.displayMessage("Incorrect username or password");
+                }
+            }
+        });
+    }
+
+
+
+
+    @Override
+    void login() {
 
     }
 }

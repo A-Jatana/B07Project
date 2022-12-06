@@ -160,7 +160,7 @@ public class AdminUpdateCourse extends UpdateCourse {
                 }
                 else {
                     if (prereq.isEmpty()){
-                        prereq = "NONE";
+                        prereq = "None";
                     } else {
                         prereq = SyntaxCheck.toValidCourse(prereq);
                     }
