@@ -1,0 +1,23 @@
+Jamie:
+- Scrum Master
+- User Story 3
+- Student Add Course
+- Refactoring Code/Mockito Testing
+
+Amitoz:
+- made layout and implemented  for admin add course feature 
+- made layout and implemented for edit course feature
+- made layout and implemented for admin delete course feature
+- colour scheme/logo 
+
+Kerry:
+- implemented entry screen
+- implemented database class with callback methods
+- implemented recyclerview & searchview to display all courses from Firebase
+- helped with MVP
+
+Sumaiya:
+- created Student Login and Sign-up layouts
+- implemented Student Course List
+- implemented functioning checkbox selection for StudentAddCourse and StudentTimeline
+- Tested and implemented details on Student Sign-up, Student Login, StudentCourseList, and all Admin user stories
