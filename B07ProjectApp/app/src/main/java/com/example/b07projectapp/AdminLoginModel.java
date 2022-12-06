@@ -1,21 +1,25 @@
 package com.example.b07projectapp;
 
-import android.widget.Toast;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class AdminLoginModel extends Login implements Control.Model{
-    boolean found = false;
+    boolean found;
     private static FirebaseDatabase dm = FirebaseDatabase.getInstance();
     private static DatabaseReference dRef;
+    private String username;
+    private String password;
+    private Control.View view;
+
     public AdminLoginModel(){
 
+    }
+    public AdminLoginModel(String username, String password, Control.View view) {
+        this.username = username;
+        this.password = password;
+        this.view = view;
     }
 
     @Override
@@ -24,7 +28,7 @@ public class AdminLoginModel extends Login implements Control.Model{
 
 
         // Points dRef to "student"
-        dRef = dm.getReference().child("student");
+        dRef = dm.getReference().child("admin");
 /*
         // Notice how it says SingleValueEvent - yeah it will loop infinitely without it
         dRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -50,24 +54,38 @@ public class AdminLoginModel extends Login implements Control.Model{
  */
 
 
-        // Notice how it says SingleValueEvent - yeah it will loop infinitely without it
-        dRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        AdminModelDatabase adminModelDatabase = new AdminModelDatabase(username, password, "admin");
+        adminModelDatabase.search(new AdminModelDatabase.adminModelCallback() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (ds.getValue().toString().equals(username) && ds.child("password").getValue().toString().equals(password)) {
-                        found = true;
-                    }
+            public void callback(boolean data) {
+                if (data) {
+
+                }
+                else {
+
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
+        Log.i("STATUS", found + "");
         return found;
     }
+
+    void check(String password, String username, Control.View view) {
+        AdminModelDatabase adminModelDatabase = new AdminModelDatabase(username, password, "admin");
+        adminModelDatabase.search(new AdminModelDatabase.adminModelCallback() {
+            @Override
+            public void callback(boolean data) {
+                if (data) {
+                    view.displayMessage("Login successful!");
+                    view.loginToProgram();
+                }
+                else {
+                    view.displayMessage("Incorrect username or password");
+                }
+            }
+        });
+    }
+
 
     @Override
     void login() {
