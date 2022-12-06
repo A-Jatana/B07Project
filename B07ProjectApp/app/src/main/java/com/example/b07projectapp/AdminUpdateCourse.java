@@ -124,11 +124,11 @@ public class AdminUpdateCourse extends UpdateCourse {
                 EditText textName = binding.updateCourseName;
                 name = textName.getText().toString();
                 EditText textCode = binding.updateCourseCode;
-                code = textCode.getText().toString();
+                code = textCode.getText().toString().toUpperCase();
                 EditText textSessions = binding.updateOfferingSessions;
-                sessions = textSessions.getText().toString();
+                sessions = textSessions.getText().toString().toUpperCase();
                 EditText textPrereq = binding.updatePrerequisites;
-                prereq = textPrereq.getText().toString();
+                prereq = textPrereq.getText().toString().toUpperCase();
                 /* TODO implement if statement
                  * If (Database already has that username) {
                  * pop up message saying username is already taken

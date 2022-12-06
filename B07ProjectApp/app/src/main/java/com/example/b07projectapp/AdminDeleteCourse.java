@@ -85,7 +85,7 @@ public class AdminDeleteCourse extends DeleteCourse {
             @Override
             public void onClick(View view) {
                 EditText textToBe = binding.inputDeleteCourseName;
-                key = textToBe.getText().toString();
+                key = textToBe.getText().toString().toUpperCase();
                 /* TODO implement if statement
                  * If (Database already has that username) {
                  * pop up message saying username is already taken

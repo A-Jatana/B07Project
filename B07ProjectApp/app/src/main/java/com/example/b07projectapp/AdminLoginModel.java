@@ -54,11 +54,15 @@ public class AdminLoginModel extends Login implements Control.Model{
 
         AdminModelDatabase adminModelDatabase = new AdminModelDatabase(username, password, "admin");
         adminModelDatabase.search(new AdminModelDatabase.adminModelCallback() {
+
             @Override
             public void callback(boolean data) {
+                /*
                 if (data) {
 
                 }
+
+                 */
             }
         });
 
@@ -87,6 +91,7 @@ public class AdminLoginModel extends Login implements Control.Model{
             @Override
             public void callback(boolean data) {
                 if (data) {
+                    Presenter.valid=true;
                     view.displayMessage("Login successful!");
                     view.loginToProgram();
                 }

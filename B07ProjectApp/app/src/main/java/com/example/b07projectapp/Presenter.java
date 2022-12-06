@@ -3,6 +3,7 @@ package com.example.b07projectapp;
 public class Presenter implements Control.Presenter{
     private Control.Model model;
     private Control.View view;
+    static boolean valid;
 
     public Presenter (Control.Model model, Control.View view){
         this.model=model;
@@ -20,6 +21,13 @@ public class Presenter implements Control.Presenter{
         else {
             AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view);
             adminLoginModel.check(username, password, view);
+
+            if (valid){
+                view.displayMessage("Login successful!");
+                view.loginToProgram();
+            } else {
+                view.displayMessage("Incorrect username or password");
+            }
         }
 //        else if (model.isFound(username, password)){
 //            view.displayMessage("Login successful!");
