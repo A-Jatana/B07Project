@@ -14,6 +14,9 @@ public class AdminLoginModel extends Login implements Control.Model{
     boolean found = false;
     private static FirebaseDatabase dm = FirebaseDatabase.getInstance();
     private static DatabaseReference dRef;
+    public AdminLoginModel(){
+
+    }
 
     @Override
     public boolean isFound(String username, String password) {

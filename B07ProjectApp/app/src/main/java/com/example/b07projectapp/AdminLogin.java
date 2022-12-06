@@ -33,7 +33,7 @@ public class AdminLogin extends Login implements Control.View{
 
     private FragmentAdminLoginBinding binding;
     private Control.Presenter presenter;
-    private AdminLoginModel model;
+    private AdminLoginModel model = new AdminLoginModel();
     // TODO: Rename and change types of parameters
     private String username;
     private String password;
