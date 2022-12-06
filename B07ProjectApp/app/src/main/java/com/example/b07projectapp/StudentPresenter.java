@@ -25,6 +25,12 @@ public class StudentPresenter implements Control.Presenter{
             StudentLoginModel studentLoginModel = new StudentLoginModel(username, password, view, FirebaseDatabase.getInstance());
             studentLoginModel.check(username, password, view);
 
+            if (valid){
+                view.displayMessage("Login successful!");
+                view.loginToProgram();
+            } else {
+                view.displayMessage("Incorrect username or password");
+            }
         }
     }
 }

@@ -48,7 +48,7 @@ public class AdminLoginModel extends Login implements Control.Model{
         adminLoginModel.check(username, password, view);
 
         isFound(username, password, view);
-        //check(username, password, view);
+        check(username, password, view);
         ModelDatabase modelDatabase = new ModelDatabase(username, password, "admin");
         valid = modelDatabase.inDatabase();
         return valid;
