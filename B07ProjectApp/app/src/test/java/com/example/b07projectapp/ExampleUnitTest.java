@@ -22,7 +22,7 @@ public class ExampleUnitTest {
     Control.Model model;
 
     @Test
-    //
+    //Both fields are empty
     public void test1 (){
         when (view.getUsername()).thenReturn("");
         when (view.getPassword()).thenReturn("");
