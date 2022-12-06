@@ -1,5 +1,7 @@
 package com.example.b07projectapp;
 
+import android.util.Log;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -11,7 +13,7 @@ public class StudentLoginModel extends Login implements Control.Model{
     private String username;
     private String password;
     private Control.View view;
-
+    private boolean valid;
     public StudentLoginModel(){
 
     }
@@ -25,12 +27,13 @@ public class StudentLoginModel extends Login implements Control.Model{
     @Override
     public void isFound(String username, String password, Control.View view) {
         ModelDatabase modelDatabase = new ModelDatabase(username, password, "student");
-        modelDatabase.search(new ModelDatabase.adminModelCallback() {
+        modelDatabase.search(new ModelDatabase.modelCallback() {
             @Override
             public void callback(boolean data) {
                 if (data) {
                     view.displayMessage("Login successful!");
                     view.loginToProgram();
+                    valid = true;
                 }
                 else {
                     view.displayMessage("Incorrect username or password");
@@ -39,17 +42,28 @@ public class StudentLoginModel extends Login implements Control.Model{
         });
     }
 
+    @Override
+    public boolean validLogin(String username, String password, Control.View view) {
+        StudentLoginModel studentLoginModel = new StudentLoginModel(username, password, view, FirebaseDatabase.getInstance());
+        studentLoginModel.check(username, password, view);
+        isFound(username, password, view);
+        check(username, password, view);
+        return valid;
+    }
+
     void check(String password, String username, Control.View view) {
         ModelDatabase modelDatabase = new ModelDatabase(username, password, "student");
-        modelDatabase.search(new ModelDatabase.adminModelCallback() {
+        modelDatabase.search(new ModelDatabase.modelCallback() {
             @Override
             public void callback(boolean data) {
                 if (data) {
                     view.displayMessage("Login successful!");
                     view.loginToProgram();
+                    valid = true;
                 }
                 else {
                     view.displayMessage("Incorrect username or password");
+                    Log.i("CHECK", "Username: " + username + ", password: " + password);
                 }
             }
         });

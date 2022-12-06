@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.b07projectapp.databinding.FragmentStudentLoginBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class StudentLogin extends Login implements Control.View{
@@ -19,6 +20,7 @@ public class StudentLogin extends Login implements Control.View{
 
     private String username;
     private String password;
+    private FirebaseAuth auth;
 
     public StudentLogin() {
         // Required empty public constructor
@@ -28,7 +30,7 @@ public class StudentLogin extends Login implements Control.View{
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        auth = FirebaseAuth.getInstance();
         binding.donthaveanaccountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

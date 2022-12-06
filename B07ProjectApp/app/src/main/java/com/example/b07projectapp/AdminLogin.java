@@ -15,16 +15,12 @@ import android.widget.Toast;
 import com.example.b07projectapp.databinding.FragmentAdminLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminLogin#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AdminLogin extends Login implements Control.View{
 
     private FragmentAdminLoginBinding binding;
     private Control.Presenter presenter;
-    private AdminLoginModel model = new AdminLoginModel();
+
     // TODO: Rename and change types of parameters
     private String username;
     private String password;
@@ -36,13 +32,7 @@ public class AdminLogin extends Login implements Control.View{
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static AdminLogin newInstance(String param1, String param2) {
-        AdminLogin fragment = new AdminLogin();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -90,7 +80,7 @@ public class AdminLogin extends Login implements Control.View{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new AdminPresenter(model, this);
+        presenter = new AdminPresenter(new AdminLoginModel(), this);
     }
 
     @Override

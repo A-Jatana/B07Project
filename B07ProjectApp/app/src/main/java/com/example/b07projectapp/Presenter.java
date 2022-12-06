@@ -4,12 +4,12 @@ import android.util.Log;
 
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AdminPresenter implements Control.Presenter{
+public class Presenter implements Control.Presenter{
     private Control.Model model;
     private Control.View view;
 
 
-    public AdminPresenter(Control.Model model, Control.View view){
+    public Presenter(Control.Model model, Control.View view){
         this.model=model;
         this.view=view;
     }
@@ -23,7 +23,6 @@ public class AdminPresenter implements Control.Presenter{
             view.displayMessage("Fields cannot be empty!");
         }
         else {
-
             if (model.validLogin(username, password, view)){
                 view.displayMessage("Login successful!");
                 view.loginToProgram();

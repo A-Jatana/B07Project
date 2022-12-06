@@ -11,7 +11,7 @@ public class AdminLoginModel extends Login implements Control.Model{
     private String username;
     private String password;
     private Control.View view;
-
+    private boolean valid;
     public AdminLoginModel(){
 
     }
@@ -25,31 +25,42 @@ public class AdminLoginModel extends Login implements Control.Model{
     @Override
     public void isFound(String username, String password, Control.View view) {
         ModelDatabase modelDatabase = new ModelDatabase(username, password, "admin");
-        modelDatabase.search(new ModelDatabase.adminModelCallback() {
+        modelDatabase.search(new ModelDatabase.modelCallback() {
             @Override
             public void callback(boolean data) {
                 if (data) {
-                    view.displayMessage("Login successful!");
-                    view.loginToProgram();
+                    //view.displayMessage("Login successful!");
+                    //view.loginToProgram();
+                    valid =true;
                 }
                 else {
-                    view.displayMessage("Incorrect username or password");
+                    //view.displayMessage("Incorrect username or password");
                 }
             }
         });
     }
 
+    public boolean validLogin(String username, String password, Control.View view){
+        AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view, FirebaseDatabase.getInstance());
+        adminLoginModel.check(username, password, view);
+
+        isFound(username, password, view);
+        //check(username, password, view);
+        return valid;
+    }
+
     void check(String password, String username, Control.View view) {
         ModelDatabase modelDatabase = new ModelDatabase(username, password, "admin");
-        modelDatabase.search(new ModelDatabase.adminModelCallback() {
+        modelDatabase.search(new ModelDatabase.modelCallback() {
             @Override
             public void callback(boolean data) {
                 if (data) {
-                    view.displayMessage("Login successful!");
-                    view.loginToProgram();
+                    //view.displayMessage("Login successful!");
+                    //view.loginToProgram();
+                    valid =true;
                 }
                 else {
-                    view.displayMessage("Incorrect username or password");
+                    //view.displayMessage("Incorrect username or password");
                 }
             }
         });

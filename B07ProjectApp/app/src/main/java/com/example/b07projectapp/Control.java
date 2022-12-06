@@ -5,6 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public interface Control{
     public interface Model {
         void isFound(String username, String password, Control.View view);
+        boolean validLogin(String username, String password, Control.View view);
     }
 
     public interface View{
