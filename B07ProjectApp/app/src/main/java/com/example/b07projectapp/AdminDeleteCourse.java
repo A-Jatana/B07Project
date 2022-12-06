@@ -85,7 +85,7 @@ public class AdminDeleteCourse extends DeleteCourse {
             @Override
             public void onClick(View view) {
                 EditText textToBe = binding.inputDeleteCourseName;
-                key = textToBe.getText().toString().toUpperCase();
+                key = textToBe.getText().toString();
                 /* TODO implement if statement
                  * If (Database already has that username) {
                  * pop up message saying username is already taken
@@ -147,7 +147,6 @@ public class AdminDeleteCourse extends DeleteCourse {
 
     void delete_course(String course_name) {
 
-        Log.i("status", "check1");
 
         dRef = FirebaseDatabase.getInstance().getReference("course");
 
@@ -156,7 +155,7 @@ public class AdminDeleteCourse extends DeleteCourse {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i("status", "check2");
+
                 // Checks if course exists
                 if (snapshot.child(course_name).exists()) {
 
@@ -172,7 +171,7 @@ public class AdminDeleteCourse extends DeleteCourse {
                             return;
                         }
                     }
-                    Log.i("status", "check3");
+
 
 
 
@@ -203,7 +202,6 @@ public class AdminDeleteCourse extends DeleteCourse {
             }
         });
 
-        Log.i("status", "check4");
     }
 }
 
