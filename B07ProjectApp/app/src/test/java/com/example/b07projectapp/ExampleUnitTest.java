@@ -26,7 +26,7 @@ public class ExampleUnitTest {
     public void test1 (){
         when (view.getUsername()).thenReturn("");
         when (view.getPassword()).thenReturn("");
-
+        //when (model.validLogin("","");
         Presenter p = new Presenter (model, view);
         p.checkLogin();
         verify(view).displayMessage("Fields cannot be empty!");

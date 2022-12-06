@@ -23,9 +23,7 @@ public class AdminLoginModel extends Login implements Control.Model{
     }
 
     @Override
-    public boolean isFound(String username, String password) {
-
-
+    public void validLogin(String username, String password) {
 
         // Points dRef to "student"
         dRef = dm.getReference().child("admin");
@@ -61,13 +59,9 @@ public class AdminLoginModel extends Login implements Control.Model{
                 if (data) {
 
                 }
-                else {
-
-                }
             }
         });
-        Log.i("STATUS", found + "");
-        return found;
+
     }
 
     @Override
@@ -102,6 +96,8 @@ public class AdminLoginModel extends Login implements Control.Model{
             }
         });
     }
+
+
 
 
     @Override
