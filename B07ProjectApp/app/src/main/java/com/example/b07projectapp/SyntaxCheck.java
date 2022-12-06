@@ -99,21 +99,21 @@ public class SyntaxCheck {
         char array[] = text.toCharArray();
         while (i< text.length()) {
             char c = array[i];
-            if (("FSW".indexOf(c) == -1) && !(c==' ') && !(c==',')) { //If c is none of the valid letter
+            if (("FfSsWw".indexOf(c) == -1) && !(c==' ') && !(c==',')) { //If c is none of the valid letter
                 return false;
-            } else if (c == 'F'){
+            } else if (c == 'F' || c == 'f'){
                 if (!isFall(text,i)) {
                     return false;
                 } else {
                     i += 4;
                 }
-            } else if (c == 'W') {
+            } else if (c == 'W' || c=='w') {
                 if (!isWinter(text,i)) {
                     return false;
                 } else {
                     i += 6;
                 }
-            } else if (c=='S') {
+            } else if (c=='S' || c=='s') {
                 if (!isSummer(text,i)) {
                     return false;
                 } else {
@@ -172,20 +172,20 @@ public class SyntaxCheck {
         while (i< text.length()) {
             char c = array[i];
 
-            if (c == 'F'){
+            if (c == 'F' || c=='f'){
                 i += 4;
                 sessions[0] = true;
             }
-            if (c == 'W') {
+            if (c == 'W' || c== 'w') {
                 i+=6;
                 sessions[1] = true;
             }
-            if (c =='S') {
+            if (c =='S' || c=='s') {
                 i+= 6;
                 sessions[2]=true;
             }
 
-            if ("FSW".indexOf(c) == -1) {
+            if ("FfSsWw".indexOf(c) == -1) {
                 i++;
             }
         }
