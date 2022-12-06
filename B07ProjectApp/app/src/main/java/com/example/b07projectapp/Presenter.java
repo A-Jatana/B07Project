@@ -16,7 +16,29 @@ public class Presenter implements Control.Presenter{
     }
 
     @Override
-    public void checkLogin() {
+    public void checkLogin(){
+        String username = view.getUsername();
+        String password = view.getPassword();
+
+        if (username.equals("") || password.equals("")){
+            view.displayMessage("Fields cannot be empty!");
+        }
+        else {
+            if (model.validLogin(username, password, view)){
+                view.displayMessage("Login successful!");
+                view.loginToProgram();
+            } else {
+                view.displayMessage("Incorrect username or password");
+            }
+        }
+//        else if (model.isFound(username, password)){
+//            view.displayMessage("Login successful!");
+//            view.loginToProgram();
+//        } else {
+//            view.displayMessage("Incorrect username or password");
+//        }
+    }
+    public void checkLoginStudent(){
         String username = view.getUsername();
         String password = view.getPassword();
 

@@ -42,7 +42,7 @@ public class StudentLogin extends Login implements Control.View{
         view.findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.checkLogin();
+                presenter.checkLoginStudent();
             }
         });
     }

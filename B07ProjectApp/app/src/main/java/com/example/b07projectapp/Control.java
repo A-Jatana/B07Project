@@ -23,6 +23,8 @@ public interface Control{
 
     public interface Presenter {
         public void checkLogin();
+
+        void checkLoginStudent();
     }
 
 }

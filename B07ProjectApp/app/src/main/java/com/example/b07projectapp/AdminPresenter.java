@@ -36,4 +36,9 @@ public class AdminPresenter implements Control.Presenter{
         }
 
     }
+
+    @Override
+    public void checkLoginStudent() {
+
+    }
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 import android.os.Handler;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import android.os.Handler;
 
 public class AdminLoginModel extends Login implements Control.Model{
     boolean found;
@@ -31,18 +32,20 @@ public class AdminLoginModel extends Login implements Control.Model{
             @Override
             public void callback(boolean data) {
                 if (data) {
-                    //view.displayMessage("Login successful!");
-                    //view.loginToProgram();
+                    view.displayMessage("Login successful!");
+                    view.loginToProgram();
                     //valid = true;
                 }
                 else {
-                    //view.displayMessage("Incorrect username or password");
+                    view.displayMessage("Incorrect username or password");
                 }
             }
         });
     }
 
-    public boolean validLogin(String username, String password, Control.View view){
+
+
+    public boolean validLogin(String username, String password, Control.View view) {
 
         AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view, FirebaseDatabase.getInstance());
         adminLoginModel.check(username, password, view);

@@ -32,11 +32,11 @@ public class StudentLoginModel extends Login implements Control.Model{
             public void callback(boolean data) {
                 if (data) {
                     //view.displayMessage("Login successful!");
-                    //view.loginToProgram();
-                    //valid = true;
+                    view.loginToProgram();
+                    valid = true;
                 }
                 else {
-                    //view.displayMessage("Incorrect username or password");
+                    view.displayMessage("Incorrect username or password");
                 }
             }
         });
@@ -48,7 +48,7 @@ public class StudentLoginModel extends Login implements Control.Model{
         studentLoginModel.check(username, password, view);
         isFound(username, password, view);
         check(username, password, view);
-        ModelDatabase modelDatabase = new ModelDatabase(username, password, "admin");
+        ModelDatabase modelDatabase = new ModelDatabase(username, password, "student");
         valid = modelDatabase.inDatabase();
         return valid;
     }

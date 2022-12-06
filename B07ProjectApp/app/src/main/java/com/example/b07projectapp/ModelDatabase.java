@@ -41,6 +41,7 @@ public class ModelDatabase {
                     }
                 }
                 finishedCallback.callback(false);
+                valid = false;
             }
 
             @Override
