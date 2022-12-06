@@ -16,11 +16,16 @@ public class Presenter implements Control.Presenter{
 
         if (username.equals("") || password.equals("")){
             view.displayMessage("Fields cannot be empty!");
-        } else if (model.isFound(username, password)){
-            view.displayMessage("Login successful!");
-            view.loginToProgram();
-        } else {
-            view.displayMessage("Incorrect username or password");
         }
+        else {
+            AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view);
+            adminLoginModel.check(username, password, view);
+        }
+//        else if (model.isFound(username, password)){
+//            view.displayMessage("Login successful!");
+//            view.loginToProgram();
+//        } else {
+//            view.displayMessage("Incorrect username or password");
+//        }
     }
 }
