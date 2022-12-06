@@ -25,7 +25,7 @@ public class AdminModelDatabase {
         this.type = type;
     }
 
-    boolean search(adminModelCallback finishedCallback) {
+    void search(adminModelCallback finishedCallback) {
 
         dRef = database.getReference().child(type);
 
@@ -33,8 +33,10 @@ public class AdminModelDatabase {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    Log.i("STATUS", ds.getValue().toString());
-                    if (ds.getValue().toString().equals(username) && ds.child("password").getValue().toString().equals(password)) {
+                    Log.i("check user", ds.getValue().toString().equals(username) + "");
+                    Log.i("check pass", ds.child("password").getValue().toString().equals(password) + "");
+                    if (ds.child("username").getValue().toString().equals(username) && ds.child("password").getValue().toString().equals(password)) {
+                        Log.i("inside", "true");
                         finishedCallback.callback(true);
                         return;
                     }
@@ -47,8 +49,6 @@ public class AdminModelDatabase {
 
             }
         });
-        Log.i("test", "false");
-        return false;
     }
     public interface adminModelCallback {
         void callback(boolean data);
