@@ -91,7 +91,6 @@ public class AdminLoginModel extends Login implements Control.Model{
             @Override
             public void callback(boolean data) {
                 if (data) {
-                    Presenter.valid=true;
                     view.displayMessage("Login successful!");
                     view.loginToProgram();
                 }

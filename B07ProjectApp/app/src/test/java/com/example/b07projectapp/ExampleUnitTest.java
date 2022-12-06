@@ -26,7 +26,32 @@ public class ExampleUnitTest {
     public void test1 (){
         when (view.getUsername()).thenReturn("");
         when (view.getPassword()).thenReturn("");
-        //when (model.validLogin("","");
+        Presenter p = new Presenter (model, view);
+        p.checkLogin();
+        verify(view).displayMessage("Fields cannot be empty!");
+    }
+    //One field is empty
+    public void test2 (){
+        when (view.getUsername()).thenReturn("");
+        when (view.getPassword()).thenReturn("g");
+        Presenter p = new Presenter (model, view);
+        p.checkLogin();
+        verify(view).displayMessage("Fields cannot be empty!");
+    }
+
+    //One field is empty
+    public void test3 (){
+        when (view.getUsername()).thenReturn("");
+        when (view.getPassword()).thenReturn("g");
+        Presenter p = new Presenter (model, view);
+        p.checkLogin();
+        verify(view).displayMessage("Fields cannot be empty!");
+    }
+
+    //One field is empty
+    public void test4 (){
+        when (view.getUsername()).thenReturn("");
+        when (view.getPassword()).thenReturn("g");
         Presenter p = new Presenter (model, view);
         p.checkLogin();
         verify(view).displayMessage("Fields cannot be empty!");
