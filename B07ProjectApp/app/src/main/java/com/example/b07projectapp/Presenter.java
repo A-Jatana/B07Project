@@ -18,6 +18,7 @@ public class Presenter implements Control.Presenter{
             view.displayMessage("Fields cannot be empty!");
         } else if (model.isFound(username, password)){
             view.displayMessage("Login successful!");
+            view.loginToProgram();
         } else {
             view.displayMessage("Incorrect username or password");
         }

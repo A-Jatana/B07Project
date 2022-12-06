@@ -17,19 +17,10 @@ import com.example.b07projectapp.databinding.FragmentStudentLoginBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StudentLogin#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class StudentLogin extends Login {
-    private FragmentStudentLoginBinding binding;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+public class StudentLogin extends Login implements Control.View{
+    private FragmentStudentLoginBinding binding;
+
     private String username;
     private String password;
 
@@ -37,23 +28,7 @@ public class StudentLogin extends Login {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StudentLogin.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StudentLogin newInstance(String param1, String param2) {
-        StudentLogin fragment = new StudentLogin();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private Control.Presenter presenter;
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -69,11 +44,10 @@ public class StudentLogin extends Login {
         view.findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText textUser = binding.inputUsername;
-                username = textUser.getText().toString();
-                EditText textPassword = binding.inputPassword;
-                password = textPassword.getText().toString();
+                presenter.checkLogin();
 
+
+/*
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast myToast = Toast.makeText(getActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT);
                     myToast.show();
@@ -97,11 +71,10 @@ public class StudentLogin extends Login {
                                 Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
                                 myToast.show();
                             }
-                            textUser.setText("");
-                            textPassword.setText("");
                         }
                     });
                 }
+                */
             }
         });
     }
@@ -115,6 +88,7 @@ public class StudentLogin extends Login {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new Presenter (new StudentLoginModel(), this);
     }
 
     @Override
@@ -123,5 +97,31 @@ public class StudentLogin extends Login {
         binding = FragmentStudentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
+    public String getUsername(){
+        EditText textUser = binding.inputUsername;
+        username = textUser.getText().toString();
+        textUser.setText("");
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        EditText textPassword = binding.inputPassword;
+        password = textPassword.getText().toString();
+        textPassword.setText("");
+        return password;
+    }
+
+    @Override
+    public void displayMessage(String msg) {
+
+    }
+
+    @Override
+    public void loginToProgram() {
+
+    }
+
 
 }

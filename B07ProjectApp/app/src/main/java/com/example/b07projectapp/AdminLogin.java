@@ -95,6 +95,7 @@ public class AdminLogin extends Login implements Control.View{
                 .navigate(R.id.action_adminLogin_to_adminCourseList);
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,5 +129,10 @@ public class AdminLogin extends Login implements Control.View{
     public void displayMessage(String msg) {
         Toast myToast = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
         myToast.show();
+    }
+
+    @Override
+    public void loginToProgram() {
+        login();
     }
 }
