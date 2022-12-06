@@ -7,7 +7,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AdminPresenter implements Control.Presenter{
     private Control.Model model;
     private Control.View view;
-
+    public static boolean valid;
 
     public AdminPresenter(Control.Model model, Control.View view){
         this.model=model;
@@ -23,19 +23,17 @@ public class AdminPresenter implements Control.Presenter{
             view.displayMessage("Fields cannot be empty!");
         }
         else {
+            AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view, FirebaseDatabase.getInstance());
+            adminLoginModel.check(username, password, view);
 
-            if (model.validLogin(username, password, view)){
+            if (valid){
                 view.displayMessage("Login successful!");
                 view.loginToProgram();
             } else {
                 view.displayMessage("Incorrect username or password");
             }
+
         }
-//        else if (model.isFound(username, password)){
-//            view.displayMessage("Login successful!");
-//            view.loginToProgram();
-//        } else {
-//            view.displayMessage("Incorrect username or password");
-//        }
+
     }
 }

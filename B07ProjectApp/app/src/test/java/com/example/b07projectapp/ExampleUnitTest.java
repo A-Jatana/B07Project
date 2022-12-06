@@ -22,9 +22,6 @@ public class ExampleUnitTest {
     @Mock
     Control.Model model;
 
-    @Mock
-    FirebaseDatabase dm;
-
     @Test
     //Both fields are empty
     public void test1 (){

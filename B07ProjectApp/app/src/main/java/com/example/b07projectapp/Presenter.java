@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Presenter implements Control.Presenter{
     private Control.Model model;
     private Control.View view;
+    public static boolean valid;
 
 
     public Presenter(Control.Model model, Control.View view){

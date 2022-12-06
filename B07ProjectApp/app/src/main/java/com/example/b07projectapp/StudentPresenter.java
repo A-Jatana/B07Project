@@ -5,6 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class StudentPresenter implements Control.Presenter{
     private Control.Model model;
     private Control.View view;
+    public static boolean valid;
 
 
     public StudentPresenter(Control.Model model, Control.View view){

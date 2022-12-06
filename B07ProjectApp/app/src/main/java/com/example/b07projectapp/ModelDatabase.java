@@ -14,7 +14,7 @@ public class ModelDatabase {
     private String username;
     private String password;
     private String type;
-
+    private boolean valid;
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference dRef;
 
@@ -36,6 +36,7 @@ public class ModelDatabase {
                     if (ds.child("username").getValue().toString().equals(username) && ds.child("password").getValue().toString().equals(password)) {
                         Log.i("inside", "true");
                         finishedCallback.callback(true);
+                        valid = true;
                         return;
                     }
                 }
@@ -47,6 +48,10 @@ public class ModelDatabase {
 
             }
         });
+    }
+
+    public boolean inDatabase(){
+        return valid;
     }
     public interface modelCallback {
         void callback(boolean data);

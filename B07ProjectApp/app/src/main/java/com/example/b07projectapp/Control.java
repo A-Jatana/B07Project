@@ -13,6 +13,12 @@ public interface Control{
         public String getPassword();
         public void displayMessage(String msg);
         public void loginToProgram();
+        public static void setAdminLogin(){
+            AdminPresenter.valid = true;
+        };
+        public static void setStudentLogin(){
+           StudentPresenter.valid = true;
+        };
     }
 
     public interface Presenter {

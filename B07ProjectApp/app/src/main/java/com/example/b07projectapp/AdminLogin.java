@@ -42,29 +42,6 @@ public class AdminLogin extends Login implements Control.View{
             @Override
             public void onClick(View view) {
                 presenter.checkLogin();
-                /*
-                if (username.isEmpty() || password.isEmpty()){
-                    Toast myToast = Toast.makeText(getActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT);
-                    myToast.show();
-                }
-                else {
-                    DatabaseManager dm = new DatabaseManager(username, password, "admin");
-                    dm.search(new DatabaseManager.searchCallback() {
-                        @Override
-                        public void callback(boolean data) {
-                            if (data) {
-                                Toast myToast = Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT);
-                                myToast.show();
-                                login();
-                            }
-                            else {
-                                Toast myToast = Toast.makeText(getContext(), "Incorrect username or password. Please try again.", Toast.LENGTH_SHORT);
-                                myToast.show();
-                            }
-                        }
-                    });
-                }
-                */
             }
 
         });
@@ -116,4 +93,9 @@ public class AdminLogin extends Login implements Control.View{
     public void loginToProgram() {
         login();
     }
+
+
+
+
+
 }

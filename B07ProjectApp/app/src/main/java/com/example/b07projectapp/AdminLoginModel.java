@@ -1,5 +1,7 @@
 package com.example.b07projectapp;
 
+import android.util.Log;
+import android.os.Handler;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,7 +33,7 @@ public class AdminLoginModel extends Login implements Control.Model{
                 if (data) {
                     //view.displayMessage("Login successful!");
                     //view.loginToProgram();
-                    valid =true;
+                    //valid = true;
                 }
                 else {
                     //view.displayMessage("Incorrect username or password");
@@ -41,11 +43,14 @@ public class AdminLoginModel extends Login implements Control.Model{
     }
 
     public boolean validLogin(String username, String password, Control.View view){
+
         AdminLoginModel adminLoginModel = new AdminLoginModel(username, password, view, FirebaseDatabase.getInstance());
         adminLoginModel.check(username, password, view);
 
         isFound(username, password, view);
         //check(username, password, view);
+        ModelDatabase modelDatabase = new ModelDatabase(username, password, "admin");
+        valid = modelDatabase.inDatabase();
         return valid;
     }
 
@@ -55,13 +60,9 @@ public class AdminLoginModel extends Login implements Control.Model{
             @Override
             public void callback(boolean data) {
                 if (data) {
-                    //view.displayMessage("Login successful!");
-                    //view.loginToProgram();
-                    valid =true;
+                    Control.View.setAdminLogin();
                 }
-                else {
-                    //view.displayMessage("Incorrect username or password");
-                }
+
             }
         });
     }
